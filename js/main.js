@@ -5,6 +5,30 @@ const navLinks = document.querySelectorAll('.nav-link');
 const contactForm = document.getElementById('contactForm');
 const header = document.querySelector('.header');
 
+// Create scroll progress indicator
+function createScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+}
+
+// Enhanced parallax effect
+function initParallax() {
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            heroSection.style.transform = `translateY(${rate}px)`;
+        });
+    }
+}
+
 // Mobile Navigation Toggle
 navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
