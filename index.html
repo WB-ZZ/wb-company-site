@@ -428,14 +428,193 @@
     </footer>
 
     <script>
-        // 강제 언어 전환 버튼 추가
+        // 실제 언어 전환 시스템
+        const translations = {
+            ko: {
+                // 네비게이션
+                nav_home: "홈",
+                nav_about: "회사소개", 
+                nav_services: "서비스",
+                nav_portfolio: "포트폴리오",
+                nav_contact: "문의하기",
+                
+                // 히어로 섹션
+                hero_title: "AI와 클라우드로 만드는",
+                hero_highlight: "디지털 미래",
+                hero_subtitle: "InnovateTech는 첨단 AI 기술과 안정적인 클라우드 인프라로<br>기업의 디지털 전환을 성공적으로 이끌어갑니다",
+                btn_services: "서비스 알아보기",
+                btn_contact: "무료 상담 신청",
+                
+                // 특징
+                feature1_title: "AI 기반 솔루션",
+                feature1_desc: "머신러닝과 딥러닝 기술을 활용한 지능형 비즈니스 솔루션을 제공합니다",
+                feature2_title: "클라우드 인프라", 
+                feature2_desc: "AWS, Azure 기반의 확장 가능하고 안정적인 클라우드 시스템을 구축합니다",
+                feature3_title: "데이터 사이언스",
+                feature3_desc: "빅데이터 분석과 시각화로 비즈니스 인사이트를 도출합니다",
+                
+                // 회사소개
+                about_title: "회사소개",
+                about_subtitle: "AI와 클라우드 전문 기업",
+                about_desc1: "InnovateTech는 2015년 설립된 AI와 클라우드 전문 기업으로, 국내 대기업부터 스타트업까지 300여 개 기업의 디지털 전환을 성공적으로 지원했습니다.",
+                about_desc2: "삼성, LG, 현대자동차 등 대기업과의 파트너십을 통해 검증된 기술력을 보유하고 있으며, AWS 파트너사, Microsoft Gold Partner로 인정받고 있습니다.",
+                chart_title: "연도별 성장률",
+                
+                // 서비스
+                services_title: "서비스",
+                tech_capabilities: "핵심 기술 역량",
+                
+                // 연락처
+                contact_title: "문의하기",
+                contact_info: "연락처 정보"
+            },
+            
+            en: {
+                // Navigation
+                nav_home: "Home",
+                nav_about: "About",
+                nav_services: "Services", 
+                nav_portfolio: "Portfolio",
+                nav_contact: "Contact",
+                
+                // Hero Section
+                hero_title: "Building Digital Future with",
+                hero_highlight: "AI & Cloud",
+                hero_subtitle: "InnovateTech leads successful digital transformation with<br>cutting-edge AI technology and reliable cloud infrastructure",
+                btn_services: "Explore Services",
+                btn_contact: "Free Consultation",
+                
+                // Features
+                feature1_title: "AI-Powered Solutions",
+                feature1_desc: "Providing intelligent business solutions using machine learning and deep learning technologies",
+                feature2_title: "Cloud Infrastructure",
+                feature2_desc: "Building scalable and reliable cloud systems based on AWS and Azure",
+                feature3_title: "Data Science",
+                feature3_desc: "Deriving business insights through big data analysis and visualization",
+                
+                // About Section
+                about_title: "About Us",
+                about_subtitle: "AI & Cloud Technology Experts",
+                about_desc1: "Founded in 2015, InnovateTech is an AI and cloud specialist company that has successfully supported digital transformation for over 300 companies, from large enterprises to startups.",
+                about_desc2: "We possess proven technological capabilities through partnerships with major corporations like Samsung, LG, and Hyundai Motor, and are recognized as an AWS Partner and Microsoft Gold Partner.",
+                chart_title: "Annual Growth Rate",
+                
+                // Services
+                services_title: "Services",
+                tech_capabilities: "Core Technical Capabilities",
+                
+                // Contact
+                contact_title: "Contact Us",
+                contact_info: "Contact Information"
+            }
+        };
+
+        let currentLang = 'ko';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // 페이지 제목 변경
+            if (lang === 'en') {
+                document.title = 'InnovateTech - Leading AI & Cloud Solutions Provider';
+            } else {
+                document.title = 'InnovateTech - 혁신적인 IT 솔루션의 선두주자';
+            }
+            
+            // 네비게이션 번역
+            const navItems = document.querySelectorAll('.nav-link');
+            if (navItems.length >= 5) {
+                navItems[0].textContent = translations[lang].nav_home;
+                navItems[1].textContent = translations[lang].nav_about;
+                navItems[2].textContent = translations[lang].nav_services;
+                navItems[3].textContent = translations[lang].nav_portfolio;
+                navItems[4].textContent = translations[lang].nav_contact;
+            }
+            
+            // 히어로 섹션 번역
+            const heroTitle = document.querySelector('.hero-title');
+            if (heroTitle) {
+                heroTitle.innerHTML = translations[lang].hero_title + '<br><span class="highlight">' + translations[lang].hero_highlight + '</span>';
+            }
+            
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            if (heroSubtitle) {
+                heroSubtitle.innerHTML = translations[lang].hero_subtitle;
+            }
+            
+            const btnPrimary = document.querySelector('.btn-primary');
+            const btnSecondary = document.querySelector('.btn-secondary');
+            if (btnPrimary) btnPrimary.textContent = translations[lang].btn_services;
+            if (btnSecondary) btnSecondary.textContent = translations[lang].btn_contact;
+            
+            // 특징 섹션 번역
+            const featureCards = document.querySelectorAll('.feature-card');
+            if (featureCards.length >= 3) {
+                featureCards[0].querySelector('h3').textContent = translations[lang].feature1_title;
+                featureCards[0].querySelector('p').textContent = translations[lang].feature1_desc;
+                featureCards[1].querySelector('h3').textContent = translations[lang].feature2_title;
+                featureCards[1].querySelector('p').textContent = translations[lang].feature2_desc;
+                featureCards[2].querySelector('h3').textContent = translations[lang].feature3_title;
+                featureCards[2].querySelector('p').textContent = translations[lang].feature3_desc;
+            }
+            
+            // 회사소개 섹션 번역
+            const aboutTitle = document.querySelector('#about .section-title');
+            if (aboutTitle) aboutTitle.textContent = translations[lang].about_title;
+            
+            const aboutSubtitle = document.querySelector('.about-text h3');
+            if (aboutSubtitle) aboutSubtitle.textContent = translations[lang].about_subtitle;
+            
+            const aboutDesc = document.querySelectorAll('.about-text p');
+            if (aboutDesc.length >= 2) {
+                aboutDesc[0].textContent = translations[lang].about_desc1;
+                aboutDesc[1].textContent = translations[lang].about_desc2;
+            }
+            
+            const chartTitle = document.querySelector('.growth-chart-container h4');
+            if (chartTitle) chartTitle.textContent = translations[lang].chart_title;
+            
+            // 서비스 섹션 번역
+            const servicesTitle = document.querySelector('#services .section-title');
+            if (servicesTitle) servicesTitle.textContent = translations[lang].services_title;
+            
+            const techCapTitle = document.querySelector('.tech-chart-container h3');
+            if (techCapTitle) techCapTitle.textContent = translations[lang].tech_capabilities;
+            
+            // 연락처 섹션 번역
+            const contactTitle = document.querySelector('#contact .section-title');
+            if (contactTitle) contactTitle.textContent = translations[lang].contact_title;
+            
+            const contactInfoTitle = document.querySelector('.contact-info h3');
+            if (contactInfoTitle) contactInfoTitle.textContent = translations[lang].contact_info;
+            
+            // 언어 버튼 상태 업데이트
+            updateLanguageButtons(lang);
+            
+            // 성공 메시지
+            console.log(`✅ 언어가 ${lang === 'ko' ? '한국어' : 'English'}로 변경되었습니다!`);
+        }
+
+        function updateLanguageButtons(activeLang) {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            langButtons.forEach(btn => {
+                if (btn.dataset.lang === activeLang) {
+                    btn.style.background = '#2a5298';
+                    btn.style.fontWeight = 'bold';
+                } else {
+                    btn.style.background = '#667eea';
+                    btn.style.fontWeight = 'normal';
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // 언어 전환 버튼 생성
             const langSwitcher = document.createElement('div');
             langSwitcher.style.cssText = 'position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 9999;';
             langSwitcher.innerHTML = `
-                <button style="background: #667eea; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px;" onclick="alert('한국어 선택됨')">🇰🇷 한국어</button>
-                <button style="background: #2a5298; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px;" onclick="alert('English 선택됨')">🇺🇸 English</button>
+                <button class="lang-btn" data-lang="ko" style="background: #2a5298; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="switchLanguage('ko')">🇰🇷 한국어</button>
+                <button class="lang-btn" data-lang="en" style="background: #667eea; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px;" onclick="switchLanguage('en')">🇺🇸 English</button>
             `;
             document.body.appendChild(langSwitcher);
             
