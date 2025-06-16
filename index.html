@@ -201,7 +201,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="images/about-placeholder.jpg" alt="회사 이미지">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center" alt="회사 이미지">
                 </div>
             </div>
         </div>
@@ -304,7 +304,7 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/portfolio-1.jpg" alt="프로젝트 1">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop" alt="프로젝트 1">
                         <div class="portfolio-overlay">
                             <h4 data-i18n="portfolio1_title">현대자동차 AI 품질관리 시스템</h4>
                             <p data-i18n="portfolio1_desc">컴퓨터비전과 딥러닝을 활용한 실시간 품질 검사</p>
@@ -313,7 +313,7 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/portfolio-2.jpg" alt="프로젝트 2">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop" alt="프로젝트 2">
                         <div class="portfolio-overlay">
                             <h4 data-i18n="portfolio2_title">신한은행 클라우드 전환</h4>
                             <p data-i18n="portfolio2_desc">레거시 시스템의 AWS 기반 마이크로서비스 아키텍처 전환</p>
@@ -322,7 +322,7 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/portfolio-3.jpg" alt="프로젝트 3">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="프로젝트 3">
                         <div class="portfolio-overlay">
                             <h4 data-i18n="portfolio3_title">CJ올리브네트웍스 빅데이터 플랫폼</h4>
                             <p data-i18n="portfolio3_desc">실시간 로그 분석과 예측 모델링 시스템</p>
@@ -601,21 +601,15 @@
             
             // 자동 번역 시스템 - data-i18n 속성 기반
             const elementsWithI18n = document.querySelectorAll('[data-i18n]');
-            console.log(`🔍 찾은 번역 대상 요소: ${elementsWithI18n.length}개`);
-            
             elementsWithI18n.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 const translation = translations[lang][key];
-                
                 if (translation) {
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                         element.placeholder = translation;
                     } else {
                         element.innerHTML = translation;
                     }
-                    console.log(`✅ ${key}: ${translation}`);
-                } else {
-                    console.log(`❌ 번역 누락: ${key}`);
                 }
             });
             
