@@ -715,32 +715,18 @@
         // 채팅 다국어 지원
         const chatTranslations = {
             ko: {
-                welcome: '안녕하세요! InnovateTech입니다. 무엇을 도와드릴까요?',
-                quickReply1: '서비스 문의',
-                quickReply2: '견적 요청', 
-                quickReply3: '기술 상담',
-                placeholder: '메시지를 입력하세요...',
-                serviceResponse: 'InnovateTech는 AI 솔루션, 클라우드 마이그레이션, 데이터 분석 서비스를 제공합니다. 어떤 서비스에 관심이 있으신가요?',
-                priceResponse: '프로젝트 견적은 요구사항에 따라 달라집니다. 상세한 상담을 위해 연락처를 남겨주시거나 02-6200-1000으로 연락해주세요.',
-                techResponse: '저희는 AWS, Azure 클라우드 플랫폼과 Python, TensorFlow 등을 활용한 AI 기술에 특화되어 있습니다. 구체적으로 어떤 기술이 궁금하신가요?',
-                contactResponse: '📞 전화: 02-6200-1000<br>📧 이메일: contact@innovatetech.co.kr<br>📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층',
-                aiResponse: 'AI 솔루션으로는 자연어처리, 컴퓨터비전, 머신러닝 모델 개발을 제공합니다. 챗봇, 이미지 인식, 예측 분석 등이 가능합니다.',
-                cloudResponse: '클라우드 마이그레이션은 AWS, Azure, GCP를 지원합니다. 현재 온프레미스 환경에서 클라우드로 안전하게 이전하는 서비스를 제공합니다.',
-                defaultResponse: '궁금한 점이 있으시면 언제든 말씀해주세요. 전문 상담원과 연결을 원하시면 "상담원 연결"이라고 말씀해주세요.'
+                welcome: '안녕하세요! InnovateTech 챗봇입니다.<br><br>💡 키워드를 입력하면 즉시 답변을 드려요:<br><strong>ai, 클라우드, 서비스, 견적, 연락처</strong>',
+                quickReply1: 'ai',
+                quickReply2: '견적', 
+                quickReply3: '연락처',
+                placeholder: '키워드 입력 (예: ai, 견적, 연락처)...'
             },
             en: {
-                welcome: 'Hello! Welcome to InnovateTech. How can I help you today?',
-                quickReply1: 'Service Inquiry',
-                quickReply2: 'Quote Request',
-                quickReply3: 'Tech Consultation', 
-                placeholder: 'Type your message...',
-                serviceResponse: 'InnovateTech provides AI solutions, cloud migration, and data analytics services. Which service are you interested in?',
-                priceResponse: 'Project quotes vary based on requirements. Please contact us at 02-6200-1000 or leave your contact information for detailed consultation.',
-                techResponse: 'We specialize in AWS, Azure cloud platforms and AI technologies using Python, TensorFlow. What specific technology are you curious about?',
-                contactResponse: '📞 Phone: 02-6200-1000<br>📧 Email: contact@innovatetech.co.kr<br>📍 Address: 35F Parnas Tower, 521 Teheran-ro, Gangnam-gu, Seoul',
-                aiResponse: 'Our AI solutions include natural language processing, computer vision, and machine learning model development. We provide chatbots, image recognition, predictive analytics, etc.',
-                cloudResponse: 'Cloud migration supports AWS, Azure, GCP. We provide safe and efficient migration services from on-premises to cloud environments.',
-                defaultResponse: 'Please feel free to ask any questions. If you want to connect with a specialist, just say "connect to agent".'
+                welcome: 'Hello! This is InnovateTech chatbot.<br><br>💡 Type keywords for instant answers:<br><strong>ai, cloud, service, quote, contact</strong>',
+                quickReply1: 'ai',
+                quickReply2: 'quote',
+                quickReply3: 'contact',
+                placeholder: 'Type keywords (e.g. ai, quote, contact)...'
             }
         };
 
@@ -853,42 +839,57 @@
 
         function getBotResponse(userMessage) {
             const lang = currentLang || 'ko';
-            const lowerMessage = userMessage.toLowerCase();
-            const isKorean = lang === 'ko';
+            const msg = userMessage.toLowerCase().trim();
             
-            // 서비스 문의
-            if (lowerMessage.includes('서비스') || lowerMessage.includes('service') || 
-                (isKorean && userMessage.includes('서비스 문의')) || 
-                (!isKorean && userMessage.includes('Service Inquiry'))) {
-                return chatTranslations[lang].serviceResponse;
-            } 
-            // 견적 요청
-            else if (lowerMessage.includes('견적') || lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('비용') ||
-                     (isKorean && userMessage.includes('견적 요청')) ||
-                     (!isKorean && userMessage.includes('Quote Request'))) {
-                return chatTranslations[lang].priceResponse;
-            } 
-            // 기술 상담
-            else if (lowerMessage.includes('기술') || lowerMessage.includes('tech') || lowerMessage.includes('상담') || lowerMessage.includes('consultation') ||
-                     (isKorean && userMessage.includes('기술 상담')) ||
-                     (!isKorean && userMessage.includes('Tech Consultation'))) {
-                return chatTranslations[lang].techResponse;
-            } 
-            // 연락처
-            else if (lowerMessage.includes('연락') || lowerMessage.includes('contact') || lowerMessage.includes('전화') || lowerMessage.includes('phone')) {
-                return chatTranslations[lang].contactResponse;
-            } 
-            // AI 관련
-            else if (lowerMessage.includes('ai') || lowerMessage.includes('인공지능') || lowerMessage.includes('artificial intelligence')) {
-                return chatTranslations[lang].aiResponse;
-            } 
-            // 클라우드 관련
-            else if (lowerMessage.includes('클라우드') || lowerMessage.includes('cloud')) {
-                return chatTranslations[lang].cloudResponse;
-            } 
-            // 기본 응답
-            else {
-                return chatTranslations[lang].defaultResponse;
+            // 키워드 매칭 - 정확하고 빠른 응답
+            const keywords = {
+                ko: {
+                    'ai': 'AI 솔루션: 자연어처리, 컴퓨터비전, 머신러닝 모델 개발<br>• 챗봇 구축<br>• 이미지/음성 인식<br>• 예측 분석<br>• 추천 시스템',
+                    '인공지능': 'AI 솔루션: 자연어처리, 컴퓨터비전, 머신러닝 모델 개발<br>• 챗봇 구축<br>• 이미지/음성 인식<br>• 예측 분석<br>• 추천 시스템',
+                    '클라우드': '클라우드 서비스: AWS, Azure, GCP 기반<br>• 클라우드 마이그레이션<br>• 서버 인프라 구축<br>• 보안 설정<br>• 성능 최적화',
+                    '서비스': '주요 서비스 목록:<br>• AI 솔루션 개발<br>• 클라우드 마이그레이션<br>• 데이터 분석<br>• 웹/앱 개발<br>• IT 컨설팅',
+                    '견적': '견적 문의: 프로젝트 규모에 따라 상이<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 무료 상담 가능',
+                    '가격': '견적 문의: 프로젝트 규모에 따라 상이<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 무료 상담 가능',
+                    '비용': '견적 문의: 프로젝트 규모에 따라 상이<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 무료 상담 가능',
+                    '연락처': '📞 전화: 02-6200-1000<br>📧 이메일: contact@innovatetech.co.kr<br>📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층<br>🕐 운영시간: 평일 09:00-18:00',
+                    '전화': '📞 전화: 02-6200-1000<br>📧 이메일: contact@innovatetech.co.kr<br>📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층<br>🕐 운영시간: 평일 09:00-18:00',
+                    '주소': '📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층<br>🚇 지하철: 2호선 강남역 1번 출구 도보 5분<br>🚗 주차: 건물 내 주차장 이용 가능',
+                    '데이터': '데이터 분석 서비스:<br>• 빅데이터 처리<br>• 실시간 대시보드<br>• 비즈니스 인텔리전스<br>• 데이터 시각화<br>• ETL 파이프라인',
+                    '개발': '개발 서비스:<br>• 웹/모바일 앱 개발<br>• API 개발<br>• 데이터베이스 설계<br>• UI/UX 디자인<br>• 유지보수',
+                    '포트폴리오': '주요 고객사:<br>• 삼성전자, LG전자<br>• 현대자동차<br>• KB금융그룹<br>• 네이버, 카카오<br>• 300+ 프로젝트 완료',
+                    '경력': '회사 연혁:<br>• 2015년 설립<br>• 8년간 AI/클라우드 전문<br>• AWS 파트너<br>• Microsoft Gold Partner<br>• 50+ 대기업 고객사'
+                },
+                en: {
+                    'ai': 'AI Solutions: NLP, Computer Vision, ML Development<br>• Chatbot Development<br>• Image/Voice Recognition<br>• Predictive Analytics<br>• Recommendation Systems',
+                    'artificial intelligence': 'AI Solutions: NLP, Computer Vision, ML Development<br>• Chatbot Development<br>• Image/Voice Recognition<br>• Predictive Analytics<br>• Recommendation Systems',
+                    'cloud': 'Cloud Services: AWS, Azure, GCP Based<br>• Cloud Migration<br>• Server Infrastructure<br>• Security Setup<br>• Performance Optimization',
+                    'service': 'Main Services:<br>• AI Solution Development<br>• Cloud Migration<br>• Data Analytics<br>• Web/App Development<br>• IT Consulting',
+                    'quote': 'Quote Inquiry: Varies by project scope<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 Free consultation available',
+                    'price': 'Quote Inquiry: Varies by project scope<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 Free consultation available',
+                    'cost': 'Quote Inquiry: Varies by project scope<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 Free consultation available',
+                    'contact': '📞 Phone: 02-6200-1000<br>📧 Email: contact@innovatetech.co.kr<br>📍 Address: 35F Parnas Tower, Gangnam-gu, Seoul<br>🕐 Hours: Weekdays 09:00-18:00',
+                    'phone': '📞 Phone: 02-6200-1000<br>📧 Email: contact@innovatetech.co.kr<br>📍 Address: 35F Parnas Tower, Gangnam-gu, Seoul<br>🕐 Hours: Weekdays 09:00-18:00',
+                    'address': '📍 Address: 35F Parnas Tower, 521 Teheran-ro, Gangnam-gu, Seoul<br>🚇 Subway: Gangnam Station Exit 1, 5min walk<br>🚗 Parking: Building parking available',
+                    'data': 'Data Analytics Services:<br>• Big Data Processing<br>• Real-time Dashboard<br>• Business Intelligence<br>• Data Visualization<br>• ETL Pipeline',
+                    'development': 'Development Services:<br>• Web/Mobile App Development<br>• API Development<br>• Database Design<br>• UI/UX Design<br>• Maintenance',
+                    'portfolio': 'Major Clients:<br>• Samsung, LG Electronics<br>• Hyundai Motor<br>• KB Financial Group<br>• Naver, Kakao<br>• 300+ Projects Completed',
+                    'history': 'Company History:<br>• Founded in 2015<br>• 8 Years AI/Cloud Expertise<br>• AWS Partner<br>• Microsoft Gold Partner<br>• 50+ Enterprise Clients'
+                }
+            };
+            
+            // 정확한 키워드 매칭
+            const langKeywords = keywords[lang];
+            for (const [keyword, response] of Object.entries(langKeywords)) {
+                if (msg.includes(keyword)) {
+                    return response;
+                }
+            }
+            
+            // 기본 응답 (도움말)
+            if (lang === 'ko') {
+                return '💡 사용 가능한 키워드:<br><strong>ai, 클라우드, 서비스, 견적, 연락처, 데이터, 개발, 포트폴리오</strong><br><br>예시: "ai" 또는 "견적" 입력해보세요!';
+            } else {
+                return '💡 Available keywords:<br><strong>ai, cloud, service, quote, contact, data, development, portfolio</strong><br><br>Try typing "ai" or "quote"!';
             }
         }
     </script>
