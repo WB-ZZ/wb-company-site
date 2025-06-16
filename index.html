@@ -645,10 +645,12 @@
                     </div>
                     <div id="chatMessages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem;">
                     </div>
-                    <div id="quickReplies" style="padding: 0.5rem 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="quick-reply" onclick="sendQuickReply('서비스 문의')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;">서비스 문의</button>
-                        <button class="quick-reply" onclick="sendQuickReply('견적 요청')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;">견적 요청</button>
-                        <button class="quick-reply" onclick="sendQuickReply('기술 상담')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;">기술 상담</button>
+                    <div id="quickReplies" style="padding: 0.5rem 1rem 0; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                        <button class="quick-reply" onclick="sendQuickReply('ai')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">AI/인공지능</button>
+                        <button class="quick-reply" onclick="sendQuickReply('견적')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">견적/가격</button>
+                        <button class="quick-reply" onclick="sendQuickReply('연락처')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">연락처/주소</button>
+                        <button class="quick-reply" onclick="sendQuickReply('서비스')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">서비스 목록</button>
+                        <button class="quick-reply" onclick="sendQuickReply('더 많은 키워드')" style="background: #667eea; color: white; border: 1px solid #667eea; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">더 많은 키워드</button>
                     </div>
                     <div style="padding: 1rem; display: flex; gap: 0.5rem; border-top: 1px solid #e9ecef;">
                         <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." style="flex: 1; border: 1px solid #e9ecef; border-radius: 1.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; outline: none; transition: border-color 0.2s ease;" onkeypress="if(event.key==='Enter') sendMessage()">
@@ -715,18 +717,24 @@
         // 채팅 다국어 지원
         const chatTranslations = {
             ko: {
-                welcome: '안녕하세요! InnovateTech 챗봇입니다.<br><br>💡 키워드를 입력하면 즉시 답변을 드려요:<br><strong>ai, 클라우드, 서비스, 견적, 연락처</strong>',
-                quickReply1: 'ai',
-                quickReply2: '견적', 
-                quickReply3: '연락처',
-                placeholder: '키워드 입력 (예: ai, 견적, 연락처)...'
+                welcome: '안녕하세요! InnovateTech 챗봇입니다.<br><br>💬 <strong>아래 버튼 클릭</strong> 또는 키워드를 직접 입력하세요:',
+                quickReply1: 'AI/인공지능',
+                quickReply2: '견적/가격', 
+                quickReply3: '연락처/주소',
+                quickReply4: '서비스 목록',
+                quickReply5: '더 많은 키워드',
+                placeholder: '질문을 입력하거나 위 버튼을 클릭하세요...',
+                moreKeywords: '📋 <strong>사용 가능한 모든 키워드:</strong><br><br>🤖 <strong>기술 관련:</strong> ai, 인공지능, 클라우드, 데이터<br>💼 <strong>비즈니스:</strong> 서비스, 견적, 가격, 비용<br>📞 <strong>연락/정보:</strong> 연락처, 전화, 주소<br>🏢 <strong>회사 정보:</strong> 포트폴리오, 경력, 개발<br><br>💡 <strong>사용법:</strong> 위 키워드 중 하나만 입력하면 바로 답변을 받을 수 있어요!'
             },
             en: {
-                welcome: 'Hello! This is InnovateTech chatbot.<br><br>💡 Type keywords for instant answers:<br><strong>ai, cloud, service, quote, contact</strong>',
-                quickReply1: 'ai',
-                quickReply2: 'quote',
-                quickReply3: 'contact',
-                placeholder: 'Type keywords (e.g. ai, quote, contact)...'
+                welcome: 'Hello! This is InnovateTech chatbot.<br><br>💬 <strong>Click buttons below</strong> or type keywords directly:',
+                quickReply1: 'AI Solutions',
+                quickReply2: 'Quote/Price',
+                quickReply3: 'Contact/Address',
+                quickReply4: 'Service List',
+                quickReply5: 'More Keywords',
+                placeholder: 'Ask a question or click buttons above...',
+                moreKeywords: '📋 <strong>All Available Keywords:</strong><br><br>🤖 <strong>Technology:</strong> ai, cloud, data<br>💼 <strong>Business:</strong> service, quote, price, cost<br>📞 <strong>Contact/Info:</strong> contact, phone, address<br>🏢 <strong>Company:</strong> portfolio, history, development<br><br>💡 <strong>How to use:</strong> Just type any keyword above and get instant answers!'
             }
         };
 
@@ -763,10 +771,18 @@
             const chatInput = document.getElementById('chatInput');
             
             if (quickReplies) {
+                const button1Action = lang === 'ko' ? 'ai' : 'ai';
+                const button2Action = lang === 'ko' ? '견적' : 'quote';
+                const button3Action = lang === 'ko' ? '연락처' : 'contact';
+                const button4Action = lang === 'ko' ? '서비스' : 'service';
+                const button5Action = lang === 'ko' ? '더 많은 키워드' : 'more keywords';
+                
                 quickReplies.innerHTML = `
-                    <button class="quick-reply" onclick="sendQuickReply('${chatTranslations[lang].quickReply1}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply1}</button>
-                    <button class="quick-reply" onclick="sendQuickReply('${chatTranslations[lang].quickReply2}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply2}</button>
-                    <button class="quick-reply" onclick="sendQuickReply('${chatTranslations[lang].quickReply3}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply3}</button>
+                    <button class="quick-reply" onclick="sendQuickReply('${button1Action}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply1}</button>
+                    <button class="quick-reply" onclick="sendQuickReply('${button2Action}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply2}</button>
+                    <button class="quick-reply" onclick="sendQuickReply('${button3Action}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply3}</button>
+                    <button class="quick-reply" onclick="sendQuickReply('${button4Action}')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply4}</button>
+                    <button class="quick-reply" onclick="sendQuickReply('${button5Action}')" style="background: #667eea; color: white; border: 1px solid #667eea; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">${chatTranslations[lang].quickReply5}</button>
                 `;
             }
             
@@ -877,6 +893,11 @@
                 }
             };
             
+            // 키워드 도움말 특별 처리
+            if (msg.includes('더 많은 키워드') || msg.includes('more keywords') || msg.includes('help') || msg.includes('도움')) {
+                return chatTranslations[lang].moreKeywords;
+            }
+            
             // 정확한 키워드 매칭
             const langKeywords = keywords[lang];
             for (const [keyword, response] of Object.entries(langKeywords)) {
@@ -887,9 +908,9 @@
             
             // 기본 응답 (도움말)
             if (lang === 'ko') {
-                return '💡 사용 가능한 키워드:<br><strong>ai, 클라우드, 서비스, 견적, 연락처, 데이터, 개발, 포트폴리오</strong><br><br>예시: "ai" 또는 "견적" 입력해보세요!';
+                return '❓ 키워드를 찾을 수 없어요!<br><br>💡 <strong>빠른 사용법:</strong><br>• 위의 <strong>파란색 버튼들</strong>을 클릭하거나<br>• <strong>"더 많은 키워드"</strong> 버튼으로 전체 목록 확인<br>• 직접 키워드 입력: ai, 견적, 연락처 등<br><br>🚀 <strong>가장 인기:</strong> ai, 견적, 연락처';
             } else {
-                return '💡 Available keywords:<br><strong>ai, cloud, service, quote, contact, data, development, portfolio</strong><br><br>Try typing "ai" or "quote"!';
+                return '❓ Keyword not found!<br><br>💡 <strong>Quick Guide:</strong><br>• Click the <strong>blue buttons</strong> above or<br>• Use <strong>"More Keywords"</strong> for full list<br>• Type directly: ai, quote, contact, etc.<br><br>🚀 <strong>Most Popular:</strong> ai, quote, contact';
             }
         }
     </script>
