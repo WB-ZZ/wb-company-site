@@ -607,9 +607,16 @@
                 }
             });
             
-            // 채팅 언어도 업데이트
+            // 채팅 위젯 재생성 (언어 변경)
+            createChatWidget();
+            
+            // PWA 버튼 재생성 (언어 변경)
+            createPWAButton();
+            
+            // 채팅이 이미 초기화되었다면 재초기화
             if (chatInitialized) {
-                updateChatLanguage();
+                chatInitialized = false;
+                chatMessages = [];
             }
         }
 
@@ -623,51 +630,11 @@
             `;
             document.body.appendChild(langSwitcher);
             
-            // 채팅 위젯 생성
-            const chatWidget = document.createElement('div');
-            chatWidget.id = 'chatWidget';
-            chatWidget.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 10000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;';
-            chatWidget.innerHTML = `
-                <div id="chatButton" style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3); transition: all 0.3s ease; position: relative;" onclick="toggleChat()">
-                    💬
-                    <span id="chatBadge" style="position: absolute; top: -5px; right: -5px; background: #ff4757; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: 600;">1</span>
-                </div>
-                <div id="chatWindow" style="position: absolute; bottom: 80px; right: 0; width: 350px; height: 500px; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); opacity: 0; transform: translateY(20px) scale(0.9); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; display: flex; flex-direction: column;">
-                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1rem; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 0.75rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">🤖</div>
-                            <div>
-                                <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">InnovateTech AI</h4>
-                                <span style="font-size: 0.8rem; opacity: 0.9;">● 온라인</span>
-                            </div>
-                        </div>
-                        <button onclick="closeChat()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0.25rem; border-radius: 4px; transition: background 0.2s ease;">✕</button>
-                    </div>
-                    <div id="chatMessages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem;">
-                    </div>
-                    <div id="quickReplies" style="padding: 0.5rem 1rem 0; display: flex; gap: 0.4rem; flex-wrap: wrap;">
-                        <button class="quick-reply" onclick="sendQuickReply('ai')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">AI/인공지능</button>
-                        <button class="quick-reply" onclick="sendQuickReply('견적')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">견적/가격</button>
-                        <button class="quick-reply" onclick="sendQuickReply('연락처')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">연락처/주소</button>
-                        <button class="quick-reply" onclick="sendQuickReply('서비스')" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">서비스 목록</button>
-                        <button class="quick-reply" onclick="sendQuickReply('더 많은 키워드')" style="background: #667eea; color: white; border: 1px solid #667eea; border-radius: 1rem; padding: 0.3rem 0.6rem; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;">더 많은 키워드</button>
-                    </div>
-                    <div style="padding: 1rem; display: flex; gap: 0.5rem; border-top: 1px solid #e9ecef;">
-                        <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." style="flex: 1; border: 1px solid #e9ecef; border-radius: 1.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; outline: none; transition: border-color 0.2s ease;" onkeypress="if(event.key==='Enter') sendMessage()">
-                        <button onclick="sendMessage()" style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease;">📤</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(chatWidget);
+            // 채팅 위젯 생성 (동적으로 언어 지원)
+            createChatWidget();
             
             // PWA 설치 버튼 추가
-            if ('serviceWorker' in navigator) {
-                const pwaButton = document.createElement('button');
-                pwaButton.style.cssText = 'position: fixed; top: 70px; right: 20px; background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px; z-index: 9999;';
-                pwaButton.textContent = '📱 앱으로 설치';
-                pwaButton.onclick = () => alert('PWA 설치 기능이 활성화되었습니다! 브라우저 주소창의 설치 아이콘을 클릭하세요.');
-                document.body.appendChild(pwaButton);
-            }
+            createPWAButton();
             
             console.log('✅ 모든 기능이 추가되었습니다: 언어전환, 채팅, PWA!');
             // 채팅 CSS 애니메이션 추가
@@ -713,6 +680,76 @@
         let chatOpen = false;
         let chatMessages = [];
         let chatInitialized = false;
+        
+        function createChatWidget() {
+            const lang = currentLang || 'ko';
+            const existingWidget = document.getElementById('chatWidget');
+            if (existingWidget) {
+                existingWidget.remove();
+            }
+            
+            const chatWidget = document.createElement('div');
+            chatWidget.id = 'chatWidget';
+            chatWidget.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 10000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;';
+            
+            const statusText = lang === 'ko' ? '● 온라인' : '● Online';
+            const placeholderText = lang === 'ko' ? '메시지를 입력하세요...' : 'Type your message...';
+            
+            chatWidget.innerHTML = `
+                <div id="chatButton" style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3); transition: all 0.3s ease; position: relative;" onclick="toggleChat()">
+                    💬
+                    <span id="chatBadge" style="position: absolute; top: -5px; right: -5px; background: #ff4757; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: 600;">1</span>
+                </div>
+                <div id="chatWindow" style="position: absolute; bottom: 80px; right: 0; width: 350px; height: 500px; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); opacity: 0; transform: translateY(20px) scale(0.9); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; display: flex; flex-direction: column;">
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1rem; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">🤖</div>
+                            <div>
+                                <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">InnovateTech AI</h4>
+                                <span style="font-size: 0.8rem; opacity: 0.9;">${statusText}</span>
+                            </div>
+                        </div>
+                        <button onclick="closeChat()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0.25rem; border-radius: 4px; transition: background 0.2s ease;">✕</button>
+                    </div>
+                    <div id="chatMessages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem;">
+                    </div>
+                    <div id="quickReplies" style="padding: 0.5rem 1rem 0; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                    </div>
+                    <div style="padding: 1rem; display: flex; gap: 0.5rem; border-top: 1px solid #e9ecef;">
+                        <input type="text" id="chatInput" placeholder="${placeholderText}" style="flex: 1; border: 1px solid #e9ecef; border-radius: 1.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; outline: none; transition: border-color 0.2s ease;" onkeypress="if(event.key==='Enter') sendMessage()">
+                        <button onclick="sendMessage()" style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease;">📤</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(chatWidget);
+            
+            // 퀵 리플라이 버튼 설정
+            updateChatLanguage();
+        }
+        
+        function createPWAButton() {
+            if ('serviceWorker' in navigator) {
+                const lang = currentLang || 'ko';
+                const existingButton = document.getElementById('pwaButton');
+                if (existingButton) {
+                    existingButton.remove();
+                }
+                
+                const pwaButton = document.createElement('button');
+                pwaButton.id = 'pwaButton';
+                pwaButton.style.cssText = 'position: fixed; top: 70px; right: 20px; background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px; z-index: 9999;';
+                
+                if (lang === 'ko') {
+                    pwaButton.textContent = '📱 앱으로 설치';
+                    pwaButton.onclick = () => alert('PWA 설치 기능이 활성화되었습니다! 브라우저 주소창의 설치 아이콘을 클릭하세요.');
+                } else {
+                    pwaButton.textContent = '📱 Install App';
+                    pwaButton.onclick = () => alert('PWA installation feature is activated! Click the install icon in your browser address bar.');
+                }
+                
+                document.body.appendChild(pwaButton);
+            }
+        }
         
         // 채팅 다국어 지원
         const chatTranslations = {
