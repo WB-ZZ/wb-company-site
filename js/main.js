@@ -336,9 +336,19 @@ function createScrollToTopButton() {
 
 // Interactive Charts
 function initCharts() {
+    // Wait for Chart.js to load
+    if (typeof Chart === 'undefined') {
+        console.log('Chart.js not loaded yet');
+        setTimeout(initCharts, 1000);
+        return;
+    }
+    
+    console.log('Initializing charts...');
+    
     // Growth Chart
     const growthCtx = document.getElementById('growthChart');
     if (growthCtx) {
+        console.log('Creating growth chart');
         new Chart(growthCtx, {
             type: 'line',
             data: {

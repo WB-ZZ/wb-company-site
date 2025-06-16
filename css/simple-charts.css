@@ -1,0 +1,168 @@
+/* Simple CSS-based Charts */
+.simple-growth-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    height: 200px;
+    padding: 1rem 0;
+}
+
+.bar {
+    width: 40px;
+    background: linear-gradient(to top, #1e3c72, #667eea);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: all 0.8s ease;
+    cursor: pointer;
+}
+
+.bar:hover {
+    background: linear-gradient(to top, #2a5298, #4a7bc8);
+    transform: scaleY(1.05) !important;
+}
+
+.bar::before {
+    content: attr(data-value);
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.bar:hover::before {
+    opacity: 1;
+}
+
+.chart-labels {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.chart-labels span {
+    width: 40px;
+    text-align: center;
+}
+
+/* Simple Tech Chart */
+.simple-tech-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.tech-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    background: conic-gradient(
+        #1e3c72 0deg 90deg,
+        #2a5298 90deg 198deg,
+        #667eea 198deg 270deg,
+        #4c63d2 270deg 324deg,
+        #3b4de8 324deg 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-circle::before {
+    content: '';
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tech-circle::after {
+    content: '기술 역량';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: #333;
+    z-index: 1;
+}
+
+/* Tech Legend */
+.tech-chart-container {
+    position: relative;
+}
+
+.tech-chart-container::after {
+    content: 'AI/ML 25% • Cloud 30% • Frontend 20% • Backend 15% • DevOps 10%';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    width: 100%;
+}
+
+/* Interactive Counters */
+.animated-counter {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e3c72;
+    transition: all 0.3s ease;
+}
+
+.animated-counter.counting {
+    color: #667eea;
+    text-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chart-bars {
+        gap: 0.5rem;
+        height: 150px;
+    }
+    
+    .bar {
+        width: 30px;
+    }
+    
+    .chart-labels span {
+        width: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .tech-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .tech-circle::before {
+        width: 90px;
+        height: 90px;
+    }
+}
