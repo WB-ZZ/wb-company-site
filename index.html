@@ -96,6 +96,17 @@
 
     <!-- 히어로 섹션 (랜딩페이지) -->
     <section id="home" class="hero">
+        <!-- 동적 배경 효과 -->
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <div class="particle-container" id="particleContainer"></div>
+            <div class="animated-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
         <!-- 애니메이션 배경 요소들 -->
         <div class="floating-elements">
             <div class="floating-element"></div>
@@ -706,7 +717,211 @@
                 }
             `;
             document.head.appendChild(chatStyles);
+            
+            // 동적 배경 애니메이션 추가
+            addDynamicBackground();
+            
+            // 숫자 카운트업 애니메이션
+            observeCounters();
         });
+        
+        function addDynamicBackground() {
+            // 동적 배경 스타일 추가
+            const dynamicStyles = document.createElement('style');
+            dynamicStyles.textContent = `
+                .hero-background {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    z-index: -1;
+                }
+                
+                .gradient-overlay {
+                    position: absolute;
+                    width: 200%;
+                    height: 200%;
+                    background: linear-gradient(45deg, 
+                        #1e3c72 0%, 
+                        #2a5298 25%, 
+                        #667eea 50%, 
+                        #764ba2 75%, 
+                        #1e3c72 100%);
+                    animation: gradientShift 15s ease infinite;
+                    opacity: 0.9;
+                }
+                
+                @keyframes gradientShift {
+                    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+                    50% { transform: translate(-30%, -30%) rotate(180deg); }
+                }
+                
+                .animated-shapes {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+                
+                .shape {
+                    position: absolute;
+                    border-radius: 50%;
+                    filter: blur(40px);
+                    opacity: 0.3;
+                }
+                
+                .shape-1 {
+                    width: 300px;
+                    height: 300px;
+                    background: radial-gradient(circle, #667eea 0%, transparent 70%);
+                    top: 10%;
+                    left: 10%;
+                    animation: float1 20s infinite ease-in-out;
+                }
+                
+                .shape-2 {
+                    width: 400px;
+                    height: 400px;
+                    background: radial-gradient(circle, #764ba2 0%, transparent 70%);
+                    top: 60%;
+                    right: 10%;
+                    animation: float2 25s infinite ease-in-out;
+                }
+                
+                .shape-3 {
+                    width: 250px;
+                    height: 250px;
+                    background: radial-gradient(circle, #2a5298 0%, transparent 70%);
+                    bottom: 20%;
+                    left: 30%;
+                    animation: float3 22s infinite ease-in-out;
+                }
+                
+                .shape-4 {
+                    width: 350px;
+                    height: 350px;
+                    background: radial-gradient(circle, #4c63d2 0%, transparent 70%);
+                    top: 40%;
+                    right: 40%;
+                    animation: float4 18s infinite ease-in-out;
+                }
+                
+                @keyframes float1 {
+                    0%, 100% { transform: translate(0, 0) scale(1); }
+                    33% { transform: translate(100px, -100px) scale(1.1); }
+                    66% { transform: translate(-100px, 100px) scale(0.9); }
+                }
+                
+                @keyframes float2 {
+                    0%, 100% { transform: translate(0, 0) scale(1); }
+                    33% { transform: translate(-150px, 100px) scale(0.9); }
+                    66% { transform: translate(150px, -100px) scale(1.1); }
+                }
+                
+                @keyframes float3 {
+                    0%, 100% { transform: translate(0, 0) scale(1); }
+                    33% { transform: translate(100px, 100px) scale(1.2); }
+                    66% { transform: translate(-100px, -100px) scale(0.8); }
+                }
+                
+                @keyframes float4 {
+                    0%, 100% { transform: translate(0, 0) scale(1); }
+                    33% { transform: translate(-100px, -100px) scale(1.1); }
+                    66% { transform: translate(100px, 100px) scale(0.9); }
+                }
+                
+                /* 파티클 효과 */
+                .particle {
+                    position: absolute;
+                    background: rgba(255, 255, 255, 0.6);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: particleFloat 10s infinite linear;
+                }
+                
+                @keyframes particleFloat {
+                    0% {
+                        transform: translateY(100vh) scale(0);
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 1;
+                    }
+                    90% {
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(-100vh) scale(1);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(dynamicStyles);
+            
+            // 파티클 생성
+            const particleContainer = document.getElementById('particleContainer');
+            if (particleContainer) {
+                for (let i = 0; i < 50; i++) {
+                    createParticle(particleContainer);
+                }
+            }
+        }
+        
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            
+            const size = Math.random() * 3 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            container.appendChild(particle);
+        }
+        
+        // 숫자 카운트업 애니메이션
+        function observeCounters() {
+            const counters = document.querySelectorAll('.stat h4');
+            const options = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                        entry.target.classList.add('counted');
+                        animateCounter(entry.target);
+                    }
+                });
+            }, options);
+            
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        }
+        
+        function animateCounter(element) {
+            const target = element.textContent;
+            const number = parseInt(target.replace(/[^\d]/g, ''));
+            const suffix = target.replace(/[\d]/g, '');
+            const duration = 2000;
+            const step = Math.ceil(number / (duration / 16));
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current > number) {
+                    element.textContent = number + suffix;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = current + suffix;
+                }
+            }, 16);
+        }
         
         let chatOpen = false;
         let chatMessages = [];
