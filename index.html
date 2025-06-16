@@ -926,28 +926,39 @@
             }, 16);
         }
         
-        // 섹션별 배경 이미지 추가
+        // 추상적/기하학적 패턴 배경 시스템
         function addSectionBackgrounds() {
             const sectionStyles = document.createElement('style');
             sectionStyles.textContent = `
-                /* 전체 배경 패턴 */
+                /* 전체 배경 - 미니멀 기하학적 패턴 */
                 body {
                     background: 
-                        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%),
-                        linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                        linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #f1f5f9 50%, #f8fafc 100%);
                     background-attachment: fixed;
                     min-height: 100vh;
+                    position: relative;
                 }
                 
-                /* 히어로 섹션 배경 강화 */
+                body::before {
+                    content: '';
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="triangles" width="200" height="200" patternUnits="userSpaceOnUse"><polygon points="100,20 180,160 20,160" fill="none" stroke="rgba(102,126,234,0.03)" stroke-width="1"/><polygon points="40,40 160,40 100,140" fill="none" stroke="rgba(118,75,162,0.03)" stroke-width="1"/></pattern></defs><rect width="200" height="200" fill="url(%23triangles)"/></svg>');
+                    opacity: 0.6;
+                    pointer-events: none;
+                    z-index: -1;
+                }
+                
+                /* 히어로 섹션 - 다이나믹 기하학적 배경 */
                 .hero {
-                    background: 
-                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&crop=center') center/cover,
-                        linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(42, 82, 152, 0.9) 50%, rgba(102, 126, 234, 0.9) 100%);
-                    background-blend-mode: overlay;
+                    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #667eea 50%, #764ba2 75%, #1e3c72 100%);
+                    background-size: 400% 400%;
+                    animation: gradientShift 15s ease infinite;
                     position: relative;
+                    overflow: hidden;
                 }
                 
                 .hero::before {
@@ -957,18 +968,43 @@
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-                    opacity: 0.3;
-                    pointer-events: none;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><pattern id="hexagons" width="60" height="60" patternUnits="userSpaceOnUse"><polygon points="30,5 50,20 50,40 30,55 10,40 10,20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="400" height="400" fill="url(%23hexagons)"/></svg>');
+                    opacity: 0.4;
+                    animation: patternMove 20s linear infinite;
                 }
                 
-                /* About 섹션 배경 */
+                .hero::after {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    animation: floatPattern 25s linear infinite;
+                }
+                
+                @keyframes gradientShift {
+                    0%, 100% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                }
+                
+                @keyframes patternMove {
+                    0% { transform: translate(0, 0); }
+                    100% { transform: translate(60px, 60px); }
+                }
+                
+                @keyframes floatPattern {
+                    0% { transform: translate(0, 0) rotate(0deg); }
+                    100% { transform: translate(-50px, -50px) rotate(360deg); }
+                }
+                
+                /* About 섹션 - 교차하는 라인 패턴 */
                 .about {
-                    background: 
-                        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1920&h=800&fit=crop&crop=center') center/cover,
-                        linear-gradient(rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0.95));
-                    background-blend-mode: overlay;
+                    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
                     position: relative;
+                    overflow: hidden;
                 }
                 
                 .about::before {
@@ -978,18 +1014,40 @@
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: linear-gradient(45deg, transparent 49%, rgba(102, 126, 234, 0.05) 50%, transparent 51%);
-                    background-size: 20px 20px;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="diagonal-lines" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0,100 L100,0" stroke="rgba(102,126,234,0.08)" stroke-width="1" fill="none"/><path d="M0,0 L100,100" stroke="rgba(118,75,162,0.08)" stroke-width="1" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23diagonal-lines)"/></svg>');
+                    opacity: 0.7;
+                    animation: slidePattern 30s linear infinite;
                 }
                 
-                /* Services 섹션 배경 */
+                .about::after {
+                    content: '';
+                    position: absolute;
+                    top: 20%;
+                    right: 10%;
+                    width: 200px;
+                    height: 200px;
+                    border: 2px solid rgba(102, 126, 234, 0.1);
+                    border-radius: 50%;
+                    animation: rotateCircle 20s linear infinite;
+                }
+                
+                @keyframes slidePattern {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(100px); }
+                }
+                
+                @keyframes rotateCircle {
+                    0% { transform: rotate(0deg) scale(1); }
+                    50% { transform: rotate(180deg) scale(1.1); }
+                    100% { transform: rotate(360deg) scale(1); }
+                }
+                
+                /* Services 섹션 - 동적 다각형 패턴 */
                 .services {
-                    background: 
-                        url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=800&fit=crop&crop=center') center/cover,
-                        linear-gradient(rgba(30, 60, 114, 0.95), rgba(102, 126, 234, 0.95));
-                    background-blend-mode: overlay;
+                    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
                     color: white;
                     position: relative;
+                    overflow: hidden;
                 }
                 
                 .services .section-title,
@@ -998,25 +1056,46 @@
                     color: white !important;
                 }
                 
-                .services::after {
+                .services::before {
                     content: '';
                     position: absolute;
                     top: 0;
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><defs><pattern id="circuit" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M0 40h80M40 0v80M20 20h40M20 60h40" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" fill="none"/></pattern></defs><rect width="80" height="80" fill="url(%23circuit)"/></svg>');
-                    opacity: 0.3;
-                    pointer-events: none;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="polygons" width="200" height="200" patternUnits="userSpaceOnUse"><polygon points="100,10 190,60 160,150 40,150 10,60" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><polygon points="60,60 140,60 170,120 100,170 30,120" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/></pattern></defs><rect width="200" height="200" fill="url(%23polygons)"/></svg>');
+                    opacity: 0.6;
+                    animation: polygonFloat 25s ease-in-out infinite;
                 }
                 
-                /* Portfolio 섹션 배경 */
+                .services::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 10%;
+                    left: 15%;
+                    width: 0;
+                    height: 0;
+                    border-left: 100px solid transparent;
+                    border-right: 100px solid transparent;
+                    border-bottom: 150px solid rgba(255, 255, 255, 0.05);
+                    animation: trianglePulse 15s ease-in-out infinite;
+                }
+                
+                @keyframes polygonFloat {
+                    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                    50% { transform: translate(20px, -20px) rotate(5deg); }
+                }
+                
+                @keyframes trianglePulse {
+                    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.05; }
+                    50% { transform: scale(1.2) rotate(10deg); opacity: 0.1; }
+                }
+                
+                /* Portfolio 섹션 - 모자이크 패턴 */
                 .portfolio {
-                    background: 
-                        url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&h=800&fit=crop&crop=center') center/cover,
-                        linear-gradient(rgba(248, 250, 252, 0.95), rgba(226, 232, 240, 0.95));
-                    background-blend-mode: overlay;
+                    background: linear-gradient(45deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
                     position: relative;
+                    overflow: hidden;
                 }
                 
                 .portfolio::before {
@@ -1026,17 +1105,22 @@
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><pattern id="mosaic" width="120" height="120" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="40" height="40" fill="none" stroke="rgba(102,126,234,0.06)" stroke-width="1"/><rect x="40" y="0" width="40" height="40" fill="none" stroke="rgba(118,75,162,0.06)" stroke-width="1"/><rect x="80" y="0" width="40" height="40" fill="none" stroke="rgba(102,126,234,0.06)" stroke-width="1"/><rect x="0" y="40" width="40" height="40" fill="none" stroke="rgba(118,75,162,0.06)" stroke-width="1"/><rect x="40" y="40" width="40" height="40" fill="none" stroke="rgba(102,126,234,0.06)" stroke-width="1"/><rect x="80" y="40" width="40" height="40" fill="none" stroke="rgba(118,75,162,0.06)" stroke-width="1"/></pattern></defs><rect width="120" height="120" fill="url(%23mosaic)"/></svg>');
+                    opacity: 0.8;
+                    animation: mosaicShift 40s linear infinite;
                 }
                 
-                /* Contact 섹션 배경 */
+                @keyframes mosaicShift {
+                    0% { transform: translate(0, 0); }
+                    100% { transform: translate(120px, 120px); }
+                }
+                
+                /* Contact 섹션 - 웨이브 패턴 */
                 .contact {
-                    background: 
-                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=800&fit=crop&crop=center') center/cover,
-                        linear-gradient(rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9));
-                    background-blend-mode: overlay;
+                    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
                     color: white;
                     position: relative;
+                    overflow: hidden;
                 }
                 
                 .contact .section-title,
@@ -1053,14 +1137,19 @@
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><defs><pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="60" height="60" fill="url(%23dots)"/></svg>');
-                    opacity: 0.4;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><pattern id="waves" width="400" height="200" patternUnits="userSpaceOnUse"><path d="M0,100 Q100,50 200,100 T400,100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><path d="M0,120 Q100,70 200,120 T400,120" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/><path d="M0,80 Q100,30 200,80 T400,80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/></pattern></defs><rect width="400" height="200" fill="url(%23waves)"/></svg>');
+                    opacity: 0.7;
+                    animation: waveFlow 20s ease-in-out infinite;
                 }
                 
-                /* Footer 배경 */
+                @keyframes waveFlow {
+                    0%, 100% { transform: translateX(0); }
+                    50% { transform: translateX(-200px); }
+                }
+                
+                /* Footer - 격자 패턴 */
                 .footer {
-                    background: 
-                        linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
                     position: relative;
                 }
                 
@@ -1071,21 +1160,22 @@
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-                    opacity: 0.2;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="50" height="50" fill="url(%23grid)"/></svg>');
+                    opacity: 0.3;
                 }
                 
                 /* 카드 배경 개선 */
                 .feature-card, .service-card, .portfolio-item {
                     background: rgba(255, 255, 255, 0.95);
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
                     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                    position: relative;
                 }
                 
                 .services .service-card {
                     background: rgba(255, 255, 255, 0.1);
-                    backdrop-filter: blur(10px);
+                    backdrop-filter: blur(15px);
                     border: 1px solid rgba(255, 255, 255, 0.2);
                     color: white;
                 }
@@ -1093,20 +1183,25 @@
                 /* 폼 배경 개선 */
                 .contact-form {
                     background: rgba(255, 255, 255, 0.95);
-                    backdrop-filter: blur(15px);
+                    backdrop-filter: blur(20px);
                     border-radius: 20px;
                     border: 1px solid rgba(255, 255, 255, 0.3);
                     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                    position: relative;
                 }
                 
                 .contact-form h3 {
                     color: #1e3c72 !important;
                 }
                 
-                /* 패럴랙스 효과 */
-                @media (min-width: 768px) {
-                    .hero, .about, .services, .portfolio, .contact {
-                        background-attachment: fixed;
+                /* 반응형 최적화 */
+                @media (max-width: 768px) {
+                    .hero::before,
+                    .about::before,
+                    .services::before,
+                    .portfolio::before,
+                    .contact::before {
+                        animation-duration: 60s; /* 모바일에서 애니메이션 속도 조정 */
                     }
                 }
             `;
