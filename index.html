@@ -136,7 +136,24 @@
                     <!-- 인터랙티브 성장 차트 -->
                     <div class="growth-chart-container" data-aos="fade-up" data-aos-delay="400">
                         <h4>연도별 성장률</h4>
-                        <canvas id="growthChart" width="400" height="200"></canvas>
+                        <div class="simple-growth-chart">
+                            <div class="chart-bars">
+                                <div class="bar" style="height: 20%; background: linear-gradient(to top, #1e3c72, #667eea);" data-year="2015" data-value="100%"></div>
+                                <div class="bar" style="height: 35%; background: linear-gradient(to top, #1e3c72, #667eea);" data-year="2017" data-value="150%"></div>
+                                <div class="bar" style="height: 55%; background: linear-gradient(to top, #1e3c72, #667eea);" data-year="2019" data-value="230%"></div>
+                                <div class="bar" style="height: 75%; background: linear-gradient(to top, #1e3c72, #667eea);" data-year="2021" data-value="340%"></div>
+                                <div class="bar" style="height: 90%; background: linear-gradient(to top, #1e3c72, #667eea);" data-year="2023" data-value="480%"></div>
+                                <div class="bar" style="height: 100%; background: linear-gradient(to top, #1e3c72, #667eea);" data-year="2024" data-value="650%"></div>
+                            </div>
+                            <div class="chart-labels">
+                                <span>2015</span>
+                                <span>2017</span>
+                                <span>2019</span>
+                                <span>2021</span>
+                                <span>2023</span>
+                                <span>2024</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="about-image">
@@ -152,10 +169,22 @@
             <h2 class="section-title">서비스</h2>
             
             <!-- 기술 역량 차트 -->
-            <div class="tech-capabilities" data-aos="fade-up">
-                <div class="tech-chart-container">
-                    <h3>핵심 기술 역량</h3>
-                    <canvas id="techChart" width="300" height="300"></canvas>
+            <div class="tech-capabilities" data-aos="fade-up" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem; padding: 2rem; background: #f8fafc; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                <div class="tech-chart-container" style="text-align: center;">
+                    <h3 style="margin-bottom: 1.5rem; color: #2c3e50; font-size: 1.4rem;">핵심 기술 역량</h3>
+                    <div class="simple-tech-chart">
+                        <div class="tech-circle" style="width: 200px; height: 200px; border-radius: 50%; position: relative; background: conic-gradient(#1e3c72 0deg 90deg, #2a5298 90deg 198deg, #667eea 198deg 270deg, #4c63d2 270deg 324deg, #3b4de8 324deg 360deg); display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <div style="width: 120px; height: 120px; background: white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 600; color: #333; z-index: 1;">기술 역량</span>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #666; text-align: center;">
+                            <div>🤖 AI/ML 25%</div>
+                            <div>☁️ Cloud 30%</div>
+                            <div>💻 Frontend 20%</div>
+                            <div>⚙️ Backend 15%</div>
+                            <div>🔧 DevOps 10%</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tech-details">
                     <div class="tech-item">
