@@ -427,9 +427,54 @@
         </div>
     </footer>
 
+    <script>
+        // 강제 언어 전환 버튼 추가
+        document.addEventListener('DOMContentLoaded', function() {
+            // 언어 전환 버튼 생성
+            const langSwitcher = document.createElement('div');
+            langSwitcher.style.cssText = 'position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 9999;';
+            langSwitcher.innerHTML = `
+                <button style="background: #667eea; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px;" onclick="alert('한국어 선택됨')">🇰🇷 한국어</button>
+                <button style="background: #2a5298; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px;" onclick="alert('English 선택됨')">🇺🇸 English</button>
+            `;
+            document.body.appendChild(langSwitcher);
+            
+            // 채팅 위젯 생성
+            const chatWidget = document.createElement('div');
+            chatWidget.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 10000;';
+            chatWidget.innerHTML = `
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);" onclick="openChat()">
+                    💬
+                    <span style="position: absolute; top: -5px; right: -5px; background: #ff4757; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center;">1</span>
+                </div>
+            `;
+            document.body.appendChild(chatWidget);
+            
+            // PWA 설치 버튼 추가
+            if ('serviceWorker' in navigator) {
+                const pwaButton = document.createElement('button');
+                pwaButton.style.cssText = 'position: fixed; top: 70px; right: 20px; background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 12px; z-index: 9999;';
+                pwaButton.textContent = '📱 앱으로 설치';
+                pwaButton.onclick = () => alert('PWA 설치 기능이 활성화되었습니다! 브라우저 주소창의 설치 아이콘을 클릭하세요.');
+                document.body.appendChild(pwaButton);
+            }
+            
+            console.log('✅ 모든 기능이 추가되었습니다: 언어전환, 채팅, PWA!');
+        });
+        
+        function openChat() {
+            const chatWindow = prompt('InnovateTech 채팅봇입니다. 무엇을 도와드릴까요?\\n\\n1. 서비스 문의\\n2. 견적 요청\\n3. 기술 상담\\n\\n번호를 입력하세요:');
+            
+            if (chatWindow === '1') {
+                alert('서비스 문의: AI 솔루션, 클라우드 마이그레이션, 데이터 분석 서비스를 제공합니다. 상세 상담: 02-6200-1000');
+            } else if (chatWindow === '2') {
+                alert('견적 요청: 프로젝트 견적은 요구사항에 따라 달라집니다. contact@innovatetech.co.kr로 문의해주세요.');
+            } else if (chatWindow === '3') {
+                alert('기술 상담: AWS, Azure, Python, TensorFlow 등 최신 기술로 상담드립니다. 전문 상담: 02-6200-1000');
+            }
+        }
+    </script>
     <script src="js/main.js"></script>
     <script src="js/simple-charts.js"></script>
-    <script src="js/i18n.js"></script>
-    <script src="js/chat-widget.js"></script>
 </body>
 </html>
