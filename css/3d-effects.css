@@ -1,0 +1,273 @@
+/* 3D Effects and Enhanced Parallax */
+
+/* 3D Card Effects */
+.card-3d {
+    perspective: 1000px;
+    transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+    transform: rotateY(5deg) rotateX(5deg);
+}
+
+.service-card,
+.feature-card,
+.portfolio-item {
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.service-card::before,
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.service-card:hover::before,
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.service-card:hover,
+.feature-card:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Parallax Layers */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    will-change: transform;
+}
+
+.parallax-bg {
+    transform: translateZ(-1px) scale(2);
+}
+
+.parallax-mid {
+    transform: translateZ(-0.5px) scale(1.5);
+}
+
+.parallax-front {
+    transform: translateZ(0);
+}
+
+/* 3D Text Effects */
+.text-3d {
+    text-shadow: 
+        1px 1px 0 rgba(0, 0, 0, 0.1),
+        2px 2px 0 rgba(0, 0, 0, 0.1),
+        3px 3px 0 rgba(0, 0, 0, 0.1),
+        4px 4px 10px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+}
+
+.hero-title {
+    transform-style: preserve-3d;
+    animation: textFloat 6s ease-in-out infinite;
+}
+
+@keyframes textFloat {
+    0%, 100% {
+        transform: translateZ(0) rotateX(0deg);
+    }
+    50% {
+        transform: translateZ(20px) rotateX(2deg);
+    }
+}
+
+/* Isometric Elements */
+.isometric-card {
+    transform: rotateX(60deg) rotateY(-30deg) rotateZ(30deg);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.isometric-card:hover {
+    transform: rotateX(60deg) rotateY(-30deg) rotateZ(30deg) scale(1.1);
+}
+
+/* 3D Navigation */
+.nav-link {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover {
+    transform: translateZ(10px);
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Morphing Buttons */
+.btn-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    border-radius: inherit;
+    transform: translateZ(-10px);
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+.btn-3d:hover {
+    transform: translateZ(10px);
+}
+
+.btn-3d:hover::before {
+    transform: translateZ(-20px);
+}
+
+/* Layered Parallax Background */
+.hero {
+    position: relative;
+    perspective: 1000px;
+}
+
+.hero-bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+}
+
+.hero-bg-layer-1 {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+    transform: translateZ(-100px) scale(1.1);
+}
+
+.hero-bg-layer-2 {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    transform: translateZ(-50px) scale(1.05);
+    opacity: 0.3;
+}
+
+.hero-bg-layer-3 {
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    transform: translateZ(-20px) scale(1.02);
+}
+
+/* Advanced Portfolio 3D Grid */
+.portfolio-grid {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+}
+
+.portfolio-item {
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:nth-child(1):hover {
+    transform: rotateX(10deg) rotateY(-10deg) translateZ(50px);
+}
+
+.portfolio-item:nth-child(2):hover {
+    transform: rotateX(-5deg) rotateY(5deg) translateZ(50px);
+}
+
+.portfolio-item:nth-child(3):hover {
+    transform: rotateX(5deg) rotateY(10deg) translateZ(50px);
+}
+
+/* 3D Stats Counter */
+.stat {
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.stat h4 {
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.stat:hover h4 {
+    transform: translateZ(20px) rotateX(10deg);
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Action Button 3D */
+.fab {
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fab:hover {
+    transform: scale(1.1) translateZ(20px) rotateY(15deg);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .service-card:hover,
+    .feature-card:hover {
+        transform: scale(1.02);
+    }
+    
+    .portfolio-item:hover {
+        transform: scale(1.05);
+    }
+    
+    .hero-title {
+        animation: none;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .card-3d,
+    .service-card,
+    .feature-card,
+    .portfolio-item,
+    .nav-link,
+    .btn-3d,
+    .stat,
+    .fab {
+        transform: none !important;
+        transition: none;
+    }
+    
+    .hero-title {
+        animation: none;
+    }
+    
+    .parallax-layer {
+        transform: none !important;
+    }
+}

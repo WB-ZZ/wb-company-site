@@ -1,0 +1,29 @@
+{
+    "name": "InnovateTech - AI & Cloud Solutions",
+    "short_name": "InnovateTech",
+    "description": "AI, 클라우드, 빅데이터 전문 IT 기업",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1e3c72",
+    "theme_color": "#667eea",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "images/icon-512.png", 
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["business", "technology"],
+    "lang": "ko-KR",
+    "dir": "ltr",
+    "scope": "/",
+    "prefer_related_applications": false
+}
