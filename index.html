@@ -601,15 +601,21 @@
             
             // 자동 번역 시스템 - data-i18n 속성 기반
             const elementsWithI18n = document.querySelectorAll('[data-i18n]');
+            console.log(`🔍 찾은 번역 대상 요소: ${elementsWithI18n.length}개`);
+            
             elementsWithI18n.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 const translation = translations[lang][key];
+                
                 if (translation) {
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                         element.placeholder = translation;
                     } else {
                         element.innerHTML = translation;
                     }
+                    console.log(`✅ ${key}: ${translation}`);
+                } else {
+                    console.log(`❌ 번역 누락: ${key}`);
                 }
             });
             
