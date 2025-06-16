@@ -1,0 +1,129 @@
+/* Interactive Charts and Graphs */
+.growth-chart-container {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--bg-secondary, #f8fafc);
+    border-radius: 15px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.growth-chart-container h4 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary, #2c3e50);
+    font-size: 1.3rem;
+}
+
+.tech-capabilities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--bg-secondary, #f8fafc);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.tech-chart-container {
+    text-align: center;
+}
+
+.tech-chart-container h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary, #2c3e50);
+    font-size: 1.4rem;
+}
+
+.tech-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tech-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color, #1e3c72);
+    width: 30px;
+}
+
+.tech-item span {
+    font-weight: 600;
+    color: var(--text-primary, #2c3e50);
+    min-width: 100px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--border-color, #e2e8f0);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1e3c72, #667eea);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 2s ease-out;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+.tech-item.animate .progress-fill {
+    animation: fillProgress 2s ease-out forwards;
+}
+
+@keyframes fillProgress {
+    from { width: 0%; }
+    to { width: var(--target-width); }
+}
+
+/* Responsive Design for Charts */
+@media (max-width: 768px) {
+    .tech-capabilities {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .growth-chart-container {
+        padding: 1rem;
+    }
+    
+    .tech-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .progress-bar {
+        width: 100%;
+    }
+}

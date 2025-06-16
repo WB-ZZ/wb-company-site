@@ -16,7 +16,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- 헤더 -->
@@ -46,17 +51,30 @@
 
     <!-- 히어로 섹션 (랜딩페이지) -->
     <section id="home" class="hero">
+        <!-- 애니메이션 배경 요소들 -->
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <!-- 파티클 애니메이션 -->
+        <div id="particles-container"></div>
+        
         <div class="hero-content">
             <div class="container">
-                <h1 class="hero-title">AI와 클라우드로 만드는<br><span class="highlight">디지털 미래</span></h1>
-                <p class="hero-subtitle">InnovateTech는 첨단 AI 기술과 안정적인 클라우드 인프라로<br>기업의 디지털 전환을 성공적으로 이끌어갑니다</p>
-                <div class="hero-buttons">
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="300">AI와 클라우드로 만드는<br><span class="highlight">디지털 미래</span></h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="500">InnovateTech는 첨단 AI 기술과 안정적인 클라우드 인프라로<br>기업의 디지털 전환을 성공적으로 이끌어갑니다</p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="700">
                     <a href="#services" class="btn btn-primary">서비스 알아보기</a>
                     <a href="#contact" class="btn btn-secondary">무료 상담 신청</a>
                 </div>
             </div>
         </div>
+        
+        <!-- 개선된 배경 -->
         <div class="hero-bg">
+            <div class="animated-bg"></div>
             <div class="hero-overlay"></div>
         </div>
     </section>
@@ -100,18 +118,24 @@
                     <p>InnovateTech는 2015년 설립된 AI와 클라우드 전문 기업으로, 국내 대기업부터 스타트업까지 300여 개 기업의 디지털 전환을 성공적으로 지원했습니다.</p>
                     <p>삼성, LG, 현대자동차 등 대기업과의 파트너십을 통해 검증된 기술력을 보유하고 있으며, AWS 파트너사, Microsoft Gold Partner로 인정받고 있습니다.</p>
                     <div class="stats">
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="100">
                             <h4>300+</h4>
                             <p>성공 프로젝트</p>
                         </div>
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="200">
                             <h4>50+</h4>
                             <p>대기업 고객</p>
                         </div>
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="300">
                             <h4>8년</h4>
                             <p>AI/클라우드 전문</p>
                         </div>
+                    </div>
+                    
+                    <!-- 인터랙티브 성장 차트 -->
+                    <div class="growth-chart-container" data-aos="fade-up" data-aos-delay="400">
+                        <h4>연도별 성장률</h4>
+                        <canvas id="growthChart" width="400" height="200"></canvas>
                     </div>
                 </div>
                 <div class="about-image">
@@ -125,6 +149,45 @@
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">서비스</h2>
+            
+            <!-- 기술 역량 차트 -->
+            <div class="tech-capabilities" data-aos="fade-up">
+                <div class="tech-chart-container">
+                    <h3>핵심 기술 역량</h3>
+                    <canvas id="techChart" width="300" height="300"></canvas>
+                </div>
+                <div class="tech-details">
+                    <div class="tech-item">
+                        <i class="fab fa-aws"></i>
+                        <span>AWS Cloud</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-python"></i>
+                        <span>AI/ML</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-docker"></i>
+                        <span>DevOps</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-react"></i>
+                        <span>Frontend</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="services-grid">
                 <div class="service-card">
                     <i class="fas fa-robot service-icon"></i>

@@ -218,36 +218,64 @@ if (statsSection) {
     statsObserver.observe(statsSection);
 }
 
-// Lazy loading for images
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img[src*="placeholder"]');
+// High-quality image system with Unsplash integration
+const UNSPLASH_IMAGES = {
+    about: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    portfolio1: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    portfolio2: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    portfolio3: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    hero: 'https://images.unsplash.com/photo-1518709268805-4e9042af2ea0?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80',
+    tech1: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop&crop=center&auto=format&q=80',
+    tech2: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop&crop=center&auto=format&q=80',
+    tech3: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop&crop=center&auto=format&q=80'
+};
+
+// Advanced image loading with blur-up technique
+function loadHighQualityImages() {
+    const imageMap = {
+        'about-placeholder.jpg': UNSPLASH_IMAGES.about,
+        'portfolio-1.jpg': UNSPLASH_IMAGES.portfolio1,
+        'portfolio-2.jpg': UNSPLASH_IMAGES.portfolio2,
+        'portfolio-3.jpg': UNSPLASH_IMAGES.portfolio3
+    };
     
-    images.forEach(img => {
-        // Create a placeholder colored rectangle
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 400;
-        canvas.height = 300;
-        
-        // Create gradient background
-        const gradient = ctx.createLinearGradient(0, 0, 400, 300);
-        gradient.addColorStop(0, '#667eea');
-        gradient.addColorStop(1, '#764ba2');
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 400, 300);
-        
-        // Add text
-        ctx.fillStyle = 'white';
-        ctx.font = '20px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('이미지 준비중', 200, 150);
-        
-        // Replace image source
-        img.src = canvas.toDataURL();
-        img.style.objectFit = 'cover';
+    document.querySelectorAll('img').forEach(img => {
+        const srcAttribute = img.getAttribute('src');
+        if (srcAttribute && srcAttribute.includes('placeholder') || srcAttribute.includes('portfolio')) {
+            const filename = srcAttribute.split('/').pop();
+            const highQualityUrl = imageMap[filename];
+            
+            if (highQualityUrl) {
+                // Create blur placeholder
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 20;
+                canvas.height = 15;
+                
+                const gradient = ctx.createLinearGradient(0, 0, 20, 15);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 20, 15);
+                
+                img.src = canvas.toDataURL();
+                img.style.filter = 'blur(5px)';
+                img.style.transition = 'filter 0.3s ease';
+                
+                // Load high quality image
+                const highQualityImg = new Image();
+                highQualityImg.onload = () => {
+                    img.src = highQualityUrl;
+                    img.style.filter = 'blur(0)';
+                };
+                highQualityImg.src = highQualityUrl;
+            }
+        }
     });
-});
+}
+
+// Call the function when DOM is loaded
+document.addEventListener('DOMContentLoaded', loadHighQualityImages);
 
 // Scroll to top functionality
 function createScrollToTopButton() {
@@ -306,8 +334,287 @@ function createScrollToTopButton() {
     });
 }
 
-// Initialize scroll to top button
-document.addEventListener('DOMContentLoaded', createScrollToTopButton);
+// Interactive Charts
+function initCharts() {
+    // Growth Chart
+    const growthCtx = document.getElementById('growthChart');
+    if (growthCtx) {
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['2015', '2017', '2019', '2021', '2023', '2024'],
+                datasets: [{
+                    label: '매출 성장률 (%)',
+                    data: [100, 150, 230, 340, 480, 650],
+                    borderColor: '#1e3c72',
+                    backgroundColor: 'rgba(30, 60, 114, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#1e3c72',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        hoverRadius: 8
+                    }
+                }
+            }
+        });
+    }
+
+    // Tech Stack Doughnut Chart
+    const techCtx = document.getElementById('techChart');
+    if (techCtx) {
+        new Chart(techCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['AI/ML', 'Cloud', 'Frontend', 'Backend', 'DevOps'],
+                datasets: [{
+                    data: [25, 30, 20, 15, 10],
+                    backgroundColor: [
+                        '#1e3c72',
+                        '#2a5298',
+                        '#667eea',
+                        '#4c63d2',
+                        '#3b4de8'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+    }
+}
+
+// Animate Progress Bars
+function animateProgressBars() {
+    const progressBars = document.querySelectorAll('.progress-fill');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                const targetWidth = progressBar.getAttribute('data-width');
+                progressBar.style.setProperty('--target-width', targetWidth);
+                progressBar.parentElement.parentElement.classList.add('animate');
+                
+                // Animate width
+                setTimeout(() => {
+                    progressBar.style.width = targetWidth;
+                }, 500);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    progressBars.forEach(bar => observer.observe(bar));
+}
+
+// Initialize AOS (Animate On Scroll)
+function initAOS() {
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+    }
+}
+
+// Particle Animation System
+function createParticles() {
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+    
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random position and size
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = (Math.random() * 4 + 2) + 'px';
+        particle.style.height = particle.style.width;
+        
+        // Random animation duration
+        particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        
+        container.appendChild(particle);
+        
+        // Remove particle after animation
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 8000);
+    }
+    
+    // Create particles continuously
+    setInterval(createParticle, 300);
+}
+
+// Enhanced Scroll Reveal
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.scroll-reveal, .feature-card, .service-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed', 'animate');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Advanced Typing Effect
+function initTypingEffect() {
+    const typingElements = document.querySelectorAll('.typing-effect');
+    
+    typingElements.forEach(element => {
+        const text = element.textContent;
+        element.textContent = '';
+        element.style.borderRight = '2px solid #ffd700';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                element.style.borderRight = 'none';
+            }
+        };
+        
+        // Start typing when element is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(typeWriter, 500);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(element);
+    });
+}
+
+// Interactive Elements Enhancement
+function enhanceInteractivity() {
+    // Add interactive class to hoverable elements
+    const interactiveElements = document.querySelectorAll('.service-card, .feature-card, .portfolio-item, .btn');
+    interactiveElements.forEach(element => {
+        element.classList.add('interactive-element');
+    });
+    
+    // Add click ripple effect
+    interactiveElements.forEach(element => {
+        element.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.pointerEvents = 'none';
+            
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            
+            element.style.position = 'relative';
+            element.style.overflow = 'hidden';
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+    
+    // Add ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize all functions
+document.addEventListener('DOMContentLoaded', () => {
+    createScrollToTopButton();
+    createScrollProgress();
+    initParallax();
+    loadHighQualityImages();
+    initCharts();
+    animateProgressBars();
+    initAOS();
+    createParticles();
+    initScrollReveal();
+    initTypingEffect();
+    enhanceInteractivity();
+});
 
 // Preloader
 function createPreloader() {
