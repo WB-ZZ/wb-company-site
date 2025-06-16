@@ -583,72 +583,25 @@
                 document.title = 'InnovateTech - 혁신적인 IT 솔루션의 선두주자';
             }
             
-            // 네비게이션 번역
-            const navItems = document.querySelectorAll('.nav-link');
-            if (navItems.length >= 5) {
-                navItems[0].textContent = translations[lang].nav_home;
-                navItems[1].textContent = translations[lang].nav_about;
-                navItems[2].textContent = translations[lang].nav_services;
-                navItems[3].textContent = translations[lang].nav_portfolio;
-                navItems[4].textContent = translations[lang].nav_contact;
-            }
+            // 자동 번역 시스템 - data-i18n 속성 기반
+            const elementsWithI18n = document.querySelectorAll('[data-i18n]');
+            elementsWithI18n.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = translations[lang][key];
+                if (translation) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translation;
+                    } else {
+                        element.innerHTML = translation;
+                    }
+                }
+            });
             
-            // 히어로 섹션 번역
+            // 히어로 섹션 특별 처리 (HTML 구조 때문에)
             const heroTitle = document.querySelector('.hero-title');
             if (heroTitle) {
                 heroTitle.innerHTML = translations[lang].hero_title + '<br><span class="highlight">' + translations[lang].hero_highlight + '</span>';
             }
-            
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            if (heroSubtitle) {
-                heroSubtitle.innerHTML = translations[lang].hero_subtitle;
-            }
-            
-            const btnPrimary = document.querySelector('.btn-primary');
-            const btnSecondary = document.querySelector('.btn-secondary');
-            if (btnPrimary) btnPrimary.textContent = translations[lang].btn_services;
-            if (btnSecondary) btnSecondary.textContent = translations[lang].btn_contact;
-            
-            // 특징 섹션 번역
-            const featureCards = document.querySelectorAll('.feature-card');
-            if (featureCards.length >= 3) {
-                featureCards[0].querySelector('h3').textContent = translations[lang].feature1_title;
-                featureCards[0].querySelector('p').textContent = translations[lang].feature1_desc;
-                featureCards[1].querySelector('h3').textContent = translations[lang].feature2_title;
-                featureCards[1].querySelector('p').textContent = translations[lang].feature2_desc;
-                featureCards[2].querySelector('h3').textContent = translations[lang].feature3_title;
-                featureCards[2].querySelector('p').textContent = translations[lang].feature3_desc;
-            }
-            
-            // 회사소개 섹션 번역
-            const aboutTitle = document.querySelector('#about .section-title');
-            if (aboutTitle) aboutTitle.textContent = translations[lang].about_title;
-            
-            const aboutSubtitle = document.querySelector('.about-text h3');
-            if (aboutSubtitle) aboutSubtitle.textContent = translations[lang].about_subtitle;
-            
-            const aboutDesc = document.querySelectorAll('.about-text p');
-            if (aboutDesc.length >= 2) {
-                aboutDesc[0].textContent = translations[lang].about_desc1;
-                aboutDesc[1].textContent = translations[lang].about_desc2;
-            }
-            
-            const chartTitle = document.querySelector('.growth-chart-container h4');
-            if (chartTitle) chartTitle.textContent = translations[lang].chart_title;
-            
-            // 서비스 섹션 번역
-            const servicesTitle = document.querySelector('#services .section-title');
-            if (servicesTitle) servicesTitle.textContent = translations[lang].services_title;
-            
-            const techCapTitle = document.querySelector('.tech-chart-container h3');
-            if (techCapTitle) techCapTitle.textContent = translations[lang].tech_capabilities;
-            
-            // 연락처 섹션 번역
-            const contactTitle = document.querySelector('#contact .section-title');
-            if (contactTitle) contactTitle.textContent = translations[lang].contact_title;
-            
-            const contactInfoTitle = document.querySelector('.contact-info h3');
-            if (contactInfoTitle) contactInfoTitle.textContent = translations[lang].contact_info;
             
             // 언어 버튼 상태 업데이트
             updateLanguageButtons(lang);
