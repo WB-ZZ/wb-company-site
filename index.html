@@ -2947,10 +2947,24 @@
             const themeIcon = document.getElementById('themeIcon');
             const currentTheme = html.getAttribute('data-theme');
             
+            // 서비스 카드들 찾기
+            const serviceCards = document.querySelectorAll('.service-card');
+            const serviceTexts = document.querySelectorAll('.service-card h3, .service-card p');
+            
             if (currentTheme === 'dark') {
                 html.setAttribute('data-theme', 'light');
                 themeIcon.className = 'fas fa-moon';
                 localStorage.setItem('theme', 'light');
+                
+                // 라이트모드: 흰 배경, 검은 텍스트
+                serviceCards.forEach(card => {
+                    card.style.background = 'white';
+                    card.style.color = 'black';
+                });
+                serviceTexts.forEach(text => {
+                    text.style.color = 'black';
+                    text.style.fontWeight = '600';
+                });
                 
                 // 테마 변경 애니메이션
                 document.body.style.transition = 'all 0.5s ease';
@@ -2961,6 +2975,16 @@
                 html.setAttribute('data-theme', 'dark');
                 themeIcon.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'dark');
+                
+                // 다크모드: 검은 배경, 흰 텍스트
+                serviceCards.forEach(card => {
+                    card.style.background = 'black';
+                    card.style.color = 'white';
+                });
+                serviceTexts.forEach(text => {
+                    text.style.color = 'white';
+                    text.style.fontWeight = '600';
+                });
                 
                 // 테마 변경 애니메이션
                 document.body.style.transition = 'all 0.5s ease';
@@ -3494,6 +3518,63 @@
                 document.body.style.overflow = 'auto';
             }
         }
+        
+        // 서비스 카드 텍스트 가시성 강제 적용
+        function fixServiceCardVisibility() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            serviceCards.forEach(card => {
+                if (currentTheme === 'dark') {
+                    card.style.backgroundColor = '#000000';
+                    card.style.color = '#ffffff';
+                    
+                    const h3 = card.querySelector('h3');
+                    const p = card.querySelector('p');
+                    if (h3) {
+                        h3.style.color = '#ffffff';
+                        h3.style.setProperty('color', '#ffffff', 'important');
+                    }
+                    if (p) {
+                        p.style.color = '#ffffff';
+                        p.style.setProperty('color', '#ffffff', 'important');
+                    }
+                } else {
+                    card.style.backgroundColor = '#ffffff';
+                    card.style.color = '#000000';
+                    
+                    const h3 = card.querySelector('h3');
+                    const p = card.querySelector('p');
+                    if (h3) {
+                        h3.style.color = '#1a1a1a';
+                        h3.style.setProperty('color', '#1a1a1a', 'important');
+                    }
+                    if (p) {
+                        p.style.color = '#333333';
+                        p.style.setProperty('color', '#333333', 'important');
+                    }
+                }
+            });
+        }
+        
+        // 페이지 로드 시 즉시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            fixServiceCardVisibility();
+            
+            // 기존 토글 함수에 추가
+            const originalToggleTheme = window.toggleTheme;
+            window.toggleTheme = function() {
+                if (originalToggleTheme) {
+                    originalToggleTheme();
+                }
+                fixServiceCardVisibility();
+            };
+        });
+        
+        // 페이지 완전 로드 후에도 한 번 더 실행
+        window.addEventListener('load', function() {
+            setTimeout(fixServiceCardVisibility, 100);
+        });
     </script>
 </body>
 </html>
