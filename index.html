@@ -65,13 +65,16 @@
     <link rel="stylesheet" href="css/wave-fix.css?v=2024122701">
     <link rel="stylesheet" href="css/force-clean.css?v=2024122702">
     
-    <!-- 직사각형 상자만 제거하고 나머지 효과는 유지 -->
+    <!-- 레이아웃 개선 및 애니메이션 복구 -->
     <style>
         /* hero-title 텍스트의 직사각형 상자만 제거 */
         .hero-title {
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
+            font-size: 3.2rem !important;
+            line-height: 1.2 !important;
+            white-space: nowrap !important;
         }
         
         /* 텍스트 그라디언트 효과 유지 */
@@ -80,6 +83,61 @@
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
             background-clip: text !important;
+        }
+        
+        /* 배경 애니메이션 복구 */
+        .floating-elements,
+        .floating-element,
+        .animated-bg,
+        #particles-container,
+        .particle {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Hero 레이아웃 개선 */
+        .hero-layout {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 3rem !important;
+        }
+        
+        .hero-text {
+            flex: 1 !important;
+            text-align: left !important;
+            margin-top: 2rem !important;
+        }
+        
+        .hero-images {
+            flex: 1.2 !important;
+        }
+        
+        /* 이미지 크기 확대 */
+        .main-visual-image {
+            width: 100% !important;
+            height: 500px !important;
+            object-fit: cover !important;
+        }
+        
+        .hero-visual-container {
+            max-width: none !important;
+        }
+        
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem !important;
+                white-space: normal !important;
+            }
+            
+            .hero-layout {
+                flex-direction: column !important;
+            }
+            
+            .main-visual-image {
+                height: 300px !important;
+            }
         }
     </style>
     
