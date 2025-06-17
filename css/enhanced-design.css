@@ -133,23 +133,64 @@ p, span, a, li {
     color: #667eea; /* 항상 보라색 유지 */
 }
 
-/* 네비게이션 */
+/* 네비게이션 - 강제 적용 */
 .header {
-    background: rgba(255, 255, 255, 0.95);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
 [data-theme="dark"] .header {
-    background: rgba(26, 26, 26, 0.95);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(26, 26, 26, 0.95) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .nav-link {
-    color: var(--text-primary);
+    color: #333333 !important;
+    font-weight: 500 !important;
+}
+
+[data-theme="dark"] .nav-link {
+    color: #ffffff !important;
 }
 
 .logo-text {
-    color: #2c5aa0; /* 항상 파란색 유지 */
+    color: #2c5aa0 !important; /* 항상 파란색 유지 */
+}
+
+.nav-menu {
+    display: flex !important;
+    list-style: none !important;
+    gap: 2rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-actions {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.theme-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(44, 90, 160, 0.1) !important;
+    border: 1px solid rgba(44, 90, 160, 0.2) !important;
+    border-radius: 50% !important;
+    color: #2c5aa0 !important;
+    cursor: pointer !important;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+.theme-toggle i {
+    font-size: 1.2rem !important;
 }
 
 /* 푸터 */
@@ -349,4 +390,98 @@ p, span, a, li {
     background: linear-gradient(90deg, #667eea, #764ba2);
     transition: width 0.1s ease;
     width: 0%;
+}
+
+/* 새로운 서비스 섹션 스타일 */
+.services-new {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0;
+}
+
+.new-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.new-service-card {
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.new-service-card:hover {
+    transform: translateY(-10px) scale(1.02) !important;
+    background: rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.service-icon-wrapper {
+    width: 80px !important;
+    height: 80px !important;
+    margin: 0 auto 1.5rem !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 2rem !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.new-service-card h3 {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+}
+
+.new-service-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+/* 다크 모드에서도 동일하게 유지 */
+[data-theme="dark"] .new-service-card {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .new-service-card h3 {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .new-service-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .new-services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .new-service-card {
+        padding: 1.5rem !important;
+    }
+    
+    .service-icon-wrapper {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 1.5rem !important;
+    }
 }
