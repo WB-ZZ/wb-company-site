@@ -248,6 +248,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- 헤더 -->
@@ -740,21 +741,27 @@
                 <form class="contact-form" id="contactForm">
                     <h3 data-i18n="contact_form_title">무료 상담 신청</h3>
                     <div class="form-group">
-                        <input type="text" data-i18n="form_company" placeholder="회사명" required>
+                        <input type="text" name="company" data-i18n="form_company" placeholder="회사명" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" data-i18n="form_name" placeholder="담당자명" required>
+                        <input type="text" name="name" data-i18n="form_name" placeholder="담당자명" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" data-i18n="form_phone" placeholder="연락처" required>
+                        <input type="tel" name="phone" data-i18n="form_phone" placeholder="연락처" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" data-i18n="form_email" placeholder="이메일" required>
+                        <input type="email" name="email" data-i18n="form_email" placeholder="이메일" required>
                     </div>
                     <div class="form-group">
-                        <textarea data-i18n="form_message" placeholder="문의내용" rows="5" required></textarea>
+                        <textarea name="message" data-i18n="form_message" placeholder="문의내용" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-i18n="btn_submit">문의하기</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span class="btn-text" data-i18n="btn_submit">문의하기</span>
+                        <span class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> 전송 중...
+                        </span>
+                    </button>
+                    <div class="form-status" id="formStatus"></div>
                 </form>
             </div>
         </div>
@@ -2382,60 +2389,101 @@
             const lang = currentLang || 'ko';
             const msg = userMessage.toLowerCase().trim();
             
-            // 키워드 매칭 - 정확하고 빠른 응답
-            const keywords = {
+            // 인사말 및 감정 응답
+            const greetings = lang === 'ko' ? 
+                ['안녕', '안녕하세요', '반갑', '처음', '헬로', 'hello', 'hi'] : 
+                ['hello', 'hi', 'hey', 'good morning', 'good afternoon'];
+            
+            const farewells = lang === 'ko' ? 
+                ['안녕히', '빠이', '고마워', '감사', 'bye', 'goodbye'] : 
+                ['bye', 'goodbye', 'see you', 'thank you', 'thanks'];
+            
+            // 인사말 감지
+            if (greetings.some(greeting => msg.includes(greeting))) {
+                return lang === 'ko' ? 
+                    '👋 안녕하세요! InnovateTech 챗봇입니다.<br><br>💡 <strong>무엇을 도와드릴까요?</strong><br>• AI, 클라우드, 데이터 분석 문의<br>• 견적 및 상담 신청<br>• 회사 정보 및 포트폴리오<br>• 연락처 및 오시는 길<br><br>🎯 위의 버튼을 클릭하거나 궁금한 것을 직접 입력해보세요!' :
+                    '👋 Hello! I\'m InnovateTech chatbot.<br><br>💡 <strong>How can I help you?</strong><br>• AI, Cloud, Data Analytics inquiries<br>• Quote and consultation requests<br>• Company info and portfolio<br>• Contact and directions<br><br>🎯 Click buttons above or type your questions!';
+            }
+            
+            // 작별인사 감지
+            if (farewells.some(farewell => msg.includes(farewell))) {
+                return lang === 'ko' ? 
+                    '👋 감사합니다! 언제든지 궁금한 것이 있으시면 다시 문의해주세요.<br><br>📞 <strong>빠른 상담:</strong> 02-6200-1000<br>📧 <strong>이메일:</strong> contact@innovatetech.co.kr<br><br>🚀 InnovateTech가 여러분의 디지털 혁신을 함께 하겠습니다!' :
+                    '👋 Thank you! Feel free to ask anytime if you have questions.<br><br>📞 <strong>Quick Contact:</strong> 02-6200-1000<br>📧 <strong>Email:</strong> contact@innovatetech.co.kr<br><br>🚀 InnovateTech will be with you for digital innovation!';
+            }
+            
+            // 스마트 키워드 및 문맥 분석
+            const smartKeywords = {
                 ko: {
-                    'ai': 'AI 솔루션: 자연어처리, 컴퓨터비전, 머신러닝 모델 개발<br>• 챗봇 구축<br>• 이미지/음성 인식<br>• 예측 분석<br>• 추천 시스템',
-                    '인공지능': 'AI 솔루션: 자연어처리, 컴퓨터비전, 머신러닝 모델 개발<br>• 챗봇 구축<br>• 이미지/음성 인식<br>• 예측 분석<br>• 추천 시스템',
-                    '클라우드': '클라우드 서비스: AWS, Azure, GCP 기반<br>• 클라우드 마이그레이션<br>• 서버 인프라 구축<br>• 보안 설정<br>• 성능 최적화',
-                    '서비스': '주요 서비스 목록:<br>• AI 솔루션 개발<br>• 클라우드 마이그레이션<br>• 데이터 분석<br>• 웹/앱 개발<br>• IT 컨설팅',
-                    '견적': '견적 문의: 프로젝트 규모에 따라 상이<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 무료 상담 가능',
-                    '가격': '견적 문의: 프로젝트 규모에 따라 상이<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 무료 상담 가능',
-                    '비용': '견적 문의: 프로젝트 규모에 따라 상이<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 무료 상담 가능',
-                    '연락처': '📞 전화: 02-6200-1000<br>📧 이메일: contact@innovatetech.co.kr<br>📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층<br>🕐 운영시간: 평일 09:00-18:00',
-                    '전화': '📞 전화: 02-6200-1000<br>📧 이메일: contact@innovatetech.co.kr<br>📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층<br>🕐 운영시간: 평일 09:00-18:00',
-                    '주소': '📍 주소: 서울 강남구 테헤란로 521 파르나스타워 35층<br>🚇 지하철: 2호선 강남역 1번 출구 도보 5분<br>🚗 주차: 건물 내 주차장 이용 가능',
-                    '데이터': '데이터 분석 서비스:<br>• 빅데이터 처리<br>• 실시간 대시보드<br>• 비즈니스 인텔리전스<br>• 데이터 시각화<br>• ETL 파이프라인',
-                    '개발': '개발 서비스:<br>• 웹/모바일 앱 개발<br>• API 개발<br>• 데이터베이스 설계<br>• UI/UX 디자인<br>• 유지보수',
-                    '포트폴리오': '주요 고객사:<br>• 삼성전자, LG전자<br>• 현대자동차<br>• KB금융그룹<br>• 네이버, 카카오<br>• 300+ 프로젝트 완료',
-                    '경력': '회사 연혁:<br>• 2015년 설립<br>• 8년간 AI/클라우드 전문<br>• AWS 파트너<br>• Microsoft Gold Partner<br>• 50+ 대기업 고객사'
+                    // 확장된 AI 관련 키워드
+                    'ai|인공지능|머신러닝|딥러닝|챗봇|자연어|nlp|컴퓨터비전|opencv': {
+                        response: '🤖 <strong>AI 솔루션 전문가입니다!</strong><br><br>✨ <strong>주요 서비스:</strong><br>• 머신러닝/딥러닝 모델 개발<br>• 자연어처리 (NLP) 시스템<br>• 컴퓨터비전 & 이미지 인식<br>• 챗봇 & 대화형 AI<br>• 예측 분석 & 추천 시스템<br><br>💼 <strong>성공 사례:</strong> 현대자동차 AI 품질관리, 삼성 음성인식 시스템<br><br>🎯 <strong>무료 상담 신청:</strong> 02-6200-1000',
+                        followUp: ['클라우드', '데이터분석', '견적문의']
+                    },
+                    'cloud|클라우드|aws|azure|gcp|서버|인프라': {
+                        response: '☁️ <strong>클라우드 전환의 파트너!</strong><br><br>🚀 <strong>클라우드 서비스:</strong><br>• AWS/Azure/GCP 마이그레이션<br>• 서버 인프라 설계 & 구축<br>• 컨테이너 & 쿠버네티스<br>• DevOps & CI/CD 파이프라인<br>• 보안 & 성능 최적화<br><br>🏆 <strong>인증:</strong> AWS Select Partner, Microsoft Gold Partner<br><br>📞 <strong>전문 상담:</strong> 02-6200-1000',
+                        followUp: ['AI솔루션', '데이터분석', '포트폴리오']
+                    },
+                    '견적|비용|가격|돈|예산|상담': {
+                        response: '💰 <strong>견적 문의 환영합니다!</strong><br><br>📋 <strong>견적 과정:</strong><br>1️⃣ 무료 상담 신청 (30분)<br>2️⃣ 요구사항 분석 & 제안서 작성<br>3️⃣ 상세 견적서 제공<br>4️⃣ 계약 & 프로젝트 시작<br><br>💡 <strong>프로젝트 규모별 견적:</strong><br>• 소규모: 1,000만원~<br>• 중규모: 5,000만원~<br>• 대규모: 1억원~<br><br>📞 <strong>지금 상담:</strong> 02-6200-1000<br>📧 contact@innovatetech.co.kr',
+                        followUp: ['문의폼작성', 'AI솔루션', '클라우드서비스']
+                    },
+                    '회사|소개|정보|연혁|팀|직원': {
+                        response: '🏢 <strong>InnovateTech 소개</strong><br><br>📅 <strong>회사 개요:</strong><br>• 설립: 2015년 (8년 전문성)<br>• 위치: 강남 파르나스타워 35층<br>• 직원: 150+ 전문가<br>• 고객: 300+ 프로젝트, 50+ 대기업<br><br>🎯 <strong>전문 분야:</strong><br>• AI/ML 솔루션 개발<br>• 클라우드 인프라 구축<br>• 빅데이터 분석<br>• 디지털 전환 컨설팅<br><br>🏆 <strong>주요 고객:</strong> 삼성, LG, 현대차, 신한은행',
+                        followUp: ['CEO인사말', '조직도', '포트폴리오']
+                    }
                 },
                 en: {
-                    'ai': 'AI Solutions: NLP, Computer Vision, ML Development<br>• Chatbot Development<br>• Image/Voice Recognition<br>• Predictive Analytics<br>• Recommendation Systems',
-                    'artificial intelligence': 'AI Solutions: NLP, Computer Vision, ML Development<br>• Chatbot Development<br>• Image/Voice Recognition<br>• Predictive Analytics<br>• Recommendation Systems',
-                    'cloud': 'Cloud Services: AWS, Azure, GCP Based<br>• Cloud Migration<br>• Server Infrastructure<br>• Security Setup<br>• Performance Optimization',
-                    'service': 'Main Services:<br>• AI Solution Development<br>• Cloud Migration<br>• Data Analytics<br>• Web/App Development<br>• IT Consulting',
-                    'quote': 'Quote Inquiry: Varies by project scope<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 Free consultation available',
-                    'price': 'Quote Inquiry: Varies by project scope<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 Free consultation available',
-                    'cost': 'Quote Inquiry: Varies by project scope<br>📞 02-6200-1000<br>📧 contact@innovatetech.co.kr<br>💼 Free consultation available',
-                    'contact': '📞 Phone: 02-6200-1000<br>📧 Email: contact@innovatetech.co.kr<br>📍 Address: 35F Parnas Tower, Gangnam-gu, Seoul<br>🕐 Hours: Weekdays 09:00-18:00',
-                    'phone': '📞 Phone: 02-6200-1000<br>📧 Email: contact@innovatetech.co.kr<br>📍 Address: 35F Parnas Tower, Gangnam-gu, Seoul<br>🕐 Hours: Weekdays 09:00-18:00',
-                    'address': '📍 Address: 35F Parnas Tower, 521 Teheran-ro, Gangnam-gu, Seoul<br>🚇 Subway: Gangnam Station Exit 1, 5min walk<br>🚗 Parking: Building parking available',
-                    'data': 'Data Analytics Services:<br>• Big Data Processing<br>• Real-time Dashboard<br>• Business Intelligence<br>• Data Visualization<br>• ETL Pipeline',
-                    'development': 'Development Services:<br>• Web/Mobile App Development<br>• API Development<br>• Database Design<br>• UI/UX Design<br>• Maintenance',
-                    'portfolio': 'Major Clients:<br>• Samsung, LG Electronics<br>• Hyundai Motor<br>• KB Financial Group<br>• Naver, Kakao<br>• 300+ Projects Completed',
-                    'history': 'Company History:<br>• Founded in 2015<br>• 8 Years AI/Cloud Expertise<br>• AWS Partner<br>• Microsoft Gold Partner<br>• 50+ Enterprise Clients'
+                    'ai|artificial|intelligence|machine|learning|deep|nlp|vision': {
+                        response: '🤖 <strong>AI Solution Experts!</strong><br><br>✨ <strong>Our Services:</strong><br>• Machine Learning/Deep Learning<br>• Natural Language Processing<br>• Computer Vision & Image Recognition<br>• Chatbots & Conversational AI<br>• Predictive Analytics<br><br>💼 <strong>Success Cases:</strong> Hyundai AI Quality Control, Samsung Voice Recognition<br><br>🎯 <strong>Free Consultation:</strong> 02-6200-1000',
+                        followUp: ['Cloud', 'Data Analytics', 'Quote']
+                    },
+                    'cloud|aws|azure|gcp|server|infrastructure': {
+                        response: '☁️ <strong>Cloud Transformation Partner!</strong><br><br>🚀 <strong>Cloud Services:</strong><br>• AWS/Azure/GCP Migration<br>• Server Infrastructure Design<br>• Container & Kubernetes<br>• DevOps & CI/CD Pipeline<br>• Security & Performance Optimization<br><br>🏆 <strong>Certifications:</strong> AWS Select Partner, Microsoft Gold Partner<br><br>📞 <strong>Expert Consultation:</strong> 02-6200-1000',
+                        followUp: ['AI Solutions', 'Data Analytics', 'Portfolio']
+                    }
                 }
             };
+            
+            // 스마트 키워드 매칭 (정규식 사용)
+            const currentKeywords = smartKeywords[lang];
+            for (const [pattern, data] of Object.entries(currentKeywords)) {
+                const regex = new RegExp(pattern, 'i');
+                if (regex.test(msg)) {
+                    return data.response + (data.followUp ? '<br><br>🔄 <strong>추천 키워드:</strong> ' + data.followUp.join(', ') : '');
+                }
+            }
+            
+            // 기존 키워드 매칭 (하위 호환성)
+            const keywords = {
+                ko: {
+                    '데이터': '📊 데이터 분석 서비스:<br>• 빅데이터 처리 플랫폼<br>• 실시간 대시보드<br>• 비즈니스 인텔리전스<br>• 데이터 시각화<br>• ETL 파이프라인',
+                    '개발': '💻 개발 서비스:<br>• 웹/모바일 앱 개발<br>• API 설계 & 개발<br>• 데이터베이스 설계<br>• UI/UX 디자인<br>• 시스템 유지보수',
+                    '포트폴리오': '🏆 주요 고객사 & 프로젝트:<br>• 삼성전자: AI 음성인식 시스템<br>• 현대자동차: AI 품질관리<br>• 신한은행: 클라우드 전환<br>• CJ올리브네트웍스: 빅데이터 플랫폼<br>• 300+ 성공 프로젝트',
+                    '연락처': '📞 <strong>연락처 정보</strong><br><br>🏢 <strong>본사:</strong> 서울 강남구 테헤란로 521 파르나스타워 35층<br>📞 <strong>전화:</strong> 02-6200-1000<br>📧 <strong>이메일:</strong> contact@innovatetech.co.kr<br>🕐 <strong>운영시간:</strong> 평일 09:00-18:00<br>🚇 <strong>교통:</strong> 강남역 1번 출구 도보 5분'
+                }
+            };
+            
+            // 기본 키워드 매칭
+            const langKeywords = keywords[lang];
+            if (langKeywords) {
+                for (const [keyword, response] of Object.entries(langKeywords)) {
+                    if (msg.includes(keyword)) {
+                        return response;
+                    }
+                }
+            }
             
             // 키워드 도움말 특별 처리
             if (msg.includes('더 많은 키워드') || msg.includes('more keywords') || msg.includes('help') || msg.includes('도움')) {
                 return chatTranslations[lang].moreKeywords;
             }
             
-            // 정확한 키워드 매칭
-            const langKeywords = keywords[lang];
-            for (const [keyword, response] of Object.entries(langKeywords)) {
-                if (msg.includes(keyword)) {
-                    return response;
-                }
-            }
-            
-            // 기본 응답 (도움말)
+            // 개선된 기본 응답
             if (lang === 'ko') {
-                return '❓ 키워드를 찾을 수 없어요!<br><br>💡 <strong>빠른 사용법:</strong><br>• 위의 <strong>파란색 버튼들</strong>을 클릭하거나<br>• <strong>"더 많은 키워드"</strong> 버튼으로 전체 목록 확인<br>• 직접 키워드 입력: ai, 견적, 연락처 등<br><br>🚀 <strong>가장 인기:</strong> ai, 견적, 연락처';
+                return '🤔 <strong>잘 이해하지 못했어요!</strong><br><br>💡 <strong>이렇게 물어보세요:</strong><br>• "AI 솔루션이 뭐야?"<br>• "클라우드 서비스 알려줘"<br>• "견적 얼마야?"<br>• "회사 소개해줘"<br>• "연락처 알려줘"<br><br>🎯 <strong>빠른 버튼:</strong> 위의 파란색 버튼들을 클릭해보세요!<br><br>🚀 <strong>인기 키워드:</strong> AI, 클라우드, 견적, 포트폴리오';
             } else {
-                return '❓ Keyword not found!<br><br>💡 <strong>Quick Guide:</strong><br>• Click the <strong>blue buttons</strong> above or<br>• Use <strong>"More Keywords"</strong> for full list<br>• Type directly: ai, quote, contact, etc.<br><br>🚀 <strong>Most Popular:</strong> ai, quote, contact';
+                return '🤔 <strong>I didn\'t quite understand!</strong><br><br>💡 <strong>Try asking:</strong><br>• "What are AI solutions?"<br>• "Tell me about cloud services"<br>• "How much does it cost?"<br>• "Tell me about the company"<br>• "Contact information"<br><br>🎯 <strong>Quick buttons:</strong> Click the blue buttons above!<br><br>🚀 <strong>Popular keywords:</strong> AI, Cloud, Quote, Portfolio';
             }
         }
     </script>
@@ -2849,6 +2897,90 @@
         function openNaverMap() {
             const naverMapUrl = 'https://map.naver.com/v5/search/서울특별시%20강남구%20테헤란로%20521%20파르나스타워';
             window.open(naverMapUrl, '_blank');
+        }
+
+        // EmailJS 초기화
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // 실제 사용시 EmailJS 공개 키로 교체
+        })();
+
+        // 문의 폼 처리
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const formStatus = document.getElementById('formStatus');
+            
+            // 로딩 상태로 변경
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-flex';
+            submitBtn.disabled = true;
+            formStatus.innerHTML = '';
+            
+            // 폼 데이터 수집
+            const formData = {
+                company: this.company.value,
+                name: this.name.value,
+                phone: this.phone.value,
+                email: this.email.value,
+                message: this.message.value,
+                date: new Date().toLocaleString('ko-KR'),
+                from_name: this.name.value,
+                reply_to: this.email.value
+            };
+            
+            // 데모용 - 실제로는 EmailJS 서비스 사용
+            setTimeout(() => {
+                try {
+                    // 성공 시뮬레이션
+                    showFormStatus('success', '문의가 성공적으로 전송되었습니다! 빠른 시일 내에 연락드리겠습니다.');
+                    this.reset(); // 폼 초기화
+                } catch (error) {
+                    // 에러 시뮬레이션
+                    showFormStatus('error', '전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+                }
+                
+                // 버튼 상태 복구
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }, 1500);
+            
+            /*
+            // 실제 EmailJS 사용시 이 코드 활성화
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+                .then(function(response) {
+                    showFormStatus('success', '문의가 성공적으로 전송되었습니다! 빠른 시일 내에 연락드리겠습니다.');
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    showFormStatus('error', '전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+                })
+                .finally(function() {
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+            */
+        });
+        
+        function showFormStatus(type, message) {
+            const formStatus = document.getElementById('formStatus');
+            formStatus.className = `form-status ${type}`;
+            formStatus.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                ${message}
+            `;
+            
+            // 3초 후 메시지 자동 숨김
+            setTimeout(() => {
+                formStatus.style.opacity = '0';
+                setTimeout(() => {
+                    formStatus.innerHTML = '';
+                    formStatus.style.opacity = '1';
+                }, 300);
+            }, 3000);
         }
         
         // 모달 외부 클릭시 닫기
