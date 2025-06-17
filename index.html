@@ -672,42 +672,45 @@
             <div class="service-expertise-section">
                 <h3 class="chart-title">서비스 기술 전문성 분포도</h3>
                 
-                <div class="chart-layout">
-                    <!-- 원형 차트 -->
-                    <div class="pie-chart-container">
-                        <div class="pie-chart">
-                            <div class="pie-slice ai-slice" data-percentage="30">
-                                <span class="slice-label">AI/ML<br>30%</span>
-                            </div>
-                            <div class="pie-slice cloud-slice" data-percentage="30">
-                                <span class="slice-label">클라우드<br>30%</span>
-                            </div>
-                            <div class="pie-slice data-slice" data-percentage="25">
-                                <span class="slice-label">데이터분석<br>25%</span>
-                            </div>
-                            <div class="pie-slice security-slice" data-percentage="15">
-                                <span class="slice-label">보안/컨설팅<br>15%</span>
-                            </div>
+                <!-- 깔끔한 막대 차트 -->
+                <div class="expertise-chart">
+                    <div class="chart-item">
+                        <div class="chart-label">
+                            <span class="label-text">AI/ML</span>
+                            <span class="label-percent">30%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill ai-bar" data-width="30"></div>
                         </div>
                     </div>
                     
-                    <!-- 범례 -->
-                    <div class="chart-legend">
-                        <div class="legend-item">
-                            <div class="legend-color ai-color"></div>
-                            <span>AI/ML (30%)</span>
+                    <div class="chart-item">
+                        <div class="chart-label">
+                            <span class="label-text">클라우드</span>
+                            <span class="label-percent">30%</span>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-color cloud-color"></div>
-                            <span>클라우드 (30%)</span>
+                        <div class="chart-bar">
+                            <div class="bar-fill cloud-bar" data-width="30"></div>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-color data-color"></div>
-                            <span>데이터분석 (25%)</span>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="chart-label">
+                            <span class="label-text">데이터분석</span>
+                            <span class="label-percent">25%</span>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-color security-color"></div>
-                            <span>보안/컨설팅 (15%)</span>
+                        <div class="chart-bar">
+                            <div class="bar-fill data-bar" data-width="25"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="chart-label">
+                            <span class="label-text">보안/컨설팅</span>
+                            <span class="label-percent">15%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill security-bar" data-width="15"></div>
                         </div>
                     </div>
                 </div>
@@ -3619,7 +3622,63 @@
         // 페이지 완전 로드 후에도 한 번 더 실행
         window.addEventListener('load', function() {
             setTimeout(fixServiceCardVisibility, 100);
+            initMagneticCursor();
+            initChartAnimation();
         });
+        
+        // 마그네틱 커서 초기화
+        function initMagneticCursor() {
+            const cursor = document.createElement('div');
+            cursor.className = 'magnetic-cursor';
+            document.body.appendChild(cursor);
+            
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            // 호버 가능한 요소들
+            const hoverElements = document.querySelectorAll('a, button, .service-card, .portfolio-item, .feature-card');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+            
+            function updateCursor() {
+                cursorX += (mouseX - cursorX) * 0.8;
+                cursorY += (mouseY - cursorY) * 0.8;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(updateCursor);
+            }
+            updateCursor();
+        }
+        
+        // 차트 애니메이션
+        function initChartAnimation() {
+            const chartObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bars = entry.target.querySelectorAll('.bar-fill');
+                        bars.forEach((bar, index) => {
+                            setTimeout(() => {
+                                const width = bar.dataset.width;
+                                bar.style.width = width + '%';
+                            }, index * 200);
+                        });
+                        chartObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            const chart = document.querySelector('.service-expertise-section');
+            if (chart) {
+                chartObserver.observe(chart);
+            }
+        }
     </script>
 </body>
 </html>
