@@ -209,112 +209,10 @@
             100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
         
-        .mastery-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 600px;
-            position: relative;
-        }
-        
-        .giant-chart {
-            position: relative;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
-        }
-        
-        .center-number {
-            font-size: 48px;
-            font-weight: 900;
-            fill: #fbbf24;
-        }
-        
-        .center-label {
-            font-size: 16px;
-            font-weight: 600;
-            fill: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .percent-label {
-            font-size: 22px;
-            font-weight: 900;
-            text-anchor: middle;
-            dominant-baseline: middle;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .chart-piece {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .chart-piece:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2) url(#glow);
-        }
-        
-        .chart-legend {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .legend-compact {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #475569;
-        }
-        
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        
-        /* 고급 배경 효과 */
+        /* 서비스 섹션 배경 정리 */
         .services {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            background: #ffffff;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .services::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23667eea" opacity="0.05"/><circle cx="80" cy="40" r="1" fill="%23764ba2" opacity="0.03"/><circle cx="40" cy="80" r="1" fill="%232a5298" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
-            opacity: 0.6;
-            z-index: 1;
-        }
-        
-        .tech-mastery-showcase {
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* 차트 애니메이션 강화 */
-        .chart-piece {
-            animation: chartGlow 4s ease-in-out infinite;
-        }
-        
-        .chart-piece:nth-child(1) { animation-delay: 0s; }
-        .chart-piece:nth-child(2) { animation-delay: 1s; }
-        .chart-piece:nth-child(3) { animation-delay: 2s; }
-        .chart-piece:nth-child(4) { animation-delay: 3s; }
-        
-        @keyframes chartGlow {
-            0%, 100% { opacity: 0.9; filter: brightness(1); }
-            50% { opacity: 1; filter: brightness(1.1); }
         }
 
         /* 모바일 대응 */
@@ -332,21 +230,6 @@
                 height: 300px !important;
             }
             
-            .tech-showcase {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .giant-chart svg {
-                width: 400px !important;
-                height: 400px !important;
-            }
-            
-            .chart-legend {
-                gap: 1rem !important;
-                flex-direction: column;
-                align-items: center;
-            }
             
             .dashboard-header {
                 flex-direction: column;
