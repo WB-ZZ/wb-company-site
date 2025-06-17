@@ -69,6 +69,16 @@
     background-color: #121212 !important;
 }
 
+[data-theme="dark"] .contact-form {
+    background: rgba(30, 30, 30, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .contact-form h3 {
+    color: #ffffff !important;
+}
+
 [data-theme="dark"] .footer {
     background-color: #121212 !important;
     border-top: 1px solid #333333 !important;
@@ -195,17 +205,19 @@ html {
     top: 100%;
     left: 0;
     background: var(--card-bg);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
-    min-width: 180px;
-    box-shadow: var(--shadow-lg);
-    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
     list-style: none;
-    padding: 0.5rem 0;
+    padding: 0.8rem 0;
+    overflow: hidden;
 }
 
 .nav-dropdown:hover .dropdown-menu {
@@ -216,19 +228,54 @@ html {
 
 .dropdown-menu li {
     padding: 0;
+    position: relative;
 }
 
 .dropdown-menu a {
-    display: block;
-    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
     color: var(--text-primary);
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--primary-color);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
 }
 
 .dropdown-menu a:hover {
-    background: var(--bg-secondary);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
     color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.dropdown-menu a:hover::before {
+    transform: scaleY(1);
+}
+
+.dropdown-menu a:after {
+    content: '→';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-left: auto;
+    font-weight: bold;
+}
+
+.dropdown-menu a:hover:after {
+    opacity: 1;
 }
 
 /* Theme Toggle Button */
@@ -308,7 +355,12 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+    background: 
+        linear-gradient(135deg, rgba(30, 60, 114, 0.85) 0%, rgba(42, 82, 152, 0.85) 50%, rgba(102, 126, 234, 0.85) 100%),
+        url('https://images.unsplash.com/photo-1518709268805-4e9042af2ea0?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: white;
     position: relative;
     overflow: hidden;
