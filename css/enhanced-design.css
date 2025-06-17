@@ -1,413 +1,243 @@
-/* ============================================
-   최종 텍스트 가시성 해결 - 완전한 테마 시스템
-   ============================================ */
+/* ===============================================
+   완전한 테마 시스템 - 모든 색상 문제 해결
+   =============================================== */
 
-/* 기본 라이트 모드 - 검은 글씨, 흰 배경 */
-html {
-    background: #ffffff !important;
+/* 기본 라이트 모드 */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-accent: #1a1a1a;
 }
 
+/* 다크 모드 */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-accent: #ffffff;
+}
+
+/* 전체 배경 */
 body {
-    background: #ffffff !important;
-    color: #000000 !important;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* 모든 텍스트 요소 기본값 - 라이트 모드 */
-h1, h2, h3, h4, h5, h6, p, a, li, 
-.section-title, .hero-title,
-.feature-card h3, .feature-card p, .portfolio-item h3, .portfolio-item p,
-.contact-info h3, .contact-info p, .footer h4, .footer p, .footer a {
-    color: #000000 !important;
-    font-weight: 600 !important;
+/* 섹션별 배경 */
+.services {
+    background-color: var(--bg-secondary);
 }
 
-/* 실시간 프로젝트 현황 텍스트 - 라이트 모드 */
+.dashboard-container {
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .dashboard-container {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .dashboard-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 모든 텍스트 요소 */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-accent);
+}
+
+p, span, a, li {
+    color: var(--text-primary);
+}
+
+/* 대시보드 텍스트 */
+.dashboard-header h3,
 .dashboard-panel h4,
 .activity-item span,
 .stat-number,
 .stat-label,
 .achievement-number,
-.achievement-desc,
-.dashboard-header h3,
-.dashboard-header p,
-.live-indicator {
-    color: #000000 !important;
+.achievement-desc {
+    color: var(--text-primary);
 }
 
 .activity-item strong {
-    color: #1a1a1a !important;
-    font-weight: 700 !important;
+    color: var(--text-accent);
+    font-weight: 700;
 }
 
-/* 서비스 카드 기본 스타일 - 라이트 모드 */
+/* 서비스 카드 */
 .service-card {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: 1px solid #e5e7eb !important;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .service-card {
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .service-card h3 {
-    color: #1a1a1a !important;
-    font-weight: 700 !important;
+    color: var(--text-accent);
 }
 
 .service-card p {
-    color: #333333 !important;
-    font-weight: 500 !important;
+    color: var(--text-primary);
 }
 
-.service-card .service-icon {
-    color: #667eea !important;
+/* 차트 섹션 */
+.service-expertise-section {
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* 다크 모드 전용 스타일 */
-[data-theme="dark"] {
-    background: #000000 !important;
+[data-theme="dark"] .service-expertise-section {
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-[data-theme="dark"] body {
-    background: #000000 !important;
-    color: #ffffff !important;
+.chart-title {
+    color: var(--text-accent);
 }
 
-[data-theme="dark"] h1, 
-[data-theme="dark"] h2, 
-[data-theme="dark"] h3, 
-[data-theme="dark"] h4, 
-[data-theme="dark"] h5, 
-[data-theme="dark"] h6, 
-[data-theme="dark"] p, 
-[data-theme="dark"] a, 
-[data-theme="dark"] li,
-[data-theme="dark"] .section-title, 
-[data-theme="dark"] .hero-title,
-[data-theme="dark"] .service-card h3, 
-[data-theme="dark"] .service-card p,
-[data-theme="dark"] .feature-card h3, 
-[data-theme="dark"] .feature-card p,
-[data-theme="dark"] .portfolio-item h3, 
-[data-theme="dark"] .portfolio-item p,
-[data-theme="dark"] .contact-info h3, 
-[data-theme="dark"] .contact-info p,
-[data-theme="dark"] .footer h4, 
-[data-theme="dark"] .footer p, 
-[data-theme="dark"] .footer a {
-    color: #ffffff !important;
-    font-weight: 600 !important;
+.bar-label {
+    color: var(--text-primary);
 }
 
-/* 다크 모드 - 실시간 프로젝트 현황 */
-[data-theme="dark"] .dashboard-panel h4,
-[data-theme="dark"] .activity-item span,
-[data-theme="dark"] .stat-number,
-[data-theme="dark"] .stat-label,
-[data-theme="dark"] .achievement-number,
-[data-theme="dark"] .achievement-desc,
-[data-theme="dark"] .dashboard-header h3,
-[data-theme="dark"] .dashboard-header p,
-[data-theme="dark"] .live-indicator,
-[data-theme="dark"] .activity-item strong {
-    color: #ffffff !important;
+.bar-container {
+    background: var(--bg-secondary);
 }
 
-/* 다크 모드 서비스 카드 */
-[data-theme="dark"] .service-card {
-    background: #000000 !important;
-    color: #ffffff !important;
-}
-
-[data-theme="dark"] .service-card h3 {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-[data-theme="dark"] .service-card p {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-}
-
-/* 호버 상태에서도 텍스트 색상 유지 */
-.service-card:hover {
-    background: #f8f9fa !important;
-}
-
-.service-card:hover h3 {
-    color: #1a1a1a !important;
-}
-
-.service-card:hover p {
-    color: #333333 !important;
-}
-
-[data-theme="dark"] .service-card:hover {
-    background: #1a1a1a !important;
-}
-
-[data-theme="dark"] .service-card:hover h3,
-[data-theme="dark"] .service-card:hover p {
-    color: #ffffff !important;
-}
-
-/* ==========================================
-   고급 커서 및 로딩 효과
-   ========================================== */
-
-/* 마그네틱 커서 */
-.magnetic-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    mix-blend-mode: difference;
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
-}
-
-.magnetic-cursor::after {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 50px;
-    height: 50px;
-    border: 2px solid rgba(102, 126, 234, 0.3);
-    border-radius: 50%;
-    transition: all 0.1s ease;
-}
-
-.magnetic-cursor.hover {
-    transform: scale(1.5);
-    background: linear-gradient(45deg, #764ba2, #667eea);
-    box-shadow: 0 0 30px rgba(118, 75, 162, 1);
-}
-
-.magnetic-cursor.hover::after {
-    top: -20px;
-    left: -20px;
-    width: 60px;
-    height: 60px;
-    border-color: rgba(118, 75, 162, 0.5);
-}
-
-/* 로딩 스피너 */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loading-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loading-spinner {
-    text-align: center;
-    color: white;
-}
-
-.spinner-ring {
-    width: 60px;
-    height: 60px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 1rem;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.loading-progress {
-    width: 200px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    overflow: hidden;
-    margin: 0 auto;
-}
-
-.progress-bar {
-    height: 100%;
-    background: white;
-    border-radius: 2px;
-    transition: width 0.3s ease;
-    width: 0%;
-}
-
-/* 스크롤 진행 표시기 */
-.scroll-progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 9998;
-}
-
-.scroll-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    transition: width 0.1s ease;
-    width: 0%;
-}
-
-/* 부드러운 애니메이션 */
-.fade-in {
-    animation: fadeIn 0.6s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.slide-up {
-    animation: slideUp 0.8s ease-out;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* 실시간 프로젝트 현황 레이아웃 수정 */
-.dashboard-container {
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.dashboard-panel {
-    background: #f8f9fa;
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.dashboard-panel h4 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.activity-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.activity-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.performance-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-}
-
-.stat-item {
-    text-align: center;
-    padding: 1rem;
-    background: white;
-    border-radius: 10px;
-}
-
-.stat-number {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #667eea !important;
-}
-
-.achievement-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
+/* 성과 아이템 */
+.stat-item,
 .achievement-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: white;
-    border-radius: 10px;
-}
-
-.achievement-icon {
-    font-size: 2rem;
-}
-
-.achievement-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #667eea !important;
-}
-
-/* 다크 모드 대시보드 */
-[data-theme="dark"] .dashboard-container {
-    background: rgba(0, 0, 0, 0.95) !important;
-}
-
-[data-theme="dark"] .dashboard-panel {
-    background: #1a1a1a;
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] .stat-item,
 [data-theme="dark"] .achievement-item {
-    background: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .magnetic-cursor {
-        display: none;
-    }
-    
-    .loading-text {
-        font-size: 1.2rem;
-    }
-    
-    .loading-progress {
-        width: 150px;
-    }
-    
-    .dashboard-container {
-        padding: 1.5rem;
-    }
-    
-    .performance-stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .achievement-grid {
-        grid-template-columns: 1fr;
-    }
+.stat-number,
+.achievement-number {
+    color: #667eea; /* 항상 보라색 유지 */
+}
+
+/* 네비게이션 */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .header {
+    background: rgba(26, 26, 26, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link {
+    color: var(--text-primary);
+}
+
+.logo-text {
+    color: #2c5aa0; /* 항상 파란색 유지 */
+}
+
+/* 푸터 */
+.footer {
+    background: var(--text-accent);
+    color: var(--bg-primary);
+}
+
+.footer h4,
+.footer p,
+.footer a {
+    color: var(--bg-primary);
+}
+
+/* 폼 요소 */
+.form-group input,
+.form-group textarea {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 드롭다운 메뉴 */
+.dropdown-menu {
+    background: var(--bg-primary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .dropdown-menu {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-menu a {
+    color: var(--text-primary);
+}
+
+/* 포트폴리오 */
+.portfolio-overlay h4,
+.portfolio-overlay p {
+    color: #ffffff; /* 항상 흰색 */
+}
+
+/* 연락처 섹션 */
+.contact {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+    color: #ffffff;
+}
+
+.contact .section-title,
+.contact h3,
+.contact p,
+.contact .info-item {
+    color: #ffffff;
+}
+
+/* 부드러운 전환 효과 */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 테마 토글 버튼 */
+.theme-toggle {
+    background: rgba(44, 90, 160, 0.1);
+    border: 1px solid rgba(44, 90, 160, 0.2);
+    color: #2c5aa0;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* 로딩 및 커서 효과는 기존 유지 */
+.loading-overlay {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.magnetic-cursor {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+}
+
+.scroll-progress-bar {
+    background: linear-gradient(90deg, #667eea, #764ba2);
 }

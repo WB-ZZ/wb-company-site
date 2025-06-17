@@ -668,47 +668,46 @@
                 </div>
             </div>
             
-            <!-- 서비스 전문성 분포도 차트 -->
+            <!-- 서비스 전문성 분포도 -->
             <div class="service-expertise-section">
                 <h3 class="chart-title">서비스 기술 전문성 분포도</h3>
                 
-                <!-- 막대 차트 -->
-                <div class="expertise-chart-container">
-                    <div class="expertise-bars">
-                        <div class="expertise-bar-item">
-                            <div class="bar-label">AI/ML</div>
-                            <div class="bar-container">
-                                <div class="bar-fill ai-bar" data-width="30">
-                                    <span class="bar-percentage">30%</span>
-                                </div>
+                <div class="chart-layout">
+                    <!-- 원형 차트 -->
+                    <div class="pie-chart-container">
+                        <div class="pie-chart">
+                            <div class="pie-slice ai-slice" data-percentage="30">
+                                <span class="slice-label">AI/ML<br>30%</span>
+                            </div>
+                            <div class="pie-slice cloud-slice" data-percentage="30">
+                                <span class="slice-label">클라우드<br>30%</span>
+                            </div>
+                            <div class="pie-slice data-slice" data-percentage="25">
+                                <span class="slice-label">데이터분석<br>25%</span>
+                            </div>
+                            <div class="pie-slice security-slice" data-percentage="15">
+                                <span class="slice-label">보안/컨설팅<br>15%</span>
                             </div>
                         </div>
-                        
-                        <div class="expertise-bar-item">
-                            <div class="bar-label">클라우드</div>
-                            <div class="bar-container">
-                                <div class="bar-fill cloud-bar" data-width="30">
-                                    <span class="bar-percentage">30%</span>
-                                </div>
-                            </div>
+                    </div>
+                    
+                    <!-- 범례 -->
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color ai-color"></div>
+                            <span>AI/ML (30%)</span>
                         </div>
-                        
-                        <div class="expertise-bar-item">
-                            <div class="bar-label">데이터분석</div>
-                            <div class="bar-container">
-                                <div class="bar-fill data-bar" data-width="25">
-                                    <span class="bar-percentage">25%</span>
-                                </div>
-                            </div>
+                        <div class="legend-item">
+                            <div class="legend-color cloud-color"></div>
+                            <span>클라우드 (30%)</span>
                         </div>
-                        
-                        <div class="expertise-bar-item">
-                            <div class="bar-label">보안/컨설팅</div>
-                            <div class="bar-container">
-                                <div class="bar-fill security-bar" data-width="15">
-                                    <span class="bar-percentage">15%</span>
-                                </div>
-                            </div>
+                        <div class="legend-item">
+                            <div class="legend-color data-color"></div>
+                            <span>데이터분석 (25%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color security-color"></div>
+                            <span>보안/컨설팅 (15%)</span>
                         </div>
                     </div>
                 </div>
@@ -3620,31 +3619,7 @@
         // 페이지 완전 로드 후에도 한 번 더 실행
         window.addEventListener('load', function() {
             setTimeout(fixServiceCardVisibility, 100);
-            animateExpertiseChart();
         });
-        
-        // 차트 애니메이션
-        function animateExpertiseChart() {
-            const chartObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const bars = entry.target.querySelectorAll('.bar-fill');
-                        bars.forEach((bar, index) => {
-                            setTimeout(() => {
-                                const width = bar.dataset.width;
-                                bar.style.width = width + '%';
-                            }, index * 300);
-                        });
-                        chartObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            
-            const chart = document.querySelector('.service-expertise-section');
-            if (chart) {
-                chartObserver.observe(chart);
-            }
-        }
     </script>
 </body>
 </html>
