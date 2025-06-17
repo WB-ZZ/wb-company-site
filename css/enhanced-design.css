@@ -13,12 +13,30 @@ body {
 }
 
 /* 모든 텍스트 요소 기본값 - 라이트 모드 */
-h1, h2, h3, h4, h5, h6, p, span, a, li, 
+h1, h2, h3, h4, h5, h6, p, a, li, 
 .section-title, .hero-title,
 .feature-card h3, .feature-card p, .portfolio-item h3, .portfolio-item p,
 .contact-info h3, .contact-info p, .footer h4, .footer p, .footer a {
     color: #000000 !important;
     font-weight: 600 !important;
+}
+
+/* 실시간 프로젝트 현황 텍스트 - 라이트 모드 */
+.dashboard-panel h4,
+.activity-item span,
+.stat-number,
+.stat-label,
+.achievement-number,
+.achievement-desc,
+.dashboard-header h3,
+.dashboard-header p,
+.live-indicator {
+    color: #000000 !important;
+}
+
+.activity-item strong {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
 }
 
 /* 서비스 카드 기본 스타일 - 라이트 모드 */
@@ -59,8 +77,6 @@ h1, h2, h3, h4, h5, h6, p, span, a, li,
 [data-theme="dark"] h5, 
 [data-theme="dark"] h6, 
 [data-theme="dark"] p, 
-[data-theme="dark"] span, 
-[data-theme="dark"] div, 
 [data-theme="dark"] a, 
 [data-theme="dark"] li,
 [data-theme="dark"] .section-title, 
@@ -78,6 +94,20 @@ h1, h2, h3, h4, h5, h6, p, span, a, li,
 [data-theme="dark"] .footer a {
     color: #ffffff !important;
     font-weight: 600 !important;
+}
+
+/* 다크 모드 - 실시간 프로젝트 현황 */
+[data-theme="dark"] .dashboard-panel h4,
+[data-theme="dark"] .activity-item span,
+[data-theme="dark"] .stat-number,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .achievement-number,
+[data-theme="dark"] .achievement-desc,
+[data-theme="dark"] .dashboard-header h3,
+[data-theme="dark"] .dashboard-header p,
+[data-theme="dark"] .live-indicator,
+[data-theme="dark"] .activity-item strong {
+    color: #ffffff !important;
 }
 
 /* 다크 모드 서비스 카드 */
@@ -264,6 +294,97 @@ h1, h2, h3, h4, h5, h6, p, span, a, li,
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* 실시간 프로젝트 현황 레이아웃 수정 */
+.dashboard-container {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-panel {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.dashboard-panel h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.performance-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #667eea !important;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+}
+
+.achievement-icon {
+    font-size: 2rem;
+}
+
+.achievement-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea !important;
+}
+
+/* 다크 모드 대시보드 */
+[data-theme="dark"] .dashboard-container {
+    background: rgba(0, 0, 0, 0.95) !important;
+}
+
+[data-theme="dark"] .dashboard-panel {
+    background: #1a1a1a;
+}
+
+[data-theme="dark"] .stat-item,
+[data-theme="dark"] .achievement-item {
+    background: #2a2a2a;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .magnetic-cursor {
@@ -276,5 +397,17 @@ h1, h2, h3, h4, h5, h6, p, span, a, li,
     
     .loading-progress {
         width: 150px;
+    }
+    
+    .dashboard-container {
+        padding: 1.5rem;
+    }
+    
+    .performance-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .achievement-grid {
+        grid-template-columns: 1fr;
     }
 }
