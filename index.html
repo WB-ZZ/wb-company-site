@@ -215,8 +215,8 @@
         
         .tech-showcase {
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 4rem;
+            grid-template-columns: 400px 1fr;
+            gap: 3rem;
             align-items: center;
             position: relative;
             z-index: 2;
@@ -228,13 +228,13 @@
         }
         
         .chart-center-title {
-            font-size: 16px;
+            font-size: 22px;
             font-weight: 700;
             fill: #f8fafc;
         }
         
         .chart-center-subtitle {
-            font-size: 12px;
+            font-size: 16px;
             fill: #94a3b8;
         }
         
@@ -626,7 +626,7 @@
                     <div class="tech-visual">
                         <!-- 대형 원형 차트 -->
                         <div class="main-chart">
-                            <svg width="280" height="280" viewBox="0 0 280 280">
+                            <svg width="400" height="400" viewBox="0 0 400 400">
                                 <defs>
                                     <linearGradient id="aws-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" style="stop-color:#FF9500"/>
@@ -647,39 +647,39 @@
                                 </defs>
                                 
                                 <!-- Background circle -->
-                                <circle cx="140" cy="140" r="120" fill="none" stroke="#f1f5f9" stroke-width="20"/>
+                                <circle cx="200" cy="200" r="160" fill="none" stroke="#f1f5f9" stroke-width="30"/>
                                 
                                 <!-- AWS - 30% -->
-                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#aws-gradient)" 
-                                        stroke-width="20" stroke-dasharray="226 754" 
-                                        stroke-dashoffset="0" transform="rotate(-90 140 140)"
-                                        class="chart-segment" data-animate="226">
+                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#aws-gradient)" 
+                                        stroke-width="30" stroke-dasharray="301 1005" 
+                                        stroke-dashoffset="0" transform="rotate(-90 200 200)"
+                                        class="chart-segment" data-animate="301">
                                 </circle>
                                 
                                 <!-- AI - 25% -->
-                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#ai-gradient)" 
-                                        stroke-width="20" stroke-dasharray="188 754" 
-                                        stroke-dashoffset="-226" transform="rotate(-90 140 140)"
-                                        class="chart-segment" data-animate="188">
+                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#ai-gradient)" 
+                                        stroke-width="30" stroke-dasharray="251 1005" 
+                                        stroke-dashoffset="-301" transform="rotate(-90 200 200)"
+                                        class="chart-segment" data-animate="251">
                                 </circle>
                                 
                                 <!-- Data - 25% -->
-                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#data-gradient)" 
-                                        stroke-width="20" stroke-dasharray="188 754" 
-                                        stroke-dashoffset="-414" transform="rotate(-90 140 140)"
-                                        class="chart-segment" data-animate="188">
+                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#data-gradient)" 
+                                        stroke-width="30" stroke-dasharray="251 1005" 
+                                        stroke-dashoffset="-552" transform="rotate(-90 200 200)"
+                                        class="chart-segment" data-animate="251">
                                 </circle>
                                 
                                 <!-- DevOps - 20% -->
-                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#devops-gradient)" 
-                                        stroke-width="20" stroke-dasharray="150 754" 
-                                        stroke-dashoffset="-602" transform="rotate(-90 140 140)"
-                                        class="chart-segment" data-animate="150">
+                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#devops-gradient)" 
+                                        stroke-width="30" stroke-dasharray="201 1005" 
+                                        stroke-dashoffset="-803" transform="rotate(-90 200 200)"
+                                        class="chart-segment" data-animate="201">
                                 </circle>
                                 
                                 <!-- Center text -->
-                                <text x="140" y="135" text-anchor="middle" class="chart-center-title">기술 역량</text>
-                                <text x="140" y="155" text-anchor="middle" class="chart-center-subtitle">분포도</text>
+                                <text x="200" y="190" text-anchor="middle" class="chart-center-title">기술 역량</text>
+                                <text x="200" y="215" text-anchor="middle" class="chart-center-subtitle">분포도</text>
                             </svg>
                         </div>
                     </div>
@@ -1750,26 +1750,20 @@
             
             if (number === 0) return;
             
-            const duration = 1500;
-            const startTime = performance.now();
+            const duration = 2000;
+            let currentValue = 0;
+            const increment = number / (duration / 16); // 60fps 기준
             
-            function easeOutExpo(t) {
-                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-            }
-            
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easedProgress = easeOutExpo(progress);
-                const current = Math.floor(easedProgress * number);
+            function updateCounter() {
+                currentValue += increment;
                 
-                element.textContent = current + suffix;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target; // 원래 텍스트로 복원
+                if (currentValue >= number) {
+                    element.textContent = target; // 최종값
+                    return;
                 }
+                
+                element.textContent = Math.floor(currentValue) + suffix;
+                requestAnimationFrame(updateCounter);
             }
             
             element.textContent = '0' + suffix; // 시작 값
