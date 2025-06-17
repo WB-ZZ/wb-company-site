@@ -1,41 +1,101 @@
 /* 전체적인 디자인 퀄리티 향상 */
 
 /* ===========================================
-   텍스트 가독성 - 최종 통합 버전
+   완전한 테마 시스템 - 배경+텍스트 통합
    =========================================== */
 
-/* 라이트 모드: 모든 텍스트 진한 검정 */
-body, h1, h2, h3, h4, h5, h6, p, span, div, a, li {
+/* 라이트 모드: 모든 배경 흰색, 모든 텍스트 검정 */
+body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* 모든 섹션 배경을 흰색으로 강제 */
+.hero, .about, .services, .portfolio, .contact, .footer,
+.service-card, .feature-card, .portfolio-item,
+.contact-form, .contact-info {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+}
+
+/* 모든 텍스트를 검정으로 */
+*, *::before, *::after {
     color: #000000 !important;
     font-weight: 600 !important;
 }
 
-.section-title, .hero-title {
+h1, h2, h3, h4, h5, h6, .section-title {
     color: #000000 !important;
     font-weight: 700 !important;
 }
 
-/* 다크 모드: 모든 텍스트 흰색 */
+/* 호버 효과도 검정 텍스트 유지 */
+*:hover, *:hover * {
+    color: #000000 !important;
+}
+
+.service-card:hover h3,
+.service-card:hover p,
+.portfolio-item:hover *,
+.feature-card:hover * {
+    color: #000000 !important;
+}
+
+/* 다크 모드: 모든 배경 검정, 모든 텍스트 흰색 */
 [data-theme="dark"] body,
+[data-theme="dark"] html {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* 다크모드에서 모든 섹션 배경을 검정으로 강제 */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .about,
+[data-theme="dark"] .services,
+[data-theme="dark"] .portfolio,
+[data-theme="dark"] .contact,
+[data-theme="dark"] .footer,
+[data-theme="dark"] .service-card,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .portfolio-item,
+[data-theme="dark"] .contact-form,
+[data-theme="dark"] .contact-info {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+}
+
+/* 다크모드에서 모든 텍스트를 흰색으로 */
+[data-theme="dark"] *,
+[data-theme="dark"] *::before,
+[data-theme="dark"] *::after {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
 [data-theme="dark"] h1,
 [data-theme="dark"] h2,
 [data-theme="dark"] h3,
 [data-theme="dark"] h4,
 [data-theme="dark"] h5,
 [data-theme="dark"] h6,
-[data-theme="dark"] p,
-[data-theme="dark"] span,
-[data-theme="dark"] div,
-[data-theme="dark"] a,
-[data-theme="dark"] li {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-}
-
-[data-theme="dark"] .section-title,
-[data-theme="dark"] .hero-title {
+[data-theme="dark"] .section-title {
     color: #ffffff !important;
     font-weight: 700 !important;
+}
+
+/* 다크모드 호버 효과도 흰색 텍스트 유지 */
+[data-theme="dark"] *:hover,
+[data-theme="dark"] *:hover * {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .service-card:hover h3,
+[data-theme="dark"] .service-card:hover p,
+[data-theme="dark"] .portfolio-item:hover *,
+[data-theme="dark"] .feature-card:hover * {
+    color: #ffffff !important;
 }
 
 /* 대시보드는 항상 어두운 배경 + 흰 글자 */
@@ -249,17 +309,15 @@ body, h1, h2, h3, h4, h5, h6, p, span, div, a, li {
 }
 
 .service-card {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
     padding: 2.5rem 2rem;
     border-radius: 20px;
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.08),
-        0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid #e5e5e5;
 }
 
 .service-card::before {
@@ -282,9 +340,7 @@ body, h1, h2, h3, h4, h5, h6, p, span, div, a, li {
     transform: translateY(-12px) scale(1.02);
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.15),
-        0 8px 25px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+        0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .service-icon {
@@ -816,12 +872,10 @@ body, h1, h2, h3, h4, h5, h6, p, span, div, a, li {
 }
 
 [data-theme="dark"] .service-card {
-    background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #333333;
 }
 
 [data-theme="dark"] .service-card:hover {
-    background: linear-gradient(145deg, #334155 0%, #475569 100%);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
