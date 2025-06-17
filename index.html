@@ -251,6 +251,30 @@
             filter: brightness(1.2) url(#glow);
         }
         
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .legend-compact {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
         /* 모바일 대응 */
         @media (max-width: 768px) {
             .hero-title {
@@ -305,6 +329,7 @@
                     </button>
                     <ul class="nav-menu" id="navMenu">
                         <li><a href="#home" class="nav-link">홈</a></li>
+                        <li><a href="#ceo-message" class="nav-link">CEO 인사말</a></li>
                         <li><a href="#about" class="nav-link">회사소개</a></li>
                         <li><a href="#services" class="nav-link">서비스</a></li>
                         <li><a href="#portfolio" class="nav-link">포트폴리오</a></li>
@@ -497,6 +522,33 @@
         </div>
     </section>
 
+    <!-- CEO 인사말 -->
+    <section id="ceo-message" class="ceo-message">
+        <div class="container">
+            <h2 class="section-title" data-i18n="ceo_message_title">CEO 인사말</h2>
+            <div class="ceo-content">
+                <div class="ceo-photo">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face" alt="CEO 사진" class="ceo-image">
+                    <div class="ceo-info">
+                        <h3 class="ceo-name" data-i18n="ceo_name">김혁신 대표이사</h3>
+                        <p class="ceo-title" data-i18n="ceo_credentials">서울대학교 컴퓨터공학 박사<br>전 삼성SDS 상무</p>
+                    </div>
+                </div>
+                <div class="ceo-message-text">
+                    <blockquote>
+                        <p data-i18n="ceo_message_1">"안녕하십니까. InnovateTech 대표이사 김혁신입니다."</p>
+                        <p data-i18n="ceo_message_2">"저희는 2015년 창립 이후 9년간 AI와 클라우드 기술 분야에서 끊임없이 혁신해왔습니다. 300여 개 기업의 디지털 전환을 성공적으로 이끌며, 대한민국 기업들이 글로벌 경쟁력을 갖출 수 있도록 최선을 다해왔습니다."</p>
+                        <p data-i18n="ceo_message_3">"앞으로도 저희 InnovateTech는 고객의 성공이 곧 저희의 성공이라는 신념으로, 최고의 기술력과 차별화된 서비스를 제공하겠습니다. 여러분의 비즈니스 혁신 파트너로서 함께 미래를 만들어가겠습니다."</p>
+                    </blockquote>
+                    <div class="ceo-signature">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTUwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTAgMzBDMjAgMjAgMzAgMTAgNDAgMjBDNTAgMzAgNjAgMTAgNzAgMjBDODAgMzAgOTAgMTAgMTAwIDIwQzExMCAzMCAxMjAgMTAgMTMwIDIwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K" alt="CEO 서명" class="signature">
+                        <p class="signature-text">대표이사 김혁신</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 회사소개 -->
     <section id="about" class="about">
         <div class="container">
@@ -542,6 +594,22 @@
                                 <span>2024</span>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- 회사 정보 버튼들 -->
+                    <div class="company-info-buttons">
+                        <button class="info-btn" onclick="openModal('historyModal')" data-i18n="btn_history">
+                            <i class="fas fa-history"></i>
+                            <span>회사연혁</span>
+                        </button>
+                        <button class="info-btn" onclick="openModal('organizationModal')" data-i18n="btn_organization">
+                            <i class="fas fa-sitemap"></i>
+                            <span>조직도</span>
+                        </button>
+                        <button class="info-btn" onclick="openModal('locationModal')" data-i18n="btn_location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>오시는 길</span>
+                        </button>
                     </div>
                 </div>
                 <div class="about-image">
@@ -636,49 +704,23 @@
                         </div>
                     </div>
                     
-                    <div class="tech-legend">
-                        <div class="legend-item" data-aos="fade-left" data-aos-delay="100">
-                            <div class="legend-color" style="background: linear-gradient(135deg, #FF9500, #FF6B00);"></div>
-                            <div class="legend-content">
-                                <h4><i class="fab fa-aws"></i> Cloud Infrastructure</h4>
-                                <div class="legend-stats">
-                                    <span class="percentage">30%</span>
-                                    <span class="description">AWS, Azure, GCP 전문</span>
-                                </div>
-                            </div>
+                    <!-- 차트 아래 간단한 범례 -->
+                    <div class="chart-legend">
+                        <div class="legend-compact">
+                            <span class="legend-dot" style="background: #FF6B00;"></span>
+                            <span>Cloud 30%</span>
                         </div>
-                        
-                        <div class="legend-item" data-aos="fade-left" data-aos-delay="200">
-                            <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
-                            <div class="legend-content">
-                                <h4><i class="fas fa-brain"></i> AI/Machine Learning</h4>
-                                <div class="legend-stats">
-                                    <span class="percentage">25%</span>
-                                    <span class="description">딥러닝, 컴퓨터비전, NLP</span>
-                                </div>
-                            </div>
+                        <div class="legend-compact">
+                            <span class="legend-dot" style="background: #667eea;"></span>
+                            <span>AI/ML 25%</span>
                         </div>
-                        
-                        <div class="legend-item" data-aos="fade-left" data-aos-delay="300">
-                            <div class="legend-color" style="background: linear-gradient(135deg, #06D6A0, #0396FF);"></div>
-                            <div class="legend-content">
-                                <h4><i class="fas fa-database"></i> Data Engineering</h4>
-                                <div class="legend-stats">
-                                    <span class="percentage">25%</span>
-                                    <span class="description">빅데이터, 실시간 분석</span>
-                                </div>
-                            </div>
+                        <div class="legend-compact">
+                            <span class="legend-dot" style="background: #06D6A0;"></span>
+                            <span>Data 25%</span>
                         </div>
-                        
-                        <div class="legend-item" data-aos="fade-left" data-aos-delay="400">
-                            <div class="legend-color" style="background: linear-gradient(135deg, #F093FB, #F5576C);"></div>
-                            <div class="legend-content">
-                                <h4><i class="fab fa-docker"></i> DevOps & Security</h4>
-                                <div class="legend-stats">
-                                    <span class="percentage">20%</span>
-                                    <span class="description">CI/CD, 보안, 모니터링</span>
-                                </div>
-                            </div>
+                        <div class="legend-compact">
+                            <span class="legend-dot" style="background: #F093FB;"></span>
+                            <span>DevOps 20%</span>
                         </div>
                     </div>
                 </div>
@@ -855,6 +897,7 @@
             ko: {
                 // 네비게이션
                 nav_home: "홈",
+                nav_ceo: "CEO 인사말",
                 nav_about: "회사소개", 
                 nav_services: "서비스",
                 nav_portfolio: "포트폴리오",
@@ -925,6 +968,67 @@
                 portfolio3_title: "CJ올리브네트웍스 빅데이터 플랫폼",
                 portfolio3_desc: "실시간 로그 분석과 예측 모델링 시스템",
                 
+                // CEO 인사말
+                ceo_message_title: "CEO 인사말",
+                ceo_name: "김혁신 대표이사",
+                ceo_credentials: "서울대학교 컴퓨터공학 박사<br>전 삼성SDS 상무",
+                ceo_message_1: "안녕하십니까. InnovateTech 대표이사 김혁신입니다.",
+                ceo_message_2: "저희는 2015년 창립 이후 9년간 AI와 클라우드 기술 분야에서 끊임없이 혁신해왔습니다. 300여 개 기업의 디지털 전환을 성공적으로 이끌며, 대한민국 기업들이 글로벌 경쟁력을 갖출 수 있도록 최선을 다해왔습니다.",
+                ceo_message_3: "앞으로도 저희 InnovateTech는 고객의 성공이 곧 저희의 성공이라는 신념으로, 최고의 기술력과 차별화된 서비스를 제공하겠습니다. 여러분의 비즈니스 혁신 파트너로서 함께 미래를 만들어가겠습니다.",
+                
+                // 회사 정보 버튼
+                btn_history: "회사연혁",
+                btn_organization: "조직도", 
+                btn_location: "오시는 길",
+                
+                // 회사연혁
+                history_title: "회사연혁",
+                history_2024_title: "글로벌 확장 원년",
+                history_2024_desc: "• 베트남, 태국 현지법인 설립<br>• AWS Advanced Partner 등급 획득<br>• 직원 수 200명 돌파",
+                history_2023_title: "AI 전문성 고도화",
+                history_2023_desc: "• 자체 AI 플랫폼 'InnovaAI' 출시<br>• 삼성전자와 대규모 AI 프로젝트 계약<br>• 매출 300억원 달성",
+                history_2021_title: "클라우드 전문기업 도약",
+                history_2021_desc: "• Microsoft Gold Partner 인증<br>• 현대자동차 클라우드 마이그레이션 완료<br>• 직원 수 100명 달성",
+                history_2018_title: "기술력 인정받는 해",
+                history_2018_desc: "• AWS Select Partner 인증<br>• 신한은행 디지털 전환 프로젝트<br>• 100번째 고객사 확보",
+                history_2015_title: "InnovateTech 설립",
+                history_2015_desc: "• 김혁신 대표 및 창립멤버 5명으로 시작<br>• 강남구 테헤란로 첫 사무실 개소<br>• 첫 클라우드 프로젝트 수주",
+                
+                // 조직도
+                org_title: "조직도",
+                org_ceo: "대표이사",
+                org_tech_cto: "기술총괄(CTO)",
+                org_business_cbo: "사업총괄(CBO)",
+                org_operation_coo: "운영총괄(COO)",
+                org_tech_dept: "기술부문",
+                org_business_dept: "사업부문",
+                org_operation_dept: "운영부문",
+                org_ai_team: "AI개발팀",
+                org_cloud_team: "클라우드팀",
+                org_data_team: "데이터팀",
+                org_sales_team: "영업팀",
+                org_marketing_team: "마케팅팀",
+                org_consulting_team: "컨설팅팀",
+                org_hr_team: "인사팀",
+                org_finance_team: "재무팀",
+                org_legal_team: "법무팀",
+                
+                // 오시는 길
+                location_title: "오시는 길",
+                location_address_title: "주소 정보",
+                location_address: "서울특별시 강남구 테헤란로 521 파르나스타워 35층",
+                location_postal: "우편번호: 06154",
+                location_subway_title: "지하철 이용시",
+                location_subway_2: "강남역 1번 출구 도보 5분",
+                location_subway_9: "신논현역 6번 출구 도보 8분",
+                location_bus_title: "버스 이용시",
+                location_bus_blue: "간선",
+                location_bus_green: "지선",
+                location_parking_title: "주차 안내",
+                location_parking_info: "파르나스타워 지하주차장 이용 가능<br>방문고객 2시간 무료주차 지원",
+                location_map_title: "약도",
+                location_map_desc: "강남역 1번 출구에서 테헤란로 방향으로 직진 5분",
+                
                 // 푸터
                 footer_tagline: "AI와 클라우드로 만드는 디지털 미래",
                 footer_links: "빠른 링크"
@@ -933,6 +1037,7 @@
             en: {
                 // Navigation
                 nav_home: "Home",
+                nav_ceo: "CEO Message",
                 nav_about: "About",
                 nav_services: "Services", 
                 nav_portfolio: "Portfolio",
@@ -1002,6 +1107,67 @@
                 portfolio2_desc: "AWS-based microservices architecture transformation from legacy systems",
                 portfolio3_title: "CJ OliveNetworks Big Data Platform",
                 portfolio3_desc: "Real-time log analysis and predictive modeling system",
+                
+                // CEO Message
+                ceo_message_title: "CEO Message",
+                ceo_name: "Kim Hyukshin, CEO",
+                ceo_credentials: "Ph.D. in Computer Engineering, Seoul National University<br>Former Managing Director, Samsung SDS",
+                ceo_message_1: "Greetings. I am Kim Hyukshin, CEO of InnovateTech.",
+                ceo_message_2: "Since our founding in 2015, we have been continuously innovating in AI and cloud technology for 9 years. We have successfully led digital transformation for over 300 companies and have done our best to help Korean companies gain global competitiveness.",
+                ceo_message_3: "Going forward, InnovateTech will continue to provide the best technology and differentiated services with the belief that our customers' success is our success. We will continue to create the future together as your business innovation partner.",
+                
+                // Company Info Buttons
+                btn_history: "Company History",
+                btn_organization: "Organization Chart",
+                btn_location: "Location",
+                
+                // Company History
+                history_title: "Company History",
+                history_2024_title: "Global Expansion Year",
+                history_2024_desc: "• Established subsidiaries in Vietnam and Thailand<br>• Achieved AWS Advanced Partner status<br>• Reached 200+ employees",
+                history_2023_title: "AI Expertise Enhancement",
+                history_2023_desc: "• Launched proprietary AI platform 'InnovaAI'<br>• Signed major AI project with Samsung Electronics<br>• Achieved 30 billion KRW in revenue",
+                history_2021_title: "Cloud Specialist Company Growth",
+                history_2021_desc: "• Microsoft Gold Partner certification<br>• Completed Hyundai Motor cloud migration<br>• Reached 100 employees",
+                history_2018_title: "Technology Recognition Year",
+                history_2018_desc: "• AWS Select Partner certification<br>• Shinhan Bank digital transformation project<br>• Secured 100th client company",
+                history_2015_title: "InnovateTech Establishment",
+                history_2015_desc: "• Started with CEO Kim Hyukshin and 5 founding members<br>• Opened first office in Teheran-ro, Gangnam-gu<br>• Won first cloud project contract",
+                
+                // Organization Chart
+                org_title: "Organization Chart",
+                org_ceo: "Chief Executive Officer",
+                org_tech_cto: "Chief Technology Officer",
+                org_business_cbo: "Chief Business Officer",
+                org_operation_coo: "Chief Operating Officer",
+                org_tech_dept: "Technology Division",
+                org_business_dept: "Business Division",
+                org_operation_dept: "Operations Division",
+                org_ai_team: "AI Development Team",
+                org_cloud_team: "Cloud Team",
+                org_data_team: "Data Team",
+                org_sales_team: "Sales Team",
+                org_marketing_team: "Marketing Team",
+                org_consulting_team: "Consulting Team",
+                org_hr_team: "HR Team",
+                org_finance_team: "Finance Team",
+                org_legal_team: "Legal Team",
+                
+                // Location
+                location_title: "Location",
+                location_address_title: "Address Information",
+                location_address: "35F Parnas Tower, 521 Teheran-ro, Gangnam-gu, Seoul",
+                location_postal: "Postal Code: 06154",
+                location_subway_title: "By Subway",
+                location_subway_2: "Gangnam Station Exit 1, 5-minute walk",
+                location_subway_9: "Sinnonhyeon Station Exit 6, 8-minute walk",
+                location_bus_title: "By Bus",
+                location_bus_blue: "Main Line",
+                location_bus_green: "Branch Line",
+                location_parking_title: "Parking Information",
+                location_parking_info: "Parnas Tower underground parking available<br>2 hours free parking for visitors",
+                location_map_title: "Map",
+                location_map_desc: "5-minute walk straight towards Teheran-ro from Gangnam Station Exit 1",
                 
                 // Footer
                 footer_tagline: "Building Digital Future with AI & Cloud",
@@ -2355,7 +2521,201 @@
             }
         }
     </script>
+    <!-- 모달들 -->
+    <!-- 회사연혁 모달 -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="history_title">회사연혁</h2>
+                <span class="close" onclick="closeModal('historyModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-content">
+                            <h4 data-i18n="history_2024_title">글로벌 확장 원년</h4>
+                            <p data-i18n="history_2024_desc">• 베트남, 태국 현지법인 설립<br>• AWS Advanced Partner 등급 획득<br>• 직원 수 200명 돌파</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-content">
+                            <h4 data-i18n="history_2023_title">AI 전문성 고도화</h4>
+                            <p data-i18n="history_2023_desc">• 자체 AI 플랫폼 'InnovaAI' 출시<br>• 삼성전자와 대규모 AI 프로젝트 계약<br>• 매출 300억원 달성</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-content">
+                            <h4 data-i18n="history_2021_title">클라우드 전문기업 도약</h4>
+                            <p data-i18n="history_2021_desc">• Microsoft Gold Partner 인증<br>• 현대자동차 클라우드 마이그레이션 완료<br>• 직원 수 100명 달성</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-content">
+                            <h4 data-i18n="history_2018_title">기술력 인정받는 해</h4>
+                            <p data-i18n="history_2018_desc">• AWS Select Partner 인증<br>• 신한은행 디지털 전환 프로젝트<br>• 100번째 고객사 확보</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2015</div>
+                        <div class="timeline-content">
+                            <h4 data-i18n="history_2015_title">InnovateTech 설립</h4>
+                            <p data-i18n="history_2015_desc">• 김혁신 대표 및 창립멤버 5명으로 시작<br>• 강남구 테헤란로 첫 사무실 개소<br>• 첫 클라우드 프로젝트 수주</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 조직도 모달 -->
+    <div id="organizationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="org_title">조직도</h2>
+                <span class="close" onclick="closeModal('organizationModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="org-chart">
+                    <div class="org-level-1">
+                        <div class="org-box ceo">
+                            <div class="org-title" data-i18n="org_ceo">대표이사</div>
+                            <div class="org-name">김혁신</div>
+                        </div>
+                    </div>
+                    <div class="org-level-2">
+                        <div class="org-box">
+                            <div class="org-title" data-i18n="org_tech_cto">기술총괄(CTO)</div>
+                            <div class="org-name">박기술</div>
+                            <div class="org-members">25명</div>
+                        </div>
+                        <div class="org-box">
+                            <div class="org-title" data-i18n="org_business_cbo">사업총괄(CBO)</div>
+                            <div class="org-name">이사업</div>
+                            <div class="org-members">20명</div>
+                        </div>
+                        <div class="org-box">
+                            <div class="org-title" data-i18n="org_operation_coo">운영총괄(COO)</div>
+                            <div class="org-name">최운영</div>
+                            <div class="org-members">15명</div>
+                        </div>
+                    </div>
+                    <div class="org-level-3">
+                        <div class="org-department">
+                            <h4 data-i18n="org_tech_dept">기술부문</h4>
+                            <div class="dept-teams">
+                                <span data-i18n="org_ai_team">AI개발팀</span>
+                                <span data-i18n="org_cloud_team">클라우드팀</span>
+                                <span data-i18n="org_data_team">데이터팀</span>
+                            </div>
+                        </div>
+                        <div class="org-department">
+                            <h4 data-i18n="org_business_dept">사업부문</h4>
+                            <div class="dept-teams">
+                                <span data-i18n="org_sales_team">영업팀</span>
+                                <span data-i18n="org_marketing_team">마케팅팀</span>
+                                <span data-i18n="org_consulting_team">컨설팅팀</span>
+                            </div>
+                        </div>
+                        <div class="org-department">
+                            <h4 data-i18n="org_operation_dept">운영부문</h4>
+                            <div class="dept-teams">
+                                <span data-i18n="org_hr_team">인사팀</span>
+                                <span data-i18n="org_finance_team">재무팀</span>
+                                <span data-i18n="org_legal_team">법무팀</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 오시는 길 모달 -->
+    <div id="locationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="location_title">오시는 길</h2>
+                <span class="close" onclick="closeModal('locationModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="location-info">
+                    <div class="location-section">
+                        <h3 data-i18n="location_address_title">주소 정보</h3>
+                        <p class="address" data-i18n="location_address">서울특별시 강남구 테헤란로 521 파르나스타워 35층</p>
+                        <p class="postal-code" data-i18n="location_postal">우편번호: 06154</p>
+                    </div>
+                    
+                    <div class="location-section">
+                        <h3 data-i18n="location_subway_title">지하철 이용시</h3>
+                        <div class="transport-info">
+                            <div class="subway-line">
+                                <span class="line-2">2호선</span>
+                                <span data-i18n="location_subway_2">강남역 1번 출구 도보 5분</span>
+                            </div>
+                            <div class="subway-line">
+                                <span class="line-9">9호선</span>
+                                <span data-i18n="location_subway_9">신논현역 6번 출구 도보 8분</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="location-section">
+                        <h3 data-i18n="location_bus_title">버스 이용시</h3>
+                        <div class="bus-info">
+                            <div class="bus-routes">
+                                <span class="bus-type blue" data-i18n="location_bus_blue">간선</span>
+                                <span>472, 146, 740, 360</span>
+                            </div>
+                            <div class="bus-routes">
+                                <span class="bus-type green" data-i18n="location_bus_green">지선</span>
+                                <span>3422, 4318, 6411</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="location-section">
+                        <h3 data-i18n="location_parking_title">주차 안내</h3>
+                        <p data-i18n="location_parking_info">파르나스타워 지하주차장 이용 가능<br>방문고객 2시간 무료주차 지원</p>
+                    </div>
+                    
+                    <div class="location-map">
+                        <h3 data-i18n="location_map_title">약도</h3>
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p data-i18n="location_map_desc">강남역 1번 출구에서 테헤란로 방향으로 직진 5분</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/simple-charts.js"></script>
+    
+    <!-- 모달 관련 스크립트 -->
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 모달 외부 클릭시 닫기
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
 </body>
 </html>
