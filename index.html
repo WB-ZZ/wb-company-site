@@ -149,156 +149,106 @@
             max-width: none !important;
         }
         
-        /* 임팩트 있는 기술 대시보드 */
-        .tech-dashboard {
-            margin: 3rem 0;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            color: white;
+        /* 차별화된 기술 마스터리 쇼케이스 */
+        .tech-mastery-showcase {
+            margin: 4rem 0;
+            padding: 0;
+            background: transparent;
             position: relative;
-            overflow: hidden;
         }
         
-        .tech-dashboard::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M 4 0 L 0 0 0 4" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .mastery-header {
+            text-align: center;
             margin-bottom: 3rem;
             position: relative;
-            z-index: 2;
         }
         
-        .dashboard-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        .mastery-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        
+        .title-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #dc2626 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .dashboard-stats {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .dashboard-stats .stat-item {
-            text-align: center;
-        }
-        
-        .dashboard-stats .stat-number {
+        .title-highlight {
             display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fbbf24;
-            line-height: 1;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-top: 0.5rem;
         }
         
-        .dashboard-stats .stat-label {
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #10b981;
             font-size: 0.9rem;
-            color: #94a3b8;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .tech-showcase {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 3rem;
+        .pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse-animation 2s infinite;
+        }
+        
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        .mastery-visual {
+            display: flex;
+            justify-content: center;
             align-items: center;
+            min-height: 600px;
             position: relative;
-            z-index: 2;
         }
         
-        .main-chart {
+        .giant-chart {
             position: relative;
-            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
         }
         
-        .chart-center-title {
-            font-size: 22px;
-            font-weight: 700;
-            fill: #f8fafc;
+        .center-number {
+            font-size: 48px;
+            font-weight: 900;
+            fill: #fbbf24;
         }
         
-        .chart-center-subtitle {
+        .center-label {
             font-size: 16px;
+            font-weight: 600;
             fill: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .chart-segment {
-            transition: stroke-dasharray 2s ease-in-out;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        .percent-label {
+            font-size: 24px;
+            font-weight: 700;
+            fill: #475569;
         }
         
-        .tech-legend {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .chart-piece {
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .legend-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .legend-color {
-            width: 12px;
-            height: 40px;
-            border-radius: 6px;
-            flex-shrink: 0;
-        }
-        
-        .legend-content h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #f8fafc;
-        }
-        
-        .legend-content h4 i {
-            margin-right: 0.5rem;
-            color: #fbbf24;
-        }
-        
-        .legend-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .percentage {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #fbbf24;
-        }
-        
-        .description {
-            font-size: 0.9rem;
-            color: #94a3b8;
+        .chart-piece:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2) url(#glow);
         }
         
         /* 모바일 대응 */
@@ -606,80 +556,82 @@
         <div class="container">
             <h2 class="section-title" data-i18n="services_title">서비스</h2>
             
-            <!-- 임팩트 있는 기술 역량 대시보드 -->
-            <div class="tech-dashboard" data-aos="fade-up">
-                <div class="dashboard-header">
-                    <h3 class="dashboard-title" data-i18n="tech_capabilities">핵심 기술 역량</h3>
-                    <div class="dashboard-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">300+</span>
-                            <span class="stat-label">완료 프로젝트</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">고객 만족도</span>
-                        </div>
+            <!-- 차별화된 기술 역량 비주얼 -->
+            <div class="tech-mastery-showcase" data-aos="fade-up">
+                <div class="mastery-header">
+                    <h3 class="mastery-title">
+                        <span class="title-gradient">기술 전문성</span>
+                        <span class="title-highlight">분포도</span>
+                    </h3>
+                    <div class="live-indicator">
+                        <span class="pulse"></span>
+                        <span>실시간 프로젝트 현황</span>
                     </div>
                 </div>
                 
-                <div class="tech-showcase">
-                    <div class="tech-visual">
-                        <!-- 대형 원형 차트 -->
-                        <div class="main-chart">
-                            <svg width="400" height="400" viewBox="0 0 400 400">
+                <div class="mastery-visual">
+                    <!-- 거대한 인터랙티브 차트 -->
+                    <div class="giant-chart">
+                        <svg width="600" height="600" viewBox="0 0 600 600">
                                 <defs>
-                                    <linearGradient id="aws-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#FF9500"/>
-                                        <stop offset="100%" style="stop-color:#FF6B00"/>
-                                    </linearGradient>
-                                    <linearGradient id="ai-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea"/>
-                                        <stop offset="100%" style="stop-color:#764ba2"/>
-                                    </linearGradient>
-                                    <linearGradient id="data-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#06D6A0"/>
-                                        <stop offset="100%" style="stop-color:#0396FF"/>
-                                    </linearGradient>
-                                    <linearGradient id="devops-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#F093FB"/>
-                                        <stop offset="100%" style="stop-color:#F5576C"/>
-                                    </linearGradient>
+                                    <radialGradient id="center-glow">
+                                        <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/>
+                                        <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0"/>
+                                    </radialGradient>
+                                    <filter id="glow">
+                                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur"/>
+                                            <feMergeNode in="SourceGraphic"/>
+                                        </feMerge>
+                                    </filter>
                                 </defs>
                                 
-                                <!-- Background circle -->
-                                <circle cx="200" cy="200" r="160" fill="none" stroke="#f1f5f9" stroke-width="30"/>
+                                <!-- 배경 원과 글로우 효과 -->
+                                <circle cx="300" cy="300" r="280" fill="url(#center-glow)" opacity="0.5"/>
+                                <circle cx="300" cy="300" r="250" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3"/>
+                                <circle cx="300" cy="300" r="200" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3"/>
+                                <circle cx="300" cy="300" r="150" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3"/>
                                 
-                                <!-- AWS - 30% -->
-                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#aws-gradient)" 
-                                        stroke-width="30" stroke-dasharray="301 1005" 
-                                        stroke-dashoffset="0" transform="rotate(-90 200 200)"
-                                        class="chart-segment" data-animate="301">
-                                </circle>
+                                <!-- 메인 차트 -->
+                                <g transform="translate(300,300)">
+                                    <!-- Cloud 30% - 가장 큰 부분 -->
+                                    <path d="M 0,-240 A 240,240 0 0,1 185.57,152.31 L 92.79,76.16 A 120,120 0 0,0 0,-120 Z" 
+                                          fill="#FF6B00" opacity="0.9" filter="url(#glow)" class="chart-piece">
+                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0s"/>
+                                    </path>
+                                    
+                                    <!-- AI 25% -->
+                                    <path d="M 185.57,152.31 A 240,240 0 0,1 -74.16,228.26 L -37.08,114.13 A 120,120 0 0,0 92.79,76.16 Z" 
+                                          fill="#667eea" opacity="0.9" filter="url(#glow)" class="chart-piece">
+                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0.3s"/>
+                                    </path>
+                                    
+                                    <!-- Data 25% -->
+                                    <path d="M -74.16,228.26 A 240,240 0 0,1 -240,0 L -120,0 A 120,120 0 0,0 -37.08,114.13 Z" 
+                                          fill="#06D6A0" opacity="0.9" filter="url(#glow)" class="chart-piece">
+                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0.6s"/>
+                                    </path>
+                                    
+                                    <!-- DevOps 20% -->
+                                    <path d="M -240,0 A 240,240 0 0,1 0,-240 L 0,-120 A 120,120 0 0,0 -120,0 Z" 
+                                          fill="#F093FB" opacity="0.9" filter="url(#glow)" class="chart-piece">
+                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0.9s"/>
+                                    </path>
+                                    
+                                    <!-- 중앙 원 -->
+                                    <circle r="100" fill="#0f172a" stroke="#fbbf24" stroke-width="3" filter="url(#glow)"/>
+                                    
+                                    <!-- 중앙 텍스트 -->
+                                    <text y="-10" text-anchor="middle" class="center-number">300+</text>
+                                    <text y="20" text-anchor="middle" class="center-label">Active Projects</text>
+                                </g>
                                 
-                                <!-- AI - 25% -->
-                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#ai-gradient)" 
-                                        stroke-width="30" stroke-dasharray="251 1005" 
-                                        stroke-dashoffset="-301" transform="rotate(-90 200 200)"
-                                        class="chart-segment" data-animate="251">
-                                </circle>
-                                
-                                <!-- Data - 25% -->
-                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#data-gradient)" 
-                                        stroke-width="30" stroke-dasharray="251 1005" 
-                                        stroke-dashoffset="-552" transform="rotate(-90 200 200)"
-                                        class="chart-segment" data-animate="251">
-                                </circle>
-                                
-                                <!-- DevOps - 20% -->
-                                <circle cx="200" cy="200" r="160" fill="none" stroke="url(#devops-gradient)" 
-                                        stroke-width="30" stroke-dasharray="201 1005" 
-                                        stroke-dashoffset="-803" transform="rotate(-90 200 200)"
-                                        class="chart-segment" data-animate="201">
-                                </circle>
-                                
-                                <!-- Center text -->
-                                <text x="200" y="190" text-anchor="middle" class="chart-center-title">기술 역량</text>
-                                <text x="200" y="215" text-anchor="middle" class="chart-center-subtitle">분포도</text>
+                                <!-- 퍼센트 라벨들 -->
+                                <text x="450" y="200" class="percent-label">30%</text>
+                                <text x="450" y="400" class="percent-label">25%</text>
+                                <text x="150" y="400" class="percent-label">25%</text>
+                                <text x="150" y="200" class="percent-label">20%</text>
                             </svg>
                         </div>
                     </div>
@@ -1740,34 +1692,33 @@
         
         function animateCounter(element) {
             // 이미 애니메이션이 실행된 경우 중복 실행 방지
-            if (element.dataset.animated === 'true') return;
-            element.dataset.animated = 'true';
+            if (element.dataset.animating === 'true') return;
+            element.dataset.animating = 'true';
             
-            const target = element.textContent.trim();
-            const numberMatch = target.match(/\d+/);
-            const number = numberMatch ? parseInt(numberMatch[0]) : 0;
-            const suffix = target.replace(/\d+/g, '');
+            const originalText = element.textContent.trim();
+            const numberMatch = originalText.match(/\d+/);
+            if (!numberMatch) return;
             
-            if (number === 0) return;
+            const targetNumber = parseInt(numberMatch[0]);
+            const suffix = originalText.replace(/\d+/, '');
             
-            const duration = 2000;
-            let currentValue = 0;
-            const increment = number / (duration / 16); // 60fps 기준
+            let currentNumber = 0;
+            const duration = 1500;
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = targetNumber / steps;
             
-            function updateCounter() {
-                currentValue += increment;
+            const timer = setInterval(() => {
+                currentNumber += increment;
                 
-                if (currentValue >= number) {
-                    element.textContent = target; // 최종값
-                    return;
+                if (currentNumber >= targetNumber) {
+                    element.textContent = originalText;
+                    clearInterval(timer);
+                    element.dataset.animating = 'false';
+                } else {
+                    element.textContent = Math.floor(currentNumber) + suffix;
                 }
-                
-                element.textContent = Math.floor(currentValue) + suffix;
-                requestAnimationFrame(updateCounter);
-            }
-            
-            element.textContent = '0' + suffix; // 시작 값
-            requestAnimationFrame(updateCounter);
+            }, stepTime);
         }
         
         // 추상적/기하학적 패턴 배경 시스템
