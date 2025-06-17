@@ -1,100 +1,126 @@
 /* 전체적인 디자인 퀄리티 향상 */
 
 /* ===========================================
-   완전한 테마 시스템 - 배경+텍스트 통합
+   완전한 테마 시스템 - 모든 상황 대응
    =========================================== */
 
-/* 라이트 모드: 모든 배경 흰색, 모든 텍스트 검정 */
-body, html {
-    background: #ffffff !important;
-    color: #000000 !important;
-}
-
-/* 모든 섹션 배경을 흰색으로 강제 */
+/* 라이트 모드 - 완전 통합 */
+body, html, 
 .hero, .about, .services, .portfolio, .contact, .footer,
-.service-card, .feature-card, .portfolio-item,
-.contact-form, .contact-info {
+.service-card, .feature-card, .portfolio-item, .contact-form, .contact-info {
     background: #ffffff !important;
     background-color: #ffffff !important;
     background-image: none !important;
 }
 
-/* 모든 텍스트를 검정으로 */
+/* 모든 텍스트 요소 - 라이트 모드 */
+body, html, h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th,
+.section-title, .hero-title, .portfolio-title,
+.service-card h3, .service-card p,
+.feature-card h3, .feature-card p,
+.portfolio-item h3, .portfolio-item p,
+.contact-info h3, .contact-info p,
+.footer h4, .footer p, .footer a,
 *, *::before, *::after {
     color: #000000 !important;
     font-weight: 600 !important;
 }
 
-h1, h2, h3, h4, h5, h6, .section-title {
-    color: #000000 !important;
+/* 제목 강조 */
+h1, h2, h3, h4, h5, h6, .section-title, .hero-title {
     font-weight: 700 !important;
 }
 
-/* 호버 효과도 검정 텍스트 유지 */
-*:hover, *:hover * {
+/* 라이트모드 호버 - 여전히 검정 */
+*:hover, *:hover *, 
+.service-card:hover, .service-card:hover h3, .service-card:hover p,
+.feature-card:hover, .feature-card:hover h3, .feature-card:hover p,
+.portfolio-item:hover, .portfolio-item:hover *,
+a:hover, button:hover {
     color: #000000 !important;
 }
 
-.service-card:hover h3,
-.service-card:hover p,
-.portfolio-item:hover *,
-.feature-card:hover * {
-    color: #000000 !important;
-}
-
-/* 다크 모드: 모든 배경 검정, 모든 텍스트 흰색 */
-[data-theme="dark"] body,
-[data-theme="dark"] html {
-    background: #000000 !important;
-    color: #ffffff !important;
-}
-
-/* 다크모드에서 모든 섹션 배경을 검정으로 강제 */
-[data-theme="dark"] .hero,
-[data-theme="dark"] .about,
-[data-theme="dark"] .services,
-[data-theme="dark"] .portfolio,
-[data-theme="dark"] .contact,
+/* 다크 모드 - 완전 통합 */
+[data-theme="dark"] body, 
+[data-theme="dark"] html,
+[data-theme="dark"] .hero, 
+[data-theme="dark"] .about, 
+[data-theme="dark"] .services, 
+[data-theme="dark"] .portfolio, 
+[data-theme="dark"] .contact, 
 [data-theme="dark"] .footer,
-[data-theme="dark"] .service-card,
-[data-theme="dark"] .feature-card,
-[data-theme="dark"] .portfolio-item,
-[data-theme="dark"] .contact-form,
+[data-theme="dark"] .service-card, 
+[data-theme="dark"] .feature-card, 
+[data-theme="dark"] .portfolio-item, 
+[data-theme="dark"] .contact-form, 
 [data-theme="dark"] .contact-info {
     background: #000000 !important;
     background-color: #000000 !important;
     background-image: none !important;
 }
 
-/* 다크모드에서 모든 텍스트를 흰색으로 */
-[data-theme="dark"] *,
-[data-theme="dark"] *::before,
+/* 모든 텍스트 요소 - 다크 모드 */
+[data-theme="dark"] body, 
+[data-theme="dark"] html, 
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6, 
+[data-theme="dark"] p, 
+[data-theme="dark"] span, 
+[data-theme="dark"] div, 
+[data-theme="dark"] a, 
+[data-theme="dark"] li, 
+[data-theme="dark"] td, 
+[data-theme="dark"] th,
+[data-theme="dark"] .section-title, 
+[data-theme="dark"] .hero-title, 
+[data-theme="dark"] .portfolio-title,
+[data-theme="dark"] .service-card h3, 
+[data-theme="dark"] .service-card p,
+[data-theme="dark"] .feature-card h3, 
+[data-theme="dark"] .feature-card p,
+[data-theme="dark"] .portfolio-item h3, 
+[data-theme="dark"] .portfolio-item p,
+[data-theme="dark"] .contact-info h3, 
+[data-theme="dark"] .contact-info p,
+[data-theme="dark"] .footer h4, 
+[data-theme="dark"] .footer p, 
+[data-theme="dark"] .footer a,
+[data-theme="dark"] *, 
+[data-theme="dark"] *::before, 
 [data-theme="dark"] *::after {
     color: #ffffff !important;
     font-weight: 600 !important;
 }
 
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] h4,
-[data-theme="dark"] h5,
-[data-theme="dark"] h6,
-[data-theme="dark"] .section-title {
-    color: #ffffff !important;
+/* 다크모드 제목 강조 */
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6, 
+[data-theme="dark"] .section-title, 
+[data-theme="dark"] .hero-title {
     font-weight: 700 !important;
 }
 
-/* 다크모드 호버 효과도 흰색 텍스트 유지 */
-[data-theme="dark"] *:hover,
-[data-theme="dark"] *:hover * {
-    color: #ffffff !important;
-}
-
-[data-theme="dark"] .service-card:hover h3,
+/* 다크모드 호버 - 여전히 흰색 */
+[data-theme="dark"] *:hover, 
+[data-theme="dark"] *:hover *, 
+[data-theme="dark"] .service-card:hover, 
+[data-theme="dark"] .service-card:hover h3, 
 [data-theme="dark"] .service-card:hover p,
+[data-theme="dark"] .feature-card:hover, 
+[data-theme="dark"] .feature-card:hover h3, 
+[data-theme="dark"] .feature-card:hover p,
+[data-theme="dark"] .portfolio-item:hover, 
 [data-theme="dark"] .portfolio-item:hover *,
-[data-theme="dark"] .feature-card:hover * {
+[data-theme="dark"] a:hover, 
+[data-theme="dark"] button:hover {
     color: #ffffff !important;
 }
 
