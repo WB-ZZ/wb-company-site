@@ -182,24 +182,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Counter animation for stats
+// Enhanced Counter Animation with requestAnimationFrame
+function animateCounter(element) {
+    if (element.dataset.animating === 'true') return;
+    element.dataset.animating = 'true';
+    
+    const originalText = element.textContent.trim();
+    const numberMatch = originalText.match(/\d+/);
+    if (!numberMatch) return;
+    
+    const targetNumber = parseInt(numberMatch[0]);
+    const suffix = originalText.replace(/\d+/, '');
+    
+    let currentNumber = 0;
+    const duration = 2500;
+    const startTime = performance.now();
+    
+    function updateCounter(timestamp) {
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        currentNumber = Math.floor(targetNumber * easeProgress);
+        element.textContent = currentNumber + suffix;
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = originalText;
+            element.dataset.animating = 'false';
+        }
+    }
+    
+    requestAnimationFrame(updateCounter);
+}
+
+// Updated animateCounters function
 function animateCounters() {
     const counters = document.querySelectorAll('.stat h4');
-    
     counters.forEach(counter => {
-        const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
-        const increment = target / 50;
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                counter.textContent = counter.textContent.replace(/[0-9]+/, target);
-                clearInterval(timer);
-            } else {
-                counter.textContent = counter.textContent.replace(/[0-9]+/, Math.floor(current));
-            }
-        }, 50);
+        animateCounter(counter);
     });
 }
 
@@ -611,8 +632,87 @@ function enhanceInteractivity() {
     document.head.appendChild(style);
 }
 
+// Magnetic Cursor System
+function initMagneticCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-magnetic';
+    document.body.appendChild(cursor);
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    const speed = 0.8;
+    
+    function updateCursor() {
+        const dx = mouseX - cursorX;
+        const dy = mouseY - cursorY;
+        
+        cursorX += dx * speed;
+        cursorY += dy * speed;
+        
+        cursor.style.transform = `translate3d(${cursorX - 10}px, ${cursorY - 10}px, 0)`;
+        requestAnimationFrame(updateCursor);
+    }
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    // Add hover effects
+    const hoverElements = document.querySelectorAll('.btn, .nav-link, .theme-toggle, a, .interactive-element');
+    hoverElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursor.classList.add('cursor-hover');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor-hover');
+        });
+    });
+    
+    updateCursor();
+}
+
+// Loading System
+function initLoadingSystem() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const progressBar = document.getElementById('loadingProgress');
+    
+    if (loadingSpinner && progressBar) {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => {
+                    loadingSpinner.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingSpinner.style.display = 'none';
+                    }, 500);
+                }, 500);
+            }
+            progressBar.style.width = progress + '%';
+        }, 100);
+    }
+}
+
+// Scroll Progress Indicator
+function initScrollProgress() {
+    const progressBar = document.getElementById('scrollProgress');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+    }
+}
+
 // Initialize all functions
 document.addEventListener('DOMContentLoaded', () => {
+    initMagneticCursor();
+    initLoadingSystem();
+    initScrollProgress();
     createScrollToTopButton();
     createScrollProgress();
     initParallax();
