@@ -1776,6 +1776,117 @@ a {
     color: var(--text-secondary) !important;
 }
 
+/* CEO Modal Specific Styles */
+.ceo-profile {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+}
+
+.ceo-image-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.ceo-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ceo-overlay {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ceo-info h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.ceo-title {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.ceo-credentials {
+    margin-top: 1.5rem;
+}
+
+.credential-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.credential-item i {
+    color: var(--primary-color);
+    width: 20px;
+}
+
+.ceo-message {
+    margin-top: 2rem;
+}
+
+.message-section {
+    margin-bottom: 2.5rem;
+}
+
+.message-section h4 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+}
+
+.message-section p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.ceo-signature {
+    margin-top: 3rem;
+    text-align: right;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.signature-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.signature-name {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
 /* Responsive modal */
 @media (max-width: 768px) {
     .modal-content {
@@ -1786,5 +1897,157 @@ a {
     
     .modal-title {
         font-size: 1.5rem;
+    }
+    
+    .ceo-profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .ceo-photo {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+}
+
+/* Company History Modal Styles */
+.company-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    color: white;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.timeline-item.featured {
+    border-left-color: #ffd700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+}
+
+.timeline-item.founding {
+    border-left-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.05), rgba(30, 60, 114, 0.02));
+}
+
+.timeline-year {
+    position: absolute;
+    left: -3.5rem;
+    top: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-item.featured .timeline-year {
+    background: #ffd700;
+    color: #333;
+}
+
+.timeline-content h4 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.timeline-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-content li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.timeline-content li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .company-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .timeline {
+        padding-left: 2rem;
+    }
+    
+    .timeline-year {
+        left: -2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .timeline-item {
+        padding: 1.5rem;
     }
 }
