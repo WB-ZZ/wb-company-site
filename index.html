@@ -65,32 +65,16 @@
     <link rel="stylesheet" href="css/wave-fix.css?v=2024122701">
     <link rel="stylesheet" href="css/force-clean.css?v=2024122702">
     
-    <!-- 텍스트 둘러싼 상자 완전 제거 -->
+    <!-- 직사각형 상자만 제거하고 나머지 효과는 유지 -->
     <style>
-        /* 모든 hero 텍스트 관련 요소의 상자 제거 */
-        .hero-content,
-        .hero-layout, 
-        .hero-text,
-        .hero-title,
-        .hero-title::before,
-        .hero-title::after {
+        /* hero-title 텍스트의 직사각형 상자만 제거 */
+        .hero-title {
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
-            background-color: transparent !important;
-            background-image: none !important;
-            backdrop-filter: none !important;
         }
         
-        /* AOS 애니메이션이 만드는 상자도 제거 */
-        [data-aos] {
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
-            background-color: transparent !important;
-        }
-        
-        /* 텍스트만 깔끔하게 */
+        /* 텍스트 그라디언트 효과 유지 */
         .hero-title {
             background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%) !important;
             -webkit-background-clip: text !important;
