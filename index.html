@@ -474,6 +474,130 @@
         </div>
     </section>
 
+    <!-- 모달들 -->
+    <!-- CEO 인사말 모달 -->
+    <div id="ceoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('ceoModal')">&times;</span>
+            <h2>CEO 인사말</h2>
+            <div class="modal-body">
+                <div class="ceo-info">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="CEO" class="ceo-photo">
+                    <div class="ceo-details">
+                        <h3>김태현 대표이사</h3>
+                        <p class="ceo-title">InnovateTech CEO</p>
+                    </div>
+                </div>
+                <p>안녕하십니까. InnovateTech 대표이사 김태현입니다.</p>
+                <p>저희 InnovateTech는 2015년 설립 이래 AI와 클라우드 기술을 바탕으로 기업의 디지털 전환을 성공적으로 이끌어왔습니다. 300여 개 기업과 함께한 경험을 바탕으로, 고객의 성공이 곧 저희의 성공이라는 믿음으로 최고의 기술 서비스를 제공하고 있습니다.</p>
+                <p>앞으로도 혁신적인 기술과 전문성을 통해 고객의 비즈니스 성장에 기여하겠습니다.</p>
+                <p class="signature">김태현 드림</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 회사연혁 모달 -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('historyModal')">&times;</span>
+            <h2>회사연혁</h2>
+            <div class="modal-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="year">2024</div>
+                        <div class="content">AI 솔루션 특허 3건 등록, 매출 650% 성장 달성</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2023</div>
+                        <div class="content">클라우드 전문 인력 50명 확충, AWS 파트너 골드 등급 달성</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2022</div>
+                        <div class="content">데이터 분석 플랫폼 출시, 대기업 고객 30개사 확보</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2021</div>
+                        <div class="content">AI 연구소 설립, Microsoft Gold Partner 인증</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2020</div>
+                        <div class="content">코로나19 대응 원격근무 솔루션 개발</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2018</div>
+                        <div class="content">클라우드 마이그레이션 서비스 확대</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2015</div>
+                        <div class="content">InnovateTech 설립, AI/클라우드 전문 기업으로 출발</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 조직도 모달 -->
+    <div id="organizationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('organizationModal')">&times;</span>
+            <h2>조직도</h2>
+            <div class="modal-body">
+                <div class="org-chart">
+                    <div class="org-level">
+                        <div class="org-box ceo">대표이사<br>김태현</div>
+                    </div>
+                    <div class="org-level">
+                        <div class="org-box">기술이사<br>이승민</div>
+                        <div class="org-box">영업이사<br>박정수</div>
+                        <div class="org-box">운영이사<br>최미영</div>
+                    </div>
+                    <div class="org-level">
+                        <div class="org-box">AI개발팀<br>(12명)</div>
+                        <div class="org-box">클라우드팀<br>(15명)</div>
+                        <div class="org-box">영업팀<br>(8명)</div>
+                        <div class="org-box">마케팅팀<br>(5명)</div>
+                        <div class="org-box">인사총무팀<br>(6명)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 오시는길 모달 -->
+    <div id="locationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('locationModal')">&times;</span>
+            <h2>오시는 길</h2>
+            <div class="modal-body">
+                <div class="location-info">
+                    <div class="address">
+                        <h3>주소</h3>
+                        <p>서울특별시 강남구 테헤란로 521<br>파르나스타워 35층</p>
+                    </div>
+                    <div class="transport">
+                        <h3>대중교통</h3>
+                        <ul>
+                            <li><strong>지하철:</strong> 2호선 삼성역 6번 출구 (도보 3분)</li>
+                            <li><strong>버스:</strong> 삼성역 정류장 하차</li>
+                            <li><strong>주차:</strong> 파르나스타워 지하주차장 이용</li>
+                        </ul>
+                    </div>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.4389754!2d127.059424!3d37.508842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca1577c9cc211%3A0x9b5c8d8b74a8b4e7!2z7YyM66Ww64KY7Iqk7YOA7JuM!5e0!3m2!1sko!2skr!4v1234567890"
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 푸터 -->
     <footer class="footer">
         <div class="container">
