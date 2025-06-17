@@ -1,23 +1,49 @@
 /* 전체적인 디자인 퀄리티 향상 */
 
-/* 밝은 모드 텍스트 가독성 개선 */
-body {
+/* 전역 텍스트 가독성 강화 - 최우선 순위 */
+* {
+    color: #1a202c !important;
+}
+
+body, body * {
     color: #1a202c !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #1a202c !important;
+    font-weight: 700 !important;
 }
 
-/* 서비스 섹션 텍스트 강화 */
-.services h2, .services h3, .services h4 {
+p, span, div, a, li {
+    color: #1a202c !important;
+    font-weight: 600 !important;
+}
+
+/* 섹션 제목들 */
+.section-title, .section-subtitle {
     color: #1a202c !important;
     font-weight: 700 !important;
 }
 
-.services p, .services div, .services span {
+/* 서비스 섹션 텍스트 강화 - 모든 선택자 포함 */
+.services h2, .services h3, .services h4, .services .section-title {
+    color: #1a202c !important;
+    font-weight: 700 !important;
+}
+
+.services p, .services div, .services span, .service-card p, .service-card h3 {
     color: #1a202c !important;
     font-weight: 600 !important;
+}
+
+/* 라이브 대시보드 텍스트 색상 */
+.live-dashboard, .live-dashboard * {
+    color: white !important;
+}
+
+/* 활동 패널 텍스트 */
+.activity-panel *, .performance-panel *, .achievement-panel * {
+    color: white !important;
 }
 
 /* 포트폴리오 섹션 텍스트 강화 */
@@ -841,8 +867,13 @@ h1, h2, h3, h4, h5, h6 {
     color: #e2e8f0 !important;
 }
 
-/* 다크모드 전체 텍스트 가독성 */
-[data-theme="dark"] body {
+/* 다크모드 전체 텍스트 가독성 - 전역 덮어쓰기 */
+[data-theme="dark"] * {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] body, 
+[data-theme="dark"] body * {
     color: #f8fafc !important;
 }
 
@@ -853,17 +884,14 @@ h1, h2, h3, h4, h5, h6 {
 [data-theme="dark"] h5, 
 [data-theme="dark"] h6 {
     color: #f8fafc !important;
+    font-weight: 700 !important;
 }
 
-[data-theme="dark"] .services p,
-[data-theme="dark"] .services div,
-[data-theme="dark"] .services span,
-[data-theme="dark"] .portfolio p,
-[data-theme="dark"] .portfolio div,
-[data-theme="dark"] .portfolio span,
-[data-theme="dark"] .contact p,
-[data-theme="dark"] .contact div,
-[data-theme="dark"] .contact span {
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] div,
+[data-theme="dark"] a,
+[data-theme="dark"] li {
     color: #cbd5e1 !important;
     font-weight: 600 !important;
 }

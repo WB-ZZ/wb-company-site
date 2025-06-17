@@ -501,8 +501,9 @@ html {
 }
 
 .service-card p {
-    color: #666;
+    color: #1a202c !important;
     line-height: 1.6;
+    font-weight: 600 !important;
 }
 
 /* Portfolio Section */
