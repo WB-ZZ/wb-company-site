@@ -279,6 +279,11 @@
                         <li><a href="#portfolio" class="nav-link">포트폴리오</a></li>
                         <li><a href="#contact" class="nav-link">문의하기</a></li>
                     </ul>
+                    <div class="nav-actions">
+                        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -2898,6 +2903,183 @@
             const naverMapUrl = 'https://map.naver.com/v5/search/서울특별시%20강남구%20테헤란로%20521%20파르나스타워';
             window.open(naverMapUrl, '_blank');
         }
+
+        // 다크/라이트 모드 토글
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+                
+                // 테마 변경 애니메이션
+                document.body.style.transition = 'all 0.5s ease';
+                setTimeout(() => {
+                    document.body.style.transition = '';
+                }, 500);
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+                
+                // 테마 변경 애니메이션
+                document.body.style.transition = 'all 0.5s ease';
+                setTimeout(() => {
+                    document.body.style.transition = '';
+                }, 500);
+            }
+        }
+
+        // 페이지 로드시 저장된 테마 적용
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else if (systemPrefersDark) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            // 초기 애니메이션 설정
+            initAnimations();
+        });
+
+        // 애니메이션 초기화 및 제어
+        function initAnimations() {
+            // 스크롤 헤더 효과
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+            // 배경 파티클 생성
+            createParticles();
+            
+            // 서비스 카드에 3D 효과 추가
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.classList.add('card-3d');
+            });
+            
+            // 버튼에 리플 효과 추가
+            const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+            buttons.forEach(btn => {
+                btn.classList.add('btn-ripple');
+            });
+            
+            // 숫자 카운터에 호버 효과 추가
+            const statNumbers = document.querySelectorAll('.stat-number, .achievement-number');
+            statNumbers.forEach(num => {
+                num.classList.add('counter-number');
+            });
+            
+            // 플로팅 애니메이션 추가
+            const floatingElements = document.querySelectorAll('.achievement-icon');
+            floatingElements.forEach((element, index) => {
+                element.classList.add('floating', `floating-delay-${(index % 3) + 1}`);
+            });
+            
+            // 대시보드에 글로우 효과 추가
+            const dashboard = document.querySelector('.live-dashboard');
+            if (dashboard) {
+                dashboard.classList.add('glow-effect');
+            }
+        }
+        
+        // 배경 파티클 생성
+        function createParticles() {
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'particle-background';
+            particleContainer.style.position = 'fixed';
+            particleContainer.style.top = '0';
+            particleContainer.style.left = '0';
+            particleContainer.style.width = '100%';
+            particleContainer.style.height = '100%';
+            particleContainer.style.pointerEvents = 'none';
+            particleContainer.style.zIndex = '1';
+            
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particleContainer.appendChild(particle);
+            }
+            
+            document.body.appendChild(particleContainer);
+        }
+        
+        // 스크롤 애니메이션 (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+        
+        // 관찰할 요소들 등록
+        document.addEventListener('DOMContentLoaded', function() {
+            const elementsToAnimate = document.querySelectorAll('.service-card, .portfolio-item, .stat, .achievement-item');
+            elementsToAnimate.forEach((element, index) => {
+                element.classList.add(`animate-delay-${(index % 6) + 1}`);
+                observer.observe(element);
+            });
+        });
+        
+        // 커서 트레일 효과 (선택적)
+        let cursorTrail = null;
+        
+        function initCursorTrail() {
+            if (window.innerWidth > 768) { // 데스크톱에서만 활성화
+                cursorTrail = document.createElement('div');
+                cursorTrail.className = 'cursor-trail';
+                document.body.appendChild(cursorTrail);
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (cursorTrail) {
+                        cursorTrail.style.left = e.clientX - 10 + 'px';
+                        cursorTrail.style.top = e.clientY - 10 + 'px';
+                    }
+                });
+            }
+        }
+        
+        // 창 크기 변경 시 커서 트레일 재설정
+        window.addEventListener('resize', () => {
+            if (cursorTrail && window.innerWidth <= 768) {
+                cursorTrail.remove();
+                cursorTrail = null;
+            } else if (!cursorTrail && window.innerWidth > 768) {
+                initCursorTrail();
+            }
+        });
+        
+        // 페이지 로드 완료 후 커서 트레일 초기화
+        window.addEventListener('load', initCursorTrail);
 
         // EmailJS 초기화
         (function() {
