@@ -67,11 +67,17 @@
     
     <!-- 레이아웃 개선 및 애니메이션 복구 -->
     <style>
-        /* hero-title 텍스트의 직사각형 상자만 제거 */
-        .hero-title {
+        /* hero-title 텍스트의 직사각형 상자 제거 */
+        .hero-title,
+        .hero-title::before,
+        .hero-title::after {
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
+            background-color: transparent !important;
+        }
+        
+        .hero-title {
             font-size: 3.2rem !important;
             line-height: 1.2 !important;
             white-space: nowrap !important;
