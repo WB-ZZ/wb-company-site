@@ -65,40 +65,32 @@
     <link rel="stylesheet" href="css/wave-fix.css?v=2024122701">
     <link rel="stylesheet" href="css/force-clean.css?v=2024122702">
     
-    <!-- 깔끔한 정리 스타일 -->
+    <!-- hero-title 텍스트의 직사각형 프레임 제거 -->
     <style>
-        /* 모든 불필요한 배경 요소들 완전 제거 */
-        .hero-overlay,
-        .hero-bg,
-        .animated-bg,
-        .gradient-overlay,
-        .particle-container,
-        .animated-shapes,
-        .shape,
-        .floating-elements,
-        .floating-element,
-        #particles-container,
-        .particle,
-        .hero::after,
-        .hero::before {
+        /* hero-title과 관련된 모든 직사각형 효과 제거 */
+        .hero-title,
+        .hero-title::before,
+        .hero-title::after {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background-image: none !important;
+        }
+        
+        .hero-title::before {
             display: none !important;
         }
         
-        /* 모든 블러 효과 제거 */
-        * {
-            backdrop-filter: none !important;
-            filter: none !important;
+        .hero-title::after {
+            display: none !important;
         }
         
-        /* Hero 섹션만 깔끔하게 */
-        .hero {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%) !important;
-        }
-        
-        /* Features 섹션과 자연스럽게 연결 */
-        .features {
-            background: white !important;
-            margin-top: 0 !important;
+        /* 텍스트만 깔끔하게 */
+        .hero-title {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
         }
     </style>
     
