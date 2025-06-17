@@ -328,100 +328,6 @@ html {
     border-radius: 2px;
 }
 
-/* CEO Message Section */
-.ceo-message {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-}
-
-.ceo-content {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 4rem;
-    align-items: center;
-    margin-top: 3rem;
-}
-
-.ceo-photo {
-    text-align: center;
-}
-
-.ceo-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    margin-bottom: 1.5rem;
-    border: 5px solid white;
-}
-
-.ceo-info {
-    text-align: center;
-}
-
-.ceo-name {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.ceo-title {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.4;
-}
-
-.ceo-message-text {
-    background: white;
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.ceo-message-text::before {
-    content: '"';
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    font-size: 6rem;
-    color: var(--accent-color);
-    opacity: 0.3;
-    font-family: serif;
-}
-
-.ceo-message-text blockquote {
-    margin: 0;
-    font-style: normal;
-}
-
-.ceo-message-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
-}
-
-.ceo-signature {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.signature {
-    height: 50px;
-}
-
-.signature-text {
-    font-weight: 600;
-    color: var(--primary-color);
-    margin: 0;
-}
 
 /* About Section */
 .about {
@@ -848,25 +754,6 @@ html {
 }
 
 @media (max-width: 768px) {
-    .ceo-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-
-    .ceo-image {
-        width: 200px;
-        height: 200px;
-    }
-
-    .ceo-message-text {
-        padding: 2rem;
-    }
-
-    .ceo-signature {
-        justify-content: center;
-    }
-
     .nav-menu {
         position: fixed;
         top: 100%;
@@ -1103,6 +990,95 @@ html {
     padding: 2rem;
     max-height: 70vh;
     overflow-y: auto;
+}
+
+/* CEO Modal Styles */
+.ceo-modal-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.ceo-photo-section {
+    text-align: center;
+}
+
+.ceo-modal-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1rem;
+    border: 3px solid white;
+}
+
+.ceo-modal-info {
+    text-align: center;
+}
+
+.ceo-modal-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.ceo-modal-title {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.ceo-modal-message {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 15px;
+    position: relative;
+}
+
+.ceo-modal-message::before {
+    content: '"';
+    position: absolute;
+    top: -5px;
+    left: 15px;
+    font-size: 4rem;
+    color: var(--accent-color);
+    opacity: 0.3;
+    font-family: serif;
+}
+
+.ceo-modal-message blockquote {
+    margin: 0;
+    font-style: normal;
+}
+
+.ceo-modal-message p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 1.2rem;
+}
+
+.ceo-modal-signature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    justify-content: center;
+}
+
+.ceo-modal-signature .signature {
+    height: 40px;
+}
+
+.ceo-modal-signature .signature-text {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
 }
 
 /* Timeline Styles */
@@ -1363,6 +1339,21 @@ html {
     .info-btn {
         width: 100%;
         max-width: 200px;
+    }
+    
+    .ceo-modal-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .ceo-modal-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .ceo-modal-message {
+        padding: 1.5rem;
     }
     
     .timeline::before {

@@ -329,7 +329,6 @@
                     </button>
                     <ul class="nav-menu" id="navMenu">
                         <li><a href="#home" class="nav-link">홈</a></li>
-                        <li><a href="#ceo-message" class="nav-link">CEO 인사말</a></li>
                         <li><a href="#about" class="nav-link">회사소개</a></li>
                         <li><a href="#services" class="nav-link">서비스</a></li>
                         <li><a href="#portfolio" class="nav-link">포트폴리오</a></li>
@@ -522,32 +521,6 @@
         </div>
     </section>
 
-    <!-- CEO 인사말 -->
-    <section id="ceo-message" class="ceo-message">
-        <div class="container">
-            <h2 class="section-title" data-i18n="ceo_message_title">CEO 인사말</h2>
-            <div class="ceo-content">
-                <div class="ceo-photo">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face" alt="CEO 사진" class="ceo-image">
-                    <div class="ceo-info">
-                        <h3 class="ceo-name" data-i18n="ceo_name">김혁신 대표이사</h3>
-                        <p class="ceo-title" data-i18n="ceo_credentials">서울대학교 컴퓨터공학 박사<br>전 삼성SDS 상무</p>
-                    </div>
-                </div>
-                <div class="ceo-message-text">
-                    <blockquote>
-                        <p data-i18n="ceo_message_1">"안녕하십니까. InnovateTech 대표이사 김혁신입니다."</p>
-                        <p data-i18n="ceo_message_2">"저희는 2015년 창립 이후 9년간 AI와 클라우드 기술 분야에서 끊임없이 혁신해왔습니다. 300여 개 기업의 디지털 전환을 성공적으로 이끌며, 대한민국 기업들이 글로벌 경쟁력을 갖출 수 있도록 최선을 다해왔습니다."</p>
-                        <p data-i18n="ceo_message_3">"앞으로도 저희 InnovateTech는 고객의 성공이 곧 저희의 성공이라는 신념으로, 최고의 기술력과 차별화된 서비스를 제공하겠습니다. 여러분의 비즈니스 혁신 파트너로서 함께 미래를 만들어가겠습니다."</p>
-                    </blockquote>
-                    <div class="ceo-signature">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTUwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTAgMzBDMjAgMjAgMzAgMTAgNDAgMjBDNTAgMzAgNjAgMTAgNzAgMjBDODAgMzAgOTAgMTAgMTAwIDIwQzExMCAzMCAxMjAgMTAgMTMwIDIwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K" alt="CEO 서명" class="signature">
-                        <p class="signature-text">대표이사 김혁신</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- 회사소개 -->
     <section id="about" class="about">
@@ -598,6 +571,10 @@
                     
                     <!-- 회사 정보 버튼들 -->
                     <div class="company-info-buttons">
+                        <button class="info-btn" onclick="openModal('ceoModal')" data-i18n="btn_ceo">
+                            <i class="fas fa-user-tie"></i>
+                            <span>CEO 인사말</span>
+                        </button>
                         <button class="info-btn" onclick="openModal('historyModal')" data-i18n="btn_history">
                             <i class="fas fa-history"></i>
                             <span>회사연혁</span>
@@ -977,6 +954,7 @@
                 ceo_message_3: "앞으로도 저희 InnovateTech는 고객의 성공이 곧 저희의 성공이라는 신념으로, 최고의 기술력과 차별화된 서비스를 제공하겠습니다. 여러분의 비즈니스 혁신 파트너로서 함께 미래를 만들어가겠습니다.",
                 
                 // 회사 정보 버튼
+                btn_ceo: "CEO 인사말",
                 btn_history: "회사연혁",
                 btn_organization: "조직도", 
                 btn_location: "오시는 길",
@@ -1117,6 +1095,7 @@
                 ceo_message_3: "Going forward, InnovateTech will continue to provide the best technology and differentiated services with the belief that our customers' success is our success. We will continue to create the future together as your business innovation partner.",
                 
                 // Company Info Buttons
+                btn_ceo: "CEO Message",
                 btn_history: "Company History",
                 btn_organization: "Organization Chart",
                 btn_location: "Location",
@@ -2522,6 +2501,38 @@
         }
     </script>
     <!-- 모달들 -->
+    <!-- CEO 인사말 모달 -->
+    <div id="ceoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="ceo_message_title">CEO 인사말</h2>
+                <span class="close" onclick="closeModal('ceoModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="ceo-modal-content">
+                    <div class="ceo-photo-section">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face" alt="CEO 사진" class="ceo-modal-image">
+                        <div class="ceo-modal-info">
+                            <h3 class="ceo-modal-name" data-i18n="ceo_name">김혁신 대표이사</h3>
+                            <p class="ceo-modal-title" data-i18n="ceo_credentials">서울대학교 컴퓨터공학 박사<br>전 삼성SDS 상무</p>
+                        </div>
+                    </div>
+                    <div class="ceo-modal-message">
+                        <blockquote>
+                            <p data-i18n="ceo_message_1">"안녕하십니까. InnovateTech 대표이사 김혁신입니다."</p>
+                            <p data-i18n="ceo_message_2">"저희는 2015년 창립 이후 9년간 AI와 클라우드 기술 분야에서 끊임없이 혁신해왔습니다. 300여 개 기업의 디지털 전환을 성공적으로 이끌며, 대한민국 기업들이 글로벌 경쟁력을 갖출 수 있도록 최선을 다해왔습니다."</p>
+                            <p data-i18n="ceo_message_3">"앞으로도 저희 InnovateTech는 고객의 성공이 곧 저희의 성공이라는 신념으로, 최고의 기술력과 차별화된 서비스를 제공하겠습니다. 여러분의 비즈니스 혁신 파트너로서 함께 미래를 만들어가겠습니다."</p>
+                        </blockquote>
+                        <div class="ceo-modal-signature">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTUwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTAgMzBDMjAgMjAgMzAgMTAgNDAgMjBDNTAgMzAgNjAgMTAgNzAgMjBDODAgMzAgOTAgMTAgMTAwIDIwQzExMCAzMCAxMjAgMTAgMTMwIDIwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K" alt="CEO 서명" class="signature">
+                            <p class="signature-text">대표이사 김혁신</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 회사연혁 모달 -->
     <div id="historyModal" class="modal">
         <div class="modal-content">
