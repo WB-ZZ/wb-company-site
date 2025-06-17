@@ -1,5 +1,53 @@
 /* 전체적인 디자인 퀄리티 향상 */
 
+/* ===========================================
+   텍스트 가독성 - 최종 통합 버전
+   =========================================== */
+
+/* 라이트 모드: 모든 텍스트 진한 검정 */
+body, h1, h2, h3, h4, h5, h6, p, span, div, a, li {
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
+.section-title, .hero-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+}
+
+/* 다크 모드: 모든 텍스트 흰색 */
+[data-theme="dark"] body,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] div,
+[data-theme="dark"] a,
+[data-theme="dark"] li {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .hero-title {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* 대시보드는 항상 어두운 배경 + 흰 글자 */
+.live-dashboard,
+.live-dashboard *,
+.activity-panel *,
+.performance-panel *,
+.achievement-panel * {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
 /* 네비게이션 위치 수정 */
 .nav-menu {
     margin-left: auto !important;
@@ -777,21 +825,7 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-[data-theme="dark"] .service-card h3 {
-    color: #f1f5f9 !important;
-}
-
-[data-theme="dark"] .service-card p {
-    color: #cbd5e1 !important;
-}
-
-[data-theme="dark"] .service-card:hover h3 {
-    color: #60a5fa !important;
-}
-
-[data-theme="dark"] .service-card:hover p {
-    color: #e2e8f0 !important;
-}
+/* 서비스 카드 스타일은 상단 통합 텍스트 스타일 적용 */
 
 /* 다크모드 텍스트 스타일은 text-fix.css에서 관리 */
 
