@@ -831,18 +831,11 @@ html {
     }
     
     .nav-dropdown .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        background: var(--bg-secondary);
-        margin-top: 1rem;
-        border-radius: 5px;
+        display: none; /* 모바일에서는 드롭다운 숨김 */
     }
     
-    .nav-dropdown .nav-link i {
-        display: none;
+    .nav-dropdown .nav-link {
+        cursor: pointer;
     }
 
     .nav-menu.active {
@@ -1393,6 +1386,47 @@ html {
     font-size: 3rem;
     margin-bottom: 1rem;
     color: var(--accent-color);
+}
+
+/* Mobile Menu Modal Styles */
+.mobile-select-modal {
+    max-width: 500px;
+}
+
+.mobile-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.mobile-menu-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.mobile-menu-btn i {
+    font-size: 2.5rem;
+}
+
+.mobile-menu-btn span {
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 /* Responsive Modal Styles */
