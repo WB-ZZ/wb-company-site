@@ -409,7 +409,8 @@ function initCharts() {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
+                aspectRatio: 2,
                 plugins: {
                     legend: {
                         display: false
@@ -695,24 +696,15 @@ function initMagneticCursor() {
 // Loading System
 function initLoadingSystem() {
     const loadingSpinner = document.getElementById('loadingSpinner');
-    const progressBar = document.getElementById('loadingProgress');
     
-    if (loadingSpinner && progressBar) {
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                setTimeout(() => {
-                    loadingSpinner.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingSpinner.style.display = 'none';
-                    }, 500);
-                }, 500);
-            }
-            progressBar.style.width = progress + '%';
-        }, 100);
+    if (loadingSpinner) {
+        // 간단하게 2초 후에 로딩 스피너 제거
+        setTimeout(() => {
+            loadingSpinner.style.opacity = '0';
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none';
+            }, 300);
+        }, 2000);
     }
 }
 
