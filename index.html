@@ -911,19 +911,30 @@
             const target = element.textContent;
             const number = parseInt(target.replace(/[^\d]/g, ''));
             const suffix = target.replace(/[\d]/g, '');
-            const duration = 2000;
-            const step = Math.ceil(number / (duration / 16));
-            let current = 0;
+            const duration = 3000; // 3초로 늘림
+            const startTime = performance.now();
             
-            const timer = setInterval(() => {
-                current += step;
-                if (current > number) {
-                    element.textContent = number + suffix;
-                    clearInterval(timer);
+            // 더 자연스러운 easing 함수
+            function easeOutQuart(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+            
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeOutQuart(progress);
+                const current = Math.floor(easedProgress * number);
+                
+                element.textContent = current + suffix;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
                 } else {
-                    element.textContent = current + suffix;
+                    element.textContent = number + suffix;
                 }
-            }, 16);
+            }
+            
+            requestAnimationFrame(updateCounter);
         }
         
         // 추상적/기하학적 패턴 배경 시스템
@@ -977,13 +988,13 @@
                 .hero::after {
                     content: '';
                     position: absolute;
-                    bottom: -5px;
+                    bottom: -10px;
                     left: 0;
                     width: 100%;
-                    height: 120px;
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,120 Q300,60 600,80 T1200,60 L1200,120 Z" fill="rgba(255,255,255,0.95)"/><path d="M0,120 Q300,80 600,100 T1200,80 L1200,120 Z" fill="rgba(255,255,255,0.8)"/></svg>');
-                    background-size: 1200px 120px;
-                    animation: waveMove 15s ease-in-out infinite;
+                    height: 200px;
+                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><path d="M0,200 Q150,120 300,140 Q450,160 600,130 Q750,100 900,120 Q1050,140 1200,110 L1200,200 Z" fill="rgba(248,250,252,1)"/><path d="M0,200 Q200,100 400,120 Q600,140 800,110 Q1000,80 1200,100 L1200,200 Z" fill="rgba(248,250,252,0.9)"/><path d="M0,200 Q100,140 200,150 Q400,160 600,140 Q800,120 1000,130 Q1100,135 1200,125 L1200,200 Z" fill="rgba(248,250,252,0.7)"/></svg>');
+                    background-size: 1200px 200px;
+                    animation: organicWaveMove 20s ease-in-out infinite;
                     z-index: 2;
                 }
                 
@@ -998,11 +1009,23 @@
                     100% { transform: translate(120px, 120px) rotate(5deg); }
                 }
                 
-                @keyframes waveMove {
-                    0%, 100% { transform: translateX(0) scaleY(1); }
-                    25% { transform: translateX(-100px) scaleY(1.1); }
-                    50% { transform: translateX(-50px) scaleY(0.9); }
-                    75% { transform: translateX(-150px) scaleY(1.05); }
+                @keyframes organicWaveMove {
+                    0%, 100% { 
+                        transform: translateX(0) scaleY(1) scaleX(1); 
+                        filter: blur(0px);
+                    }
+                    25% { 
+                        transform: translateX(-80px) scaleY(1.15) scaleX(1.05); 
+                        filter: blur(0.5px);
+                    }
+                    50% { 
+                        transform: translateX(-40px) scaleY(0.85) scaleX(0.95); 
+                        filter: blur(0px);
+                    }
+                    75% { 
+                        transform: translateX(-120px) scaleY(1.08) scaleX(1.02); 
+                        filter: blur(0.3px);
+                    }
                 }
                 
                 /* About 섹션 - 개선된 디자인 */
