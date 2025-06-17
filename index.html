@@ -1780,25 +1780,33 @@
             container.appendChild(particle);
         }
         
-        // 숫자 카운트업 애니메이션
+        // 숫자 카운트업 애니메이션 (최적화된 버전)
         function observeCounters() {
-            const counters = document.querySelectorAll('.stat h4');
+            const counters = document.querySelectorAll('.stat h4, .counter-number');
+            
+            // 기존 옵저버 정리
+            if (window.counterObserver) {
+                window.counterObserver.disconnect();
+            }
+            
             const options = {
-                threshold: 0.5,
-                rootMargin: '0px'
+                threshold: 0.3,
+                rootMargin: '50px'
             };
             
-            const observer = new IntersectionObserver((entries) => {
+            window.counterObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
                         entry.target.classList.add('counted');
                         animateCounter(entry.target);
+                        // 한 번 실행 후 관찰 중단으로 중복 방지
+                        window.counterObserver.unobserve(entry.target);
                     }
                 });
             }, options);
             
             counters.forEach(counter => {
-                observer.observe(counter);
+                window.counterObserver.observe(counter);
             });
         }
         
@@ -1815,22 +1823,28 @@
             const suffix = originalText.replace(/\d+/, '');
             
             let currentNumber = 0;
-            const duration = 1500;
-            const stepTime = 20;
-            const steps = duration / stepTime;
-            const increment = targetNumber / steps;
+            const duration = 2500; // 더 긴 시간으로 변경
+            const startTime = performance.now();
             
-            const timer = setInterval(() => {
-                currentNumber += increment;
+            function updateCounter(timestamp) {
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
                 
-                if (currentNumber >= targetNumber) {
-                    element.textContent = originalText;
-                    clearInterval(timer);
-                    element.dataset.animating = 'false';
+                // easeOutCubic 이징 함수로 부드러운 애니메이션
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                currentNumber = Math.floor(targetNumber * easeProgress);
+                
+                element.textContent = currentNumber + suffix;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
                 } else {
-                    element.textContent = Math.floor(currentNumber) + suffix;
+                    element.textContent = originalText;
+                    element.dataset.animating = 'false';
                 }
-            }, stepTime);
+            }
+            
+            requestAnimationFrame(updateCounter);
         }
         
         // 추상적/기하학적 패턴 배경 시스템
@@ -3043,28 +3057,37 @@
             document.body.appendChild(particleContainer);
         }
         
-        // 스크롤 애니메이션 (Intersection Observer)
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-on-scroll');
-                }
-            });
-        }, observerOptions);
-        
-        // 관찰할 요소들 등록
-        document.addEventListener('DOMContentLoaded', function() {
-            const elementsToAnimate = document.querySelectorAll('.service-card, .portfolio-item, .stat, .achievement-item');
+        // 통합된 스크롤 애니메이션 옵저버
+        function initScrollAnimations() {
+            // 기존 옵저버 정리
+            if (window.scrollObserver) {
+                window.scrollObserver.disconnect();
+            }
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '50px'
+            };
+            
+            window.scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('animate-on-scroll')) {
+                        entry.target.classList.add('animate-on-scroll');
+                        // 애니메이션 완료 후 관찰 중단
+                        setTimeout(() => {
+                            window.scrollObserver.unobserve(entry.target);
+                        }, 1000);
+                    }
+                });
+            }, observerOptions);
+            
+            // 관찰할 요소들 등록
+            const elementsToAnimate = document.querySelectorAll('.service-card, .portfolio-item, .achievement-item');
             elementsToAnimate.forEach((element, index) => {
                 element.classList.add(`animate-delay-${(index % 6) + 1}`);
-                observer.observe(element);
+                window.scrollObserver.observe(element);
             });
-        });
+        }
         
         // 커서 트레일 효과 (선택적)
         let cursorTrail = null;
@@ -3097,11 +3120,17 @@
         // 페이지 로드 완료 후 커서 트레일 초기화
         window.addEventListener('load', initCursorTrail);
 
-        // 로딩 스피너 및 스크롤 인디케이터 초기화
+        // 모든 기능 초기화
         document.addEventListener('DOMContentLoaded', function() {
             initLoadingSpinner();
             initScrollProgress();
             initNetworkStatus();
+            initScrollAnimations();
+            observeCounters();
+            
+            // 기존 초기화 함수들도 실행
+            addSectionBackgrounds();
+            addParticleBackground();
         });
 
         // 로딩 스피너 관리
@@ -3129,7 +3158,7 @@
                     setTimeout(() => {
                         loadingOverlay.style.display = 'none';
                     }, 500);
-                }, 300);
+                }, 800); // 0.8초 후 사라지도록 수정
             });
             
             // 페이지 전환 시 로딩 표시
