@@ -577,26 +577,53 @@ html {
     font-weight: 500;
 }
 
-/* Chart Container */
-.chart-container {
+/* Performance Cards */
+.performance-cards {
     background: var(--card-bg);
     border-radius: 15px;
     padding: 2rem;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border-color);
-    max-height: 400px;
-    height: 300px;
 }
 
-.chart-container h3 {
+.performance-cards h3 {
     margin-bottom: 1.5rem;
     color: var(--text-primary);
     text-align: center;
+    font-size: 1.5rem;
 }
 
-.chart-container canvas {
-    max-height: 250px !important;
-    height: 250px !important;
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.performance-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.performance-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.performance-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.performance-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 /* Services Section - 새 디자인 */

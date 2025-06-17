@@ -374,20 +374,31 @@ function createScrollToTopButton() {
     });
 }
 
-// Interactive Charts
+// Interactive Charts - 한번만 실행되도록 수정
+let chartsInitialized = false;
+
 function initCharts() {
+    // 이미 초기화되었으면 리턴
+    if (chartsInitialized) return;
+    
     // Wait for Chart.js to load
     if (typeof Chart === 'undefined') {
-        console.log('Chart.js not loaded yet');
         setTimeout(initCharts, 1000);
         return;
     }
     
+    chartsInitialized = true;
     console.log('Initializing charts...');
     
     // Growth Chart
     const growthCtx = document.getElementById('growthChart');
     if (growthCtx) {
+        // 기존 차트가 있다면 제거
+        const existingChart = Chart.getChart(growthCtx);
+        if (existingChart) {
+            existingChart.destroy();
+        }
+        
         console.log('Creating growth chart');
         new Chart(growthCtx, {
             type: 'line',
@@ -410,7 +421,10 @@ function initCharts() {
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                aspectRatio: 2,
+                aspectRatio: 2.5,
+                layout: {
+                    padding: 10
+                },
                 plugins: {
                     legend: {
                         display: false
