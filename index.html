@@ -662,103 +662,94 @@
         <div class="container">
             <h2 class="section-title" data-i18n="services_title">서비스</h2>
             
-            <!-- 기술 역량 차트 -->
-            <div class="tech-chart-section" data-aos="fade-up">
+            <!-- 실시간 프로젝트 대시보드 -->
+            <div class="live-dashboard" data-aos="fade-up">
+                <div class="dashboard-header">
+                    <h3 class="dashboard-title">
+                        <span class="live-dot"></span>
+                        실시간 프로젝트 현황
+                    </h3>
+                    <div class="last-updated">마지막 업데이트: 방금 전</div>
+                </div>
                 
-                <div class="chart-container">
-                    <div class="interactive-chart">
-                        <svg width="600" height="600" viewBox="0 0 600 600">
-                                <defs>
-                                    <radialGradient id="center-glow">
-                                        <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/>
-                                        <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0"/>
-                                    </radialGradient>
-                                    <filter id="glow">
-                                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                                        <feMerge>
-                                            <feMergeNode in="coloredBlur"/>
-                                            <feMergeNode in="SourceGraphic"/>
-                                        </feMerge>
-                                    </filter>
-                                </defs>
-                                
-                                <!-- 배경 원과 글로우 효과 -->
-                                <circle cx="300" cy="300" r="280" fill="url(#center-glow)" opacity="0.5"/>
-                                <circle cx="300" cy="300" r="250" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3"/>
-                                <circle cx="300" cy="300" r="200" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3"/>
-                                <circle cx="300" cy="300" r="150" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3"/>
-                                
-                                <!-- 메인 차트 -->
-                                <g transform="translate(300,300)">
-                                    <!-- Cloud 30% - 가장 큰 부분 -->
-                                    <path d="M 0,-240 A 240,240 0 0,1 185.57,152.31 L 92.79,76.16 A 120,120 0 0,0 0,-120 Z" 
-                                          fill="#FF6B00" opacity="0.9" filter="url(#glow)" class="chart-piece">
-                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0s"/>
-                                    </path>
-                                    
-                                    <!-- AI 25% -->
-                                    <path d="M 185.57,152.31 A 240,240 0 0,1 -74.16,228.26 L -37.08,114.13 A 120,120 0 0,0 92.79,76.16 Z" 
-                                          fill="#667eea" opacity="0.9" filter="url(#glow)" class="chart-piece">
-                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0.3s"/>
-                                    </path>
-                                    
-                                    <!-- Data 25% -->
-                                    <path d="M -74.16,228.26 A 240,240 0 0,1 -240,0 L -120,0 A 120,120 0 0,0 -37.08,114.13 Z" 
-                                          fill="#06D6A0" opacity="0.9" filter="url(#glow)" class="chart-piece">
-                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0.6s"/>
-                                    </path>
-                                    
-                                    <!-- DevOps 20% -->
-                                    <path d="M -240,0 A 240,240 0 0,1 0,-240 L 0,-120 A 120,120 0 0,0 -120,0 Z" 
-                                          fill="#F093FB" opacity="0.9" filter="url(#glow)" class="chart-piece">
-                                        <animate attributeName="opacity" from="0" to="0.9" dur="0.5s" begin="0.9s"/>
-                                    </path>
-                                    
-                                    <!-- 중앙 원 -->
-                                    <circle r="100" fill="#0f172a" stroke="#fbbf24" stroke-width="3" filter="url(#glow)"/>
-                                    
-                                    <!-- 중앙 텍스트 -->
-                                    <text y="-10" text-anchor="middle" class="center-number">300+</text>
-                                    <text y="20" text-anchor="middle" class="center-label">Active Projects</text>
-                                </g>
-                                
-                                <!-- 퍼센트 라벨들 - 정확한 섹션 중앙 위치 -->
-                                <text x="430" y="240" class="percent-label" fill="#FF6B00" font-weight="bold">30%</text>
-                                <text x="370" y="430" class="percent-label" fill="#667eea" font-weight="bold">25%</text>
-                                <text x="230" y="430" class="percent-label" fill="#06D6A0" font-weight="bold">25%</text>
-                                <text x="180" y="240" class="percent-label" fill="#F093FB" font-weight="bold">20%</text>
-                            </svg>
+                <div class="dashboard-grid">
+                    <!-- 현재 활동 상태 -->
+                    <div class="activity-panel">
+                        <h4>🔥 현재 진행 중</h4>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-status active"></div>
+                                <span>AWS 클라우드 서버 <strong>27대</strong> 운영 중</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-status processing"></div>
+                                <span>AI 모델 훈련 <strong>5개</strong> 진행 중</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-status monitoring"></div>
+                                <span>실시간 데이터 파이프라인 <strong>12개</strong> 모니터링</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-status deploying"></div>
+                                <span>DevOps 배포 <strong>3건</strong> 자동화 중</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- 프로페셔널 범례 -->
-                    <div class="chart-legend">
-                        <div class="legend-item">
-                            <div class="legend-icon" style="background: #FF6B00;"></div>
-                            <div class="legend-content">
-                                <span class="legend-title">Cloud Infrastructure</span>
-                                <span class="legend-desc">AWS, Azure, GCP</span>
+                    <!-- 이번 달 성과 -->
+                    <div class="performance-panel">
+                        <h4>📊 이번 달 성과</h4>
+                        <div class="performance-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">신규 프로젝트</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">18</div>
+                                <div class="stat-label">완료 프로젝트</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">98.5%</div>
+                                <div class="stat-label">성공률</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">4.9/5</div>
+                                <div class="stat-label">고객 만족도</div>
                             </div>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-icon" style="background: #667eea;"></div>
-                            <div class="legend-content">
-                                <span class="legend-title">AI & Machine Learning</span>
-                                <span class="legend-desc">Deep Learning, NLP</span>
+                    </div>
+                    
+                    <!-- 누적 성과 -->
+                    <div class="achievement-panel">
+                        <h4>🏆 누적 성과</h4>
+                        <div class="achievement-grid">
+                            <div class="achievement-item">
+                                <div class="achievement-icon">🚀</div>
+                                <div class="achievement-content">
+                                    <div class="achievement-number">300+</div>
+                                    <div class="achievement-desc">완료 프로젝트</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-icon" style="background: #06D6A0;"></div>
-                            <div class="legend-content">
-                                <span class="legend-title">Data Analytics</span>
-                                <span class="legend-desc">BigData, Visualization</span>
+                            <div class="achievement-item">
+                                <div class="achievement-icon">🏢</div>
+                                <div class="achievement-content">
+                                    <div class="achievement-number">50+</div>
+                                    <div class="achievement-desc">대기업 고객사</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-icon" style="background: #F093FB;"></div>
-                            <div class="legend-content">
-                                <span class="legend-title">DevOps & Security</span>
-                                <span class="legend-desc">CI/CD, Monitoring</span>
+                            <div class="achievement-item">
+                                <div class="achievement-icon">💰</div>
+                                <div class="achievement-content">
+                                    <div class="achievement-number">250억</div>
+                                    <div class="achievement-desc">총 계약금액</div>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="achievement-icon">⚡</div>
+                                <div class="achievement-content">
+                                    <div class="achievement-number">24/7</div>
+                                    <div class="achievement-desc">기술지원</div>
+                                </div>
                             </div>
                         </div>
                     </div>
