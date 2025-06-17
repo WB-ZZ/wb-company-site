@@ -1,13 +1,20 @@
-/* 텍스트 가독성 완전 해결 - 최종판 */
+/* 올바른 텍스트/배경 대비 설계 */
 
-/* 모든 요소의 기본 텍스트 색상 강제 설정 */
+/* 라이트모드: 모든 배경 밝게, 모든 텍스트 어둡게 */
 *, *::before, *::after {
-    color: #0f172a !important;
+    color: #1a202c !important;
     font-weight: 600 !important;
 }
 
 html, body {
-    color: #0f172a !important;
+    color: #1a202c !important;
+    background: #ffffff !important;
+}
+
+/* 모든 섹션 배경을 밝게 통일 */
+.hero, .about, .services, .portfolio, .contact, .footer {
+    background: #ffffff !important;
+    color: #1a202c !important;
 }
 
 /* 제목들 */
@@ -15,27 +22,39 @@ h1, h2, h3, h4, h5, h6,
 .section-title, .hero-title, .portfolio-title,
 .service-card h3, .feature-card h3,
 .stat h4, .achievement-number {
-    color: #0f172a !important;
+    color: #1a202c !important;
     font-weight: 700 !important;
 }
 
 /* 본문 텍스트 */
 p, span, div, a, li, td, th,
 .service-card p, .feature-card p,
-.portfolio-overlay h4, .portfolio-overlay p,
 .contact-info p, .footer p,
-.nav-link, .btn {
-    color: #0f172a !important;
+.nav-link {
+    color: #1a202c !important;
     font-weight: 600 !important;
 }
 
 /* 폼 요소들 */
 input, textarea, select, option, label {
-    color: #0f172a !important;
+    color: #1a202c !important;
     font-weight: 600 !important;
+    background: #ffffff !important;
 }
 
-/* 다크모드 전용 스타일 */
+/* 버튼들은 대비되는 색상으로 */
+.btn, button {
+    background: #1a202c !important;
+    color: #ffffff !important;
+    border: 2px solid #1a202c !important;
+}
+
+.btn:hover, button:hover {
+    background: #2d3748 !important;
+    color: #ffffff !important;
+}
+
+/* 다크모드: 모든 배경 어둡게, 모든 텍스트 밝게 */
 [data-theme="dark"] *, 
 [data-theme="dark"] *::before, 
 [data-theme="dark"] *::after {
@@ -44,6 +63,18 @@ input, textarea, select, option, label {
 
 [data-theme="dark"] html, 
 [data-theme="dark"] body {
+    color: #f1f5f9 !important;
+    background: #0f172a !important;
+}
+
+/* 다크모드에서 모든 섹션 배경을 어둡게 통일 */
+[data-theme="dark"] .hero, 
+[data-theme="dark"] .about, 
+[data-theme="dark"] .services, 
+[data-theme="dark"] .portfolio, 
+[data-theme="dark"] .contact, 
+[data-theme="dark"] .footer {
+    background: #0f172a !important;
     color: #f1f5f9 !important;
 }
 
@@ -73,12 +104,9 @@ input, textarea, select, option, label {
 [data-theme="dark"] th,
 [data-theme="dark"] .service-card p, 
 [data-theme="dark"] .feature-card p,
-[data-theme="dark"] .portfolio-overlay h4, 
-[data-theme="dark"] .portfolio-overlay p,
 [data-theme="dark"] .contact-info p, 
 [data-theme="dark"] .footer p,
-[data-theme="dark"] .nav-link, 
-[data-theme="dark"] .btn {
+[data-theme="dark"] .nav-link {
     color: #cbd5e1 !important;
     font-weight: 600 !important;
 }
@@ -90,9 +118,27 @@ input, textarea, select, option, label {
 [data-theme="dark"] label {
     color: #f1f5f9 !important;
     font-weight: 600 !important;
+    background: #1e293b !important;
+    border-color: #374151 !important;
 }
 
-/* 특별한 경우들 - 흰색 배경에 흰색 텍스트 유지 */
+/* 다크모드 버튼 */
+[data-theme="dark"] .btn, 
+[data-theme="dark"] button {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 2px solid #f1f5f9 !important;
+}
+
+[data-theme="dark"] .btn:hover, 
+[data-theme="dark"] button:hover {
+    background: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+/* 특별한 케이스들 */
+
+/* 라이브 대시보드 - 어두운 배경이므로 밝은 텍스트 */
 .live-dashboard, 
 .live-dashboard *, 
 .activity-panel *, 
@@ -102,27 +148,21 @@ input, textarea, select, option, label {
 .dashboard-title,
 .last-updated {
     color: white !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
 }
 
-/* 히어로 섹션 텍스트 */
-.hero-title {
-    color: white !important;
-}
-
-.hero-subtitle {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-/* 포트폴리오 오버레이 */
+/* 포트폴리오 오버레이 - 어두운 배경이므로 밝은 텍스트 */
 .portfolio-overlay,
 .portfolio-overlay * {
     color: white !important;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)) !important;
 }
 
-/* 버튼 텍스트 */
-.btn, .btn * {
+/* 로딩 스피너 */
+.loading-overlay,
+.loading-overlay * {
     color: white !important;
-    font-weight: 600 !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
 }
 
 /* 네비게이션 로고 */
