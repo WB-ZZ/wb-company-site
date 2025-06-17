@@ -58,12 +58,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/charts.css">
     <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/simple-charts.css">
     <link rel="stylesheet" href="css/3d-effects.css">
-    <link rel="stylesheet" href="css/wave-fix.css?v=2024122701">
-    <link rel="stylesheet" href="css/force-clean.css?v=2024122702">
     
     <!-- 레이아웃 개선 및 애니메이션 복구 -->
     <style>
@@ -1743,28 +1739,28 @@
         }
         
         function animateCounter(element) {
-            const target = element.textContent.trim();
-            console.log('Animating:', target); // 디버깅용
+            // 이미 애니메이션이 실행된 경우 중복 실행 방지
+            if (element.dataset.animated === 'true') return;
+            element.dataset.animated = 'true';
             
-            // 숫자와 접미사 분리 개선
+            const target = element.textContent.trim();
             const numberMatch = target.match(/\d+/);
             const number = numberMatch ? parseInt(numberMatch[0]) : 0;
             const suffix = target.replace(/\d+/g, '');
             
-            console.log('Number:', number, 'Suffix:', suffix); // 디버깅용
+            if (number === 0) return;
             
-            const duration = 2000; // 2초로 단축
+            const duration = 1500;
             const startTime = performance.now();
             
-            // 더 자연스러운 easing 함수
-            function easeOutQuart(t) {
-                return 1 - Math.pow(1 - t, 4);
+            function easeOutExpo(t) {
+                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
             }
             
             function updateCounter(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                const easedProgress = easeOutQuart(progress);
+                const easedProgress = easeOutExpo(progress);
                 const current = Math.floor(easedProgress * number);
                 
                 element.textContent = current + suffix;
@@ -1772,10 +1768,11 @@
                 if (progress < 1) {
                     requestAnimationFrame(updateCounter);
                 } else {
-                    element.textContent = number + suffix;
+                    element.textContent = target; // 원래 텍스트로 복원
                 }
             }
             
+            element.textContent = '0' + suffix; // 시작 값
             requestAnimationFrame(updateCounter);
         }
         
