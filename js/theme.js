@@ -62,5 +62,23 @@ function updateThemeIcon(theme) {
 
 // 페이지 로드 시 테마 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    // 강제로 다크모드 테스트
+    localStorage.setItem('theme', 'dark');
     initTheme();
+    
+    // 추가 강제 적용
+    setTimeout(() => {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.setAttribute('data-theme', 'dark');
+        document.body.style.backgroundColor = '#000000';
+        document.body.style.color = '#ffffff';
+        console.log('FORCED DARK MODE APPLIED!');
+        
+        // 모든 섹션도 강제로 변경
+        const sections = document.querySelectorAll('section, .header, .footer');
+        sections.forEach(section => {
+            section.style.backgroundColor = '#000000';
+            section.style.color = '#ffffff';
+        });
+    }, 100);
 });

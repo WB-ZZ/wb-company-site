@@ -71,6 +71,56 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/enhanced-design.css?v=2024061801">
     
+    <!-- 강제 다크모드 스타일 - 인라인 -->
+    <style>
+        /* 매우 강력한 다크모드 강제 적용 */
+        html[data-theme="dark"] {
+            background: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        html[data-theme="dark"] body,
+        [data-theme="dark"] body {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        html[data-theme="dark"] .header,
+        [data-theme="dark"] .header {
+            background: rgba(0, 0, 0, 0.95) !important;
+            background-color: rgba(0, 0, 0, 0.95) !important;
+        }
+        
+        html[data-theme="dark"] section,
+        [data-theme="dark"] section {
+            background: #000000 !important;
+            background-color: #000000 !important;
+        }
+        
+        html[data-theme="dark"] *,
+        [data-theme="dark"] * {
+            color: #ffffff !important;
+        }
+        
+        /* 테스트용 표시 */
+        html[data-theme="dark"] body::after,
+        [data-theme="dark"] body::after {
+            content: "★ DARK MODE ON ★" !important;
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            background: red !important;
+            color: white !important;
+            padding: 10px !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            z-index: 99999 !important;
+            border: 2px solid yellow !important;
+            border-radius: 5px !important;
+        }
+    </style>
+    
     <!-- External Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
