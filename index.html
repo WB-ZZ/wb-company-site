@@ -62,6 +62,22 @@
     <link rel="stylesheet" href="css/3d-effects.css">
     <link rel="stylesheet" href="css/enhanced-design.css">
     
+    <!-- 로딩 스피너 및 스크롤 인디케이터 HTML -->
+    <div id="loadingSpinner" class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="loading-text">InnovateTech</div>
+            <div class="loading-progress">
+                <div class="progress-bar" id="loadingProgress"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 스크롤 진행 표시기 -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollProgress"></div>
+    </div>
+
     <!-- 레이아웃 개선 및 애니메이션 복구 -->
     <style>
         /* hero-title 텍스트의 직사각형 상자 제거 */
@@ -3081,6 +3097,182 @@
         // 페이지 로드 완료 후 커서 트레일 초기화
         window.addEventListener('load', initCursorTrail);
 
+        // 로딩 스피너 및 스크롤 인디케이터 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initLoadingSpinner();
+            initScrollProgress();
+            initNetworkStatus();
+        });
+
+        // 로딩 스피너 관리
+        function initLoadingSpinner() {
+            const loadingOverlay = document.getElementById('loadingSpinner');
+            const progressBar = document.getElementById('loadingProgress');
+            
+            if (!loadingOverlay || !progressBar) return;
+            
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15 + 5; // 5-20% 씩 증가
+                if (progress > 90) progress = 90; // 90%에서 대기
+                
+                progressBar.style.width = progress + '%';
+            }, 200);
+            
+            // 윈도우 로드 완료 후 로딩 완료
+            window.addEventListener('load', () => {
+                clearInterval(progressInterval);
+                progressBar.style.width = '100%';
+                
+                setTimeout(() => {
+                    loadingOverlay.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 500);
+                }, 300);
+            });
+            
+            // 페이지 전환 시 로딩 표시
+            document.addEventListener('beforeunload', () => {
+                showPageTransition();
+            });
+        }
+
+        // 스크롤 진행 표시기
+        function initScrollProgress() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            if (!scrollProgress) return;
+            
+            function updateScrollProgress() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                scrollProgress.style.width = Math.min(scrollPercent, 100) + '%';
+            }
+            
+            // 스크롤 이벤트 최적화 (throttle)
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                if (scrollTimeout) return;
+                scrollTimeout = setTimeout(() => {
+                    updateScrollProgress();
+                    scrollTimeout = null;
+                }, 10);
+            });
+            
+            // 초기 진행도 설정
+            updateScrollProgress();
+        }
+
+        // AJAX 로딩 표시기
+        function showAjaxLoading(message = '로딩 중...') {
+            let ajaxLoader = document.querySelector('.ajax-loading');
+            if (!ajaxLoader) {
+                ajaxLoader = document.createElement('div');
+                ajaxLoader.className = 'ajax-loading';
+                ajaxLoader.innerHTML = `
+                    <div class="ajax-spinner"></div>
+                    <span>${message}</span>
+                `;
+                document.body.appendChild(ajaxLoader);
+            }
+            ajaxLoader.classList.add('show');
+        }
+
+        function hideAjaxLoading() {
+            const ajaxLoader = document.querySelector('.ajax-loading');
+            if (ajaxLoader) {
+                ajaxLoader.classList.remove('show');
+            }
+        }
+
+        // 네트워크 상태 모니터링
+        function initNetworkStatus() {
+            const networkStatus = document.createElement('div');
+            networkStatus.className = 'network-status';
+            document.body.appendChild(networkStatus);
+            
+            function updateNetworkStatus() {
+                const isOnline = navigator.onLine;
+                networkStatus.className = `network-status ${isOnline ? 'online' : 'offline'}`;
+                networkStatus.innerHTML = `
+                    <i class="fas ${isOnline ? 'fa-wifi' : 'fa-wifi-slash'}"></i>
+                    <span>${isOnline ? '온라인' : '오프라인'}</span>
+                `;
+                
+                if (!isOnline) {
+                    networkStatus.classList.add('show');
+                    setTimeout(() => {
+                        networkStatus.classList.remove('show');
+                    }, 3000);
+                }
+            }
+            
+            window.addEventListener('online', updateNetworkStatus);
+            window.addEventListener('offline', updateNetworkStatus);
+            updateNetworkStatus();
+        }
+
+        // 페이지 전환 효과
+        function showPageTransition() {
+            let pageTransition = document.querySelector('.page-transition');
+            if (!pageTransition) {
+                pageTransition = document.createElement('div');
+                pageTransition.className = 'page-transition';
+                pageTransition.innerHTML = '<div class="transition-logo">InnovateTech</div>';
+                document.body.appendChild(pageTransition);
+            }
+            pageTransition.classList.add('active');
+        }
+
+        // 섹션 로딩 스켈레톤 생성
+        function createSkeleton(container, type = 'text') {
+            const skeleton = document.createElement('div');
+            skeleton.className = `skeleton skeleton-${type}`;
+            container.appendChild(skeleton);
+            return skeleton;
+        }
+
+        // 지연 로딩 이미지 처리
+        function initLazyLoading() {
+            const images = document.querySelectorAll('img[data-src]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('skeleton');
+                        img.onload = () => img.classList.add('fade-in');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // 성능 모니터링
+        function initPerformanceMonitoring() {
+            if ('PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    list.getEntries().forEach((entry) => {
+                        if (entry.entryType === 'measure') {
+                            console.log(`Performance: ${entry.name} took ${entry.duration}ms`);
+                        }
+                    });
+                });
+                observer.observe({ entryTypes: ['measure'] });
+            }
+        }
+
+        // 초기화
+        window.addEventListener('load', () => {
+            initLazyLoading();
+            initPerformanceMonitoring();
+        });
+
         // EmailJS 초기화
         (function() {
             emailjs.init("YOUR_PUBLIC_KEY"); // 실제 사용시 EmailJS 공개 키로 교체
@@ -3100,6 +3292,7 @@
             btnLoading.style.display = 'inline-flex';
             submitBtn.disabled = true;
             formStatus.innerHTML = '';
+            showAjaxLoading('문의 전송 중...');
             
             // 폼 데이터 수집
             const formData = {
@@ -3128,6 +3321,7 @@
                 btnText.style.display = 'inline';
                 btnLoading.style.display = 'none';
                 submitBtn.disabled = false;
+                hideAjaxLoading();
             }, 1500);
             
             /*
