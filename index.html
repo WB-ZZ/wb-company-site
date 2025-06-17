@@ -153,93 +153,156 @@
             max-width: none !important;
         }
         
-        /* 전문적인 기술 역량 섹션 */
-        .tech-expertise-section {
+        /* 임팩트 있는 기술 대시보드 */
+        .tech-dashboard {
             margin: 3rem 0;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .expertise-title {
-            text-align: center;
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-        
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .expertise-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .expertise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-        
-        .expertise-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.5rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             color: white;
-        }
-        
-        .expertise-card h4 {
-            font-size: 1.1rem;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        
-        .expertise-bar {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
+            position: relative;
             overflow: hidden;
-            margin-bottom: 0.5rem;
         }
         
-        .expertise-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 4px;
-            transition: width 1.5s ease-in-out;
-            animation: fillBar 1.5s ease-in-out forwards;
+        .tech-dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M 4 0 L 0 0 0 4" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
         }
         
-        .expertise-fill[data-level="95"] { width: 95%; }
-        .expertise-fill[data-level="90"] { width: 90%; }
-        .expertise-fill[data-level="88"] { width: 88%; }
-        .expertise-fill[data-level="85"] { width: 85%; }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
         
-        .expertise-label {
+        .dashboard-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dashboard-stats {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .dashboard-stats .stat-item {
+            text-align: center;
+        }
+        
+        .dashboard-stats .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fbbf24;
+            line-height: 1;
+        }
+        
+        .dashboard-stats .stat-label {
             font-size: 0.9rem;
-            color: #64748b;
+            color: #94a3b8;
             font-weight: 500;
         }
         
-        @keyframes fillBar {
-            from { width: 0%; }
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .main-chart {
+            position: relative;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+        }
+        
+        .chart-center-title {
+            font-size: 16px;
+            font-weight: 700;
+            fill: #f8fafc;
+        }
+        
+        .chart-center-subtitle {
+            font-size: 12px;
+            fill: #94a3b8;
+        }
+        
+        .chart-segment {
+            transition: stroke-dasharray 2s ease-in-out;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        }
+        
+        .tech-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .legend-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 40px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        .legend-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f8fafc;
+        }
+        
+        .legend-content h4 i {
+            margin-right: 0.5rem;
+            color: #fbbf24;
+        }
+        
+        .legend-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .percentage {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+        
+        .description {
+            font-size: 0.9rem;
+            color: #94a3b8;
         }
         
         /* 모바일 대응 */
@@ -257,8 +320,19 @@
                 height: 300px !important;
             }
             
-            .expertise-grid {
+            .tech-showcase {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .dashboard-stats {
+                justify-content: center;
             }
         }
     </style>
@@ -536,52 +610,128 @@
         <div class="container">
             <h2 class="section-title" data-i18n="services_title">서비스</h2>
             
-            <!-- 전문적인 기술 역량 -->
-            <div class="tech-expertise-section" data-aos="fade-up">
-                <h3 class="expertise-title" data-i18n="tech_capabilities">핵심 기술 역량</h3>
-                <div class="expertise-grid">
-                    <div class="expertise-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="expertise-icon">
-                            <i class="fab fa-aws"></i>
+            <!-- 임팩트 있는 기술 역량 대시보드 -->
+            <div class="tech-dashboard" data-aos="fade-up">
+                <div class="dashboard-header">
+                    <h3 class="dashboard-title" data-i18n="tech_capabilities">핵심 기술 역량</h3>
+                    <div class="dashboard-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">300+</span>
+                            <span class="stat-label">완료 프로젝트</span>
                         </div>
-                        <h4>Cloud Infrastructure</h4>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-level="95"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">고객 만족도</span>
                         </div>
-                        <span class="expertise-label">Expert Level</span>
+                    </div>
+                </div>
+                
+                <div class="tech-showcase">
+                    <div class="tech-visual">
+                        <!-- 대형 원형 차트 -->
+                        <div class="main-chart">
+                            <svg width="280" height="280" viewBox="0 0 280 280">
+                                <defs>
+                                    <linearGradient id="aws-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#FF9500"/>
+                                        <stop offset="100%" style="stop-color:#FF6B00"/>
+                                    </linearGradient>
+                                    <linearGradient id="ai-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#764ba2"/>
+                                    </linearGradient>
+                                    <linearGradient id="data-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#06D6A0"/>
+                                        <stop offset="100%" style="stop-color:#0396FF"/>
+                                    </linearGradient>
+                                    <linearGradient id="devops-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#F093FB"/>
+                                        <stop offset="100%" style="stop-color:#F5576C"/>
+                                    </linearGradient>
+                                </defs>
+                                
+                                <!-- Background circle -->
+                                <circle cx="140" cy="140" r="120" fill="none" stroke="#f1f5f9" stroke-width="20"/>
+                                
+                                <!-- AWS - 30% -->
+                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#aws-gradient)" 
+                                        stroke-width="20" stroke-dasharray="226 754" 
+                                        stroke-dashoffset="0" transform="rotate(-90 140 140)"
+                                        class="chart-segment" data-animate="226">
+                                </circle>
+                                
+                                <!-- AI - 25% -->
+                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#ai-gradient)" 
+                                        stroke-width="20" stroke-dasharray="188 754" 
+                                        stroke-dashoffset="-226" transform="rotate(-90 140 140)"
+                                        class="chart-segment" data-animate="188">
+                                </circle>
+                                
+                                <!-- Data - 25% -->
+                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#data-gradient)" 
+                                        stroke-width="20" stroke-dasharray="188 754" 
+                                        stroke-dashoffset="-414" transform="rotate(-90 140 140)"
+                                        class="chart-segment" data-animate="188">
+                                </circle>
+                                
+                                <!-- DevOps - 20% -->
+                                <circle cx="140" cy="140" r="120" fill="none" stroke="url(#devops-gradient)" 
+                                        stroke-width="20" stroke-dasharray="150 754" 
+                                        stroke-dashoffset="-602" transform="rotate(-90 140 140)"
+                                        class="chart-segment" data-animate="150">
+                                </circle>
+                                
+                                <!-- Center text -->
+                                <text x="140" y="135" text-anchor="middle" class="chart-center-title">기술 역량</text>
+                                <text x="140" y="155" text-anchor="middle" class="chart-center-subtitle">분포도</text>
+                            </svg>
+                        </div>
                     </div>
                     
-                    <div class="expertise-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="expertise-icon">
-                            <i class="fas fa-brain"></i>
+                    <div class="tech-legend">
+                        <div class="legend-item" data-aos="fade-left" data-aos-delay="100">
+                            <div class="legend-color" style="background: linear-gradient(135deg, #FF9500, #FF6B00);"></div>
+                            <div class="legend-content">
+                                <h4><i class="fab fa-aws"></i> Cloud Infrastructure</h4>
+                                <div class="legend-stats">
+                                    <span class="percentage">30%</span>
+                                    <span class="description">AWS, Azure, GCP 전문</span>
+                                </div>
+                            </div>
                         </div>
-                        <h4>AI/Machine Learning</h4>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-level="90"></div>
+                        
+                        <div class="legend-item" data-aos="fade-left" data-aos-delay="200">
+                            <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                            <div class="legend-content">
+                                <h4><i class="fas fa-brain"></i> AI/Machine Learning</h4>
+                                <div class="legend-stats">
+                                    <span class="percentage">25%</span>
+                                    <span class="description">딥러닝, 컴퓨터비전, NLP</span>
+                                </div>
+                            </div>
                         </div>
-                        <span class="expertise-label">Expert Level</span>
-                    </div>
-                    
-                    <div class="expertise-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="expertise-icon">
-                            <i class="fas fa-database"></i>
+                        
+                        <div class="legend-item" data-aos="fade-left" data-aos-delay="300">
+                            <div class="legend-color" style="background: linear-gradient(135deg, #06D6A0, #0396FF);"></div>
+                            <div class="legend-content">
+                                <h4><i class="fas fa-database"></i> Data Engineering</h4>
+                                <div class="legend-stats">
+                                    <span class="percentage">25%</span>
+                                    <span class="description">빅데이터, 실시간 분석</span>
+                                </div>
+                            </div>
                         </div>
-                        <h4>Data Engineering</h4>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-level="88"></div>
+                        
+                        <div class="legend-item" data-aos="fade-left" data-aos-delay="400">
+                            <div class="legend-color" style="background: linear-gradient(135deg, #F093FB, #F5576C);"></div>
+                            <div class="legend-content">
+                                <h4><i class="fab fa-docker"></i> DevOps & Security</h4>
+                                <div class="legend-stats">
+                                    <span class="percentage">20%</span>
+                                    <span class="description">CI/CD, 보안, 모니터링</span>
+                                </div>
+                            </div>
                         </div>
-                        <span class="expertise-label">Advanced</span>
-                    </div>
-                    
-                    <div class="expertise-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="expertise-icon">
-                            <i class="fab fa-docker"></i>
-                        </div>
-                        <h4>DevOps & Security</h4>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-level="85"></div>
-                        </div>
-                        <span class="expertise-label">Advanced</span>
                     </div>
                 </div>
             </div>
