@@ -3101,10 +3101,10 @@
                 magneticCursor.className = 'magnetic-cursor';
                 document.body.appendChild(magneticCursor);
                 
-                // 부드러운 커서 움직임
+                // 부드러운 커서 움직임 (더 빠르게)
                 function updateCursor() {
-                    cursorX += (mouseX - cursorX) * 0.15;
-                    cursorY += (mouseY - cursorY) * 0.15;
+                    cursorX += (mouseX - cursorX) * 0.35;
+                    cursorY += (mouseY - cursorY) * 0.35;
                     
                     if (magneticCursor) {
                         magneticCursor.style.left = cursorX - 10 + 'px';
