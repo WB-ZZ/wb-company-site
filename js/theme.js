@@ -3,7 +3,22 @@
 // 테마 초기화
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    // 모든 곳에 강제로 적용
     document.documentElement.setAttribute('data-theme', savedTheme);
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    // 강제 스타일 적용
+    if (savedTheme === 'dark') {
+        document.body.style.backgroundColor = '#000000';
+        document.body.style.color = '#ffffff';
+        console.log('DARK MODE INITIALIZED!');
+    } else {
+        document.body.style.backgroundColor = '#ffffff';
+        document.body.style.color = '#000000';
+        console.log('LIGHT MODE INITIALIZED!');
+    }
+    
     updateThemeIcon(savedTheme);
 }
 
@@ -12,9 +27,25 @@ function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
+    // 모든 곳에 강제로 적용
     document.documentElement.setAttribute('data-theme', newTheme);
+    document.body.setAttribute('data-theme', newTheme);
+    document.html.setAttribute('data-theme', newTheme);
+    
+    // 로컬스토리지에 저장
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
+    
+    // 강제 스타일 적용
+    if (newTheme === 'dark') {
+        document.body.style.backgroundColor = '#000000';
+        document.body.style.color = '#ffffff';
+        console.log('DARK MODE APPLIED!');
+    } else {
+        document.body.style.backgroundColor = '#ffffff';
+        document.body.style.color = '#000000';
+        console.log('LIGHT MODE APPLIED!');
+    }
 }
 
 // 테마 아이콘 업데이트
