@@ -69,7 +69,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/enhanced-design.css?v=2024061806">
+    <link rel="stylesheet" href="css/enhanced-design.css?v=2024061807">
     
     <!-- 강제 다크모드 스타일 - 인라인 -->
     <style>
@@ -665,24 +665,142 @@
     <!-- 조직도 모달 -->
     <div id="organizationModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('organizationModal')">&times;</span>
-            <h2>조직도</h2>
+            <div class="modal-header">
+                <h2 class="modal-title">조직도</h2>
+                <button class="modal-close" onclick="closeModal('organizationModal')">&times;</button>
+            </div>
             <div class="modal-body">
+                <div class="org-overview">
+                    <div class="org-stat">
+                        <i class="fas fa-users"></i>
+                        <h4>120명</h4>
+                        <p>전체 임직원</p>
+                    </div>
+                    <div class="org-stat">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>5개</h4>
+                        <p>주요 부서</p>
+                    </div>
+                    <div class="org-stat">
+                        <i class="fas fa-globe-asia"></i>
+                        <h4>3개</h4>
+                        <p>해외 지사</p>
+                    </div>
+                    <div class="org-stat">
+                        <i class="fas fa-certificate"></i>
+                        <h4>85%</h4>
+                        <p>전문 자격증 보유율</p>
+                    </div>
+                </div>
+                
                 <div class="org-chart">
-                    <div class="org-level">
-                        <div class="org-box ceo">대표이사<br>김태현</div>
+                    <div class="org-level ceo-level">
+                        <div class="org-card ceo">
+                            <div class="org-photo">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="CEO">
+                            </div>
+                            <div class="org-info">
+                                <h4>김태현</h4>
+                                <p class="position">대표이사 / CEO</p>
+                                <p class="detail">KAIST 박사, 前 Google</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="org-level">
-                        <div class="org-box">기술이사<br>이승민</div>
-                        <div class="org-box">영업이사<br>박정수</div>
-                        <div class="org-box">운영이사<br>최미영</div>
+                    
+                    <div class="org-connector"></div>
+                    
+                    <div class="org-level executive-level">
+                        <div class="org-card">
+                            <div class="org-photo">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="CTO">
+                            </div>
+                            <div class="org-info">
+                                <h4>이승민</h4>
+                                <p class="position">CTO / 기술총괄</p>
+                                <p class="detail">MIT 석사, 특허 15건</p>
+                            </div>
+                        </div>
+                        <div class="org-card">
+                            <div class="org-photo">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="CSO">
+                            </div>
+                            <div class="org-info">
+                                <h4>박정수</h4>
+                                <p class="position">CSO / 영업총괄</p>
+                                <p class="detail">연세대 MBA, 前 삼성전자</p>
+                            </div>
+                        </div>
+                        <div class="org-card">
+                            <div class="org-photo">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="COO">
+                            </div>
+                            <div class="org-info">
+                                <h4>최미영</h4>
+                                <p class="position">COO / 운영총괄</p>
+                                <p class="detail">서울대 경영학, 前 LG CNS</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="org-level">
-                        <div class="org-box">AI개발팀<br>(12명)</div>
-                        <div class="org-box">클라우드팀<br>(15명)</div>
-                        <div class="org-box">영업팀<br>(8명)</div>
-                        <div class="org-box">마케팅팀<br>(5명)</div>
-                        <div class="org-box">인사총무팀<br>(6명)</div>
+                    
+                    <div class="org-connector"></div>
+                    
+                    <div class="org-level team-level">
+                        <div class="org-team">
+                            <i class="fas fa-brain"></i>
+                            <h5>AI 연구소</h5>
+                            <p class="team-size">25명</p>
+                            <p class="team-desc">머신러닝, 딥러닝, 자연어처리</p>
+                        </div>
+                        <div class="org-team">
+                            <i class="fas fa-cloud"></i>
+                            <h5>클라우드 사업부</h5>
+                            <p class="team-size">30명</p>
+                            <p class="team-desc">AWS, Azure, GCP 전문가</p>
+                        </div>
+                        <div class="org-team">
+                            <i class="fas fa-laptop-code"></i>
+                            <h5>개발본부</h5>
+                            <p class="team-size">35명</p>
+                            <p class="team-desc">풀스택, DevOps, QA</p>
+                        </div>
+                        <div class="org-team">
+                            <i class="fas fa-handshake"></i>
+                            <h5>영업/마케팅본부</h5>
+                            <p class="team-size">20명</p>
+                            <p class="team-desc">B2B 영업, 디지털 마케팅</p>
+                        </div>
+                        <div class="org-team">
+                            <i class="fas fa-cogs"></i>
+                            <h5>경영지원본부</h5>
+                            <p class="team-size">10명</p>
+                            <p class="team-desc">인사, 재무, 법무, IT</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="org-culture">
+                    <h4>조직 문화</h4>
+                    <div class="culture-values">
+                        <div class="culture-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <h5>혁신</h5>
+                            <p>끊임없는 도전과 창의적 사고</p>
+                        </div>
+                        <div class="culture-item">
+                            <i class="fas fa-users-cog"></i>
+                            <h5>협업</h5>
+                            <p>부서간 시너지와 열린 소통</p>
+                        </div>
+                        <div class="culture-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h5>성장</h5>
+                            <p>지속적인 학습과 역량 개발</p>
+                        </div>
+                        <div class="culture-item">
+                            <i class="fas fa-heart"></i>
+                            <h5>고객중심</h5>
+                            <p>고객 성공이 우리의 성공</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -692,32 +810,152 @@
     <!-- 오시는길 모달 -->
     <div id="locationModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('locationModal')">&times;</span>
-            <h2>오시는 길</h2>
+            <div class="modal-header">
+                <h2 class="modal-title">오시는 길</h2>
+                <button class="modal-close" onclick="closeModal('locationModal')">&times;</button>
+            </div>
             <div class="modal-body">
-                <div class="location-info">
-                    <div class="address">
-                        <h3>주소</h3>
-                        <p>서울특별시 강남구 테헤란로 521<br>파르나스타워 35층</p>
+                <div class="location-header">
+                    <div class="location-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop&auto=format&q=80" alt="파르나스타워" class="building-photo">
+                        <div class="location-overlay">
+                            <h3>파르나스타워 35층</h3>
+                            <p>강남 최고의 프리미엄 오피스</p>
+                        </div>
                     </div>
-                    <div class="transport">
-                        <h3>대중교통</h3>
-                        <ul>
-                            <li><strong>지하철:</strong> 2호선 삼성역 6번 출구 (도보 3분)</li>
-                            <li><strong>버스:</strong> 삼성역 정류장 하차</li>
-                            <li><strong>주차:</strong> 파르나스타워 지하주차장 이용</li>
-                        </ul>
+                    <div class="quick-info">
+                        <div class="info-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>주소</h4>
+                            <p>서울특별시 강남구 테헤란로 521<br>파르나스타워 35층</p>
+                            <p class="postal-code">우편번호: 06164</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-phone"></i>
+                            <h4>연락처</h4>
+                            <p class="phone-number">02-6200-1000</p>
+                            <p class="office-hours">평일 09:00 - 18:00</p>
+                        </div>
                     </div>
+                </div>
+                
+                <div class="transport-section">
+                    <h4><i class="fas fa-subway"></i> 지하철 이용시</h4>
+                    <div class="transport-grid">
+                        <div class="transport-card primary">
+                            <div class="line-badge line-2">2호선</div>
+                            <h5>삼성역</h5>
+                            <p class="time">6번 출구 → 도보 3분</p>
+                            <p class="detail">가장 가까운 역, 추천 경로</p>
+                        </div>
+                        <div class="transport-card">
+                            <div class="line-badge line-9">9호선</div>
+                            <h5>봉은사역</h5>
+                            <p class="time">1번 출구 → 도보 8분</p>
+                            <p class="detail">테헤란로 방향</p>
+                        </div>
+                        <div class="transport-card">
+                            <div class="line-badge line-7">7호선</div>
+                            <h5>청담역</h5>
+                            <p class="time">2번 출구 → 도보 12분</p>
+                            <p class="detail">한강공원 경유</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transport-section">
+                    <h4><i class="fas fa-bus"></i> 버스 이용시</h4>
+                    <div class="bus-info">
+                        <div class="bus-route">
+                            <span class="bus-type blue">간선</span>
+                            <p>146, 360, 740 등</p>
+                        </div>
+                        <div class="bus-route">
+                            <span class="bus-type green">지선</span>
+                            <p>2413, 3412, 6411 등</p>
+                        </div>
+                        <div class="bus-route">
+                            <span class="bus-type red">광역</span>
+                            <p>1100, 7007, 8001 등</p>
+                        </div>
+                    </div>
+                    <p class="bus-stop"><i class="fas fa-map-pin"></i> 정류장: 삼성역 (ID: 23-284)</p>
+                </div>
+                
+                <div class="transport-section">
+                    <h4><i class="fas fa-car"></i> 자가용 이용시</h4>
+                    <div class="parking-info">
+                        <div class="parking-card">
+                            <i class="fas fa-parking"></i>
+                            <h5>파르나스타워 주차장</h5>
+                            <p>지하 1층 ~ 지하 6층</p>
+                            <p class="parking-fee">시간당 3,000원</p>
+                            <p class="parking-discount">방문시 2시간 무료</p>
+                        </div>
+                        <div class="parking-routes">
+                            <h6>주요 진입로</h6>
+                            <ul>
+                                <li><strong>강남역 방면:</strong> 테헤란로 직진 → 삼성역 방향</li>
+                                <li><strong>잠실 방면:</strong> 테헤란로 → 영동대로 교차로</li>
+                                <li><strong>한남대교 방면:</strong> 한남대로 → 테헤란로</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nearby-info">
+                    <h4><i class="fas fa-compass"></i> 주변 시설</h4>
+                    <div class="nearby-grid">
+                        <div class="nearby-item">
+                            <i class="fas fa-coffee"></i>
+                            <p>스타벅스 (1층)</p>
+                        </div>
+                        <div class="nearby-item">
+                            <i class="fas fa-utensils"></i>
+                            <p>다양한 레스토랑 (지하1층)</p>
+                        </div>
+                        <div class="nearby-item">
+                            <i class="fas fa-store"></i>
+                            <p>편의점 (1층, 지하1층)</p>
+                        </div>
+                        <div class="nearby-item">
+                            <i class="fas fa-university"></i>
+                            <p>COEX (도보 5분)</p>
+                        </div>
+                        <div class="nearby-item">
+                            <i class="fas fa-tree"></i>
+                            <p>봉은사 (도보 7분)</p>
+                        </div>
+                        <div class="nearby-item">
+                            <i class="fas fa-water"></i>
+                            <p>한강공원 (도보 15분)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-section">
+                    <h4><i class="fas fa-map"></i> 지도</h4>
                     <div class="map-container">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.4389754!2d127.059424!3d37.508842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca1577c9cc211%3A0x9b5c8d8b74a8b4e7!2z7YyM66Ww64KY7Iqk7YOA7JuM!5e0!3m2!1sko!2skr!4v1234567890"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.4389754!2d127.059424!3d37.508842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15b1d7c7a89%3A0x5c5d4c7b1f7a8c5e!2z7YyM66Ww64KY7Iqk7YOA7JuM!5e0!3m2!1sko!2skr!4v1234567890"
                             width="100%" 
-                            height="300" 
-                            style="border:0;" 
+                            height="350" 
+                            style="border:0; border-radius: 12px;" 
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
+                    </div>
+                    <div class="map-actions">
+                        <a href="https://map.naver.com" target="_blank" class="map-link naver">
+                            <i class="fas fa-external-link-alt"></i> 네이버 지도
+                        </a>
+                        <a href="https://map.kakao.com" target="_blank" class="map-link kakao">
+                            <i class="fas fa-external-link-alt"></i> 카카오맵
+                        </a>
+                        <a href="https://maps.google.com" target="_blank" class="map-link google">
+                            <i class="fas fa-external-link-alt"></i> 구글 지도
+                        </a>
                     </div>
                 </div>
             </div>

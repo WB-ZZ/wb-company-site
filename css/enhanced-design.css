@@ -2051,3 +2051,477 @@ a {
         padding: 1.5rem;
     }
 }
+
+/* Organization Modal Styles */
+.org-overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.org-stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.org-stat i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.org-stat h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+.org-chart {
+    margin: 3rem 0;
+}
+
+.org-level {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.org-connector {
+    height: 30px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path d="M50 0 L50 30 M20 15 L80 15" stroke="%23667eea" stroke-width="2" fill="none"/></svg>') center/contain no-repeat;
+    margin: 0 auto 2rem;
+    width: 200px;
+}
+
+.org-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 200px;
+}
+
+.org-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.org-card.ceo {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.05), rgba(30, 60, 114, 0.02));
+}
+
+.org-photo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--primary-color);
+}
+
+.org-info h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.position {
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.detail {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.team-level {
+    gap: 1rem;
+}
+
+.org-team {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.org-team:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.org-team i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.org-team h5 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.team-size {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.team-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.org-culture {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: 12px;
+}
+
+.org-culture h4 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.culture-values {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.culture-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.culture-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.culture-item h5 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Location Modal Styles */
+.location-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.location-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.building-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.location-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 1.5rem;
+}
+
+.location-overlay h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+}
+
+.quick-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.info-card i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.postal-code, .office-hours {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.phone-number {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.transport-section {
+    margin-bottom: 3rem;
+}
+
+.transport-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.transport-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.transport-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.transport-card.primary {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.05), rgba(30, 60, 114, 0.02));
+}
+
+.line-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.line-2 { background: #33A23D; }
+.line-7 { background: #747F00; }
+.line-9 { background: #D4AA00; }
+
+.transport-card h5 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.time {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.detail {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.bus-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bus-route {
+    text-align: center;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+}
+
+.bus-type {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.bus-type.blue { background: #3D5AA3; }
+.bus-type.green { background: #53B332; }
+.bus-type.red { background: #CC2737; }
+
+.bus-stop {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.parking-info {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+}
+
+.parking-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.parking-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.parking-fee {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.parking-discount {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.parking-routes h6 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.nearby-info {
+    margin-bottom: 3rem;
+}
+
+.nearby-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+.nearby-item {
+    text-align: center;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.nearby-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.map-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.map-container {
+    margin-bottom: 1rem;
+}
+
+.map-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.map-link {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.map-link.naver {
+    background: #03C75A;
+    color: white;
+}
+
+.map-link.kakao {
+    background: #FEE500;
+    color: #3A1D1D;
+}
+
+.map-link.google {
+    background: #4285F4;
+    color: white;
+}
+
+.map-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+    .org-overview, .culture-values {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .org-level {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .location-header {
+        grid-template-columns: 1fr;
+    }
+    
+    .transport-grid, .bus-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .parking-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .nearby-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .map-actions {
+        flex-direction: column;
+    }
+}
