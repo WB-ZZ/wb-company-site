@@ -3089,36 +3089,128 @@
             });
         }
         
-        // 커서 트레일 효과 (선택적)
-        let cursorTrail = null;
+        // 현대적인 자기장 + 글로우 커서 효과
+        let magneticCursor = null;
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
         
-        function initCursorTrail() {
-            if (window.innerWidth > 768) { // 데스크톱에서만 활성화
-                cursorTrail = document.createElement('div');
-                cursorTrail.className = 'cursor-trail';
-                document.body.appendChild(cursorTrail);
+        function initMagneticCursor() {
+            // 데스크톱에서만 활성화 (터치 디바이스 제외)
+            if (window.innerWidth > 768 && !('ontouchstart' in window)) {
+                magneticCursor = document.createElement('div');
+                magneticCursor.className = 'magnetic-cursor';
+                document.body.appendChild(magneticCursor);
                 
+                // 부드러운 커서 움직임
+                function updateCursor() {
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    
+                    if (magneticCursor) {
+                        magneticCursor.style.left = cursorX - 10 + 'px';
+                        magneticCursor.style.top = cursorY - 10 + 'px';
+                    }
+                    requestAnimationFrame(updateCursor);
+                }
+                updateCursor();
+                
+                // 마우스 움직임 추적
                 document.addEventListener('mousemove', (e) => {
-                    if (cursorTrail) {
-                        cursorTrail.style.left = e.clientX - 10 + 'px';
-                        cursorTrail.style.top = e.clientY - 10 + 'px';
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+                
+                // 클릭 리플 효과
+                document.addEventListener('mousedown', () => {
+                    if (magneticCursor) {
+                        magneticCursor.classList.add('click-ripple');
+                        setTimeout(() => {
+                            magneticCursor.classList.remove('click-ripple');
+                        }, 600);
                     }
                 });
+                
+                // 요소별 호버 효과
+                setupMagneticElements();
             }
         }
         
-        // 창 크기 변경 시 커서 트레일 재설정
+        function setupMagneticElements() {
+            // 버튼 호버
+            const buttons = document.querySelectorAll('button, .btn, .theme-toggle');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    if (magneticCursor) magneticCursor.className = 'magnetic-cursor hover-button';
+                    addMagneticEffect(btn);
+                });
+                btn.addEventListener('mouseleave', () => {
+                    if (magneticCursor) magneticCursor.className = 'magnetic-cursor';
+                    removeMagneticEffect(btn);
+                });
+            });
+            
+            // 링크 호버
+            const links = document.querySelectorAll('a, .nav-link');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    if (magneticCursor) magneticCursor.className = 'magnetic-cursor hover-link';
+                    addMagneticEffect(link);
+                });
+                link.addEventListener('mouseleave', () => {
+                    if (magneticCursor) magneticCursor.className = 'magnetic-cursor';
+                    removeMagneticEffect(link);
+                });
+            });
+            
+            // 텍스트 호버
+            const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span');
+            textElements.forEach(text => {
+                text.addEventListener('mouseenter', () => {
+                    if (magneticCursor) magneticCursor.className = 'magnetic-cursor hover-text';
+                });
+                text.addEventListener('mouseleave', () => {
+                    if (magneticCursor) magneticCursor.className = 'magnetic-cursor';
+                });
+            });
+        }
+        
+        function addMagneticEffect(element) {
+            element.classList.add('magnetic-element');
+            
+            element.addEventListener('mousemove', handleMagneticMove);
+            element.addEventListener('mouseleave', handleMagneticLeave);
+        }
+        
+        function removeMagneticEffect(element) {
+            element.removeEventListener('mousemove', handleMagneticMove);
+            element.removeEventListener('mouseleave', handleMagneticLeave);
+        }
+        
+        function handleMagneticMove(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // 자기장 효과 - 요소가 커서 쪽으로 약간 이동
+            this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+        }
+        
+        function handleMagneticLeave() {
+            this.style.transform = 'translate(0, 0)';
+        }
+        
+        // 창 크기 변경 시 커서 재설정
         window.addEventListener('resize', () => {
-            if (cursorTrail && window.innerWidth <= 768) {
-                cursorTrail.remove();
-                cursorTrail = null;
-            } else if (!cursorTrail && window.innerWidth > 768) {
-                initCursorTrail();
+            if (magneticCursor && window.innerWidth <= 768) {
+                magneticCursor.remove();
+                magneticCursor = null;
+            } else if (!magneticCursor && window.innerWidth > 768 && !('ontouchstart' in window)) {
+                initMagneticCursor();
             }
         });
         
-        // 페이지 로드 완료 후 커서 트레일 초기화
-        window.addEventListener('load', initCursorTrail);
+        // 페이지 로드 완료 후 자기장 커서 초기화
+        window.addEventListener('load', initMagneticCursor);
 
         // 모든 기능 초기화
         document.addEventListener('DOMContentLoaded', function() {

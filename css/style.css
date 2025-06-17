@@ -6,9 +6,9 @@
     --success-color: #00d4aa;
     --warning-color: #ffa726;
     --error-color: #f44336;
-    --text-primary: #2c3e50;
-    --text-secondary: #64748b;
-    --text-light: #94a3b8;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-light: #718096;
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
     --bg-tertiary: #f1f5f9;
@@ -360,11 +360,12 @@ html {
 .feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #1a202c;
+    font-weight: 700;
 }
 
 .feature-card p {
-    color: #666;
+    color: #4a5568;
     line-height: 1.6;
 }
 
@@ -373,7 +374,7 @@ html {
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #333;
+    color: #1a202c;
     margin-bottom: 1rem;
     position: relative;
 }
