@@ -28,23 +28,56 @@
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* 다크 모드 */
-[data-theme="dark"] {
+/* 다크 모드 - 강제 적용 */
+[data-theme="dark"],
+[data-theme="dark"] * {
     /* 다크 모드 색상 */
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2a2a2a;
-    --bg-tertiary: #3a3a3a;
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --text-light: #999999;
-    --border-color: #444444;
-    --nav-bg: rgba(26, 26, 26, 0.95);
-    --card-bg: #2a2a2a;
+    --bg-primary: #121212 !important;
+    --bg-secondary: #1e1e1e !important;
+    --bg-tertiary: #2a2a2a !important;
+    --text-primary: #ffffff !important;
+    --text-secondary: #e0e0e0 !important;
+    --text-light: #b0b0b0 !important;
+    --border-color: #333333 !important;
+    --nav-bg: rgba(18, 18, 18, 0.95) !important;
+    --card-bg: #1e1e1e !important;
     
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5) !important;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !important;
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4) !important;
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 다크모드 강제 배경색 적용 */
+[data-theme="dark"] body {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .header {
+    background: rgba(18, 18, 18, 0.95) !important;
+    border-bottom: 1px solid #333333 !important;
+}
+
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #3a3a3a 100%) !important;
+}
+
+[data-theme="dark"] .about {
+    background-color: #121212 !important;
+}
+
+[data-theme="dark"] .portfolio {
+    background-color: #1e1e1e !important;
+}
+
+[data-theme="dark"] .contact {
+    background-color: #121212 !important;
+}
+
+[data-theme="dark"] .footer {
+    background-color: #121212 !important;
+    border-top: 1px solid #333333 !important;
 }
 
 /* Reset and Base Styles */
@@ -564,73 +597,192 @@ html {
     text-align: center;
 }
 
-/* Services Section */
-.services-new {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Services Section - 새 디자인 */
+.services-section {
+    padding: 5rem 0;
+    background: var(--bg-primary);
+    position: relative;
+}
+
+.services-section .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.services-section .section-title {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.services-section .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* 서비스 통계 카드 */
+.service-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    padding: 5rem 0;
-    color: white;
 }
 
-.services-new .section-title {
-    color: white;
-    text-align: center;
-    margin-bottom: 2rem;
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
-.new-services-grid {
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.stat-percentage {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-desc {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* 서비스 카드 그리드 */
+.services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
 }
 
-.new-service-card {
-    background: rgba(255, 255, 255, 0.12) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 20px !important;
-    padding: 2rem !important;
-    text-align: center !important;
-    transition: all 0.3s ease !important;
-    position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+.service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.new-service-card:hover {
-    transform: translateY(-10px) scale(1.02) !important;
-    background: rgba(255, 255, 255, 0.18) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
-.service-icon-wrapper {
-    width: 80px !important;
-    height: 80px !important;
-    margin: 0 auto 1.5rem !important;
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 2rem !important;
-    color: #ffffff !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+.service-card:hover::before {
+    transform: scaleX(1);
 }
 
-.new-service-card h3 {
-    color: #ffffff !important;
-    font-size: 1.5rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 1rem !important;
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
 }
 
-.new-service-card p {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    margin: 0 !important;
+.service-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.service-header h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.service-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-features li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.service-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+/* 다크모드 서비스 섹션 */
+[data-theme="dark"] .services-section {
+    background-color: #121212 !important;
+}
+
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .service-card {
+    background: #1e1e1e !important;
+    border-color: #333333 !important;
 }
 
 /* Portfolio Section */

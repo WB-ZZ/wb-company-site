@@ -226,6 +226,8 @@ function animateCounters() {
 
 // Trigger counter animation when stats section is visible
 const statsSection = document.querySelector('.stats');
+const serviceStatsSection = document.querySelector('.service-stats');
+
 if (statsSection) {
     const statsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -237,6 +239,23 @@ if (statsSection) {
     }, { threshold: 0.5 });
     
     statsObserver.observe(statsSection);
+}
+
+// Animate service stats as well
+if (serviceStatsSection) {
+    const serviceStatsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const serviceCounters = entry.target.querySelectorAll('.stat-number, .stat-percentage');
+                serviceCounters.forEach(counter => {
+                    animateCounter(counter);
+                });
+                serviceStatsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    serviceStatsObserver.observe(serviceStatsSection);
 }
 
 // High-quality image system with Unsplash integration
