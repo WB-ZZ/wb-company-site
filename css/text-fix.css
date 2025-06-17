@@ -1,0 +1,137 @@
+/* 텍스트 가독성 완전 해결 - 최종판 */
+
+/* 모든 요소의 기본 텍스트 색상 강제 설정 */
+*, *::before, *::after {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+html, body {
+    color: #0f172a !important;
+}
+
+/* 제목들 */
+h1, h2, h3, h4, h5, h6,
+.section-title, .hero-title, .portfolio-title,
+.service-card h3, .feature-card h3,
+.stat h4, .achievement-number {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+/* 본문 텍스트 */
+p, span, div, a, li, td, th,
+.service-card p, .feature-card p,
+.portfolio-overlay h4, .portfolio-overlay p,
+.contact-info p, .footer p,
+.nav-link, .btn {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+/* 폼 요소들 */
+input, textarea, select, option, label {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+/* 다크모드 전용 스타일 */
+[data-theme="dark"] *, 
+[data-theme="dark"] *::before, 
+[data-theme="dark"] *::after {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] html, 
+[data-theme="dark"] body {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6,
+[data-theme="dark"] .section-title, 
+[data-theme="dark"] .hero-title, 
+[data-theme="dark"] .portfolio-title,
+[data-theme="dark"] .service-card h3, 
+[data-theme="dark"] .feature-card h3,
+[data-theme="dark"] .stat h4, 
+[data-theme="dark"] .achievement-number {
+    color: #f1f5f9 !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="dark"] p, 
+[data-theme="dark"] span, 
+[data-theme="dark"] div, 
+[data-theme="dark"] a, 
+[data-theme="dark"] li, 
+[data-theme="dark"] td, 
+[data-theme="dark"] th,
+[data-theme="dark"] .service-card p, 
+[data-theme="dark"] .feature-card p,
+[data-theme="dark"] .portfolio-overlay h4, 
+[data-theme="dark"] .portfolio-overlay p,
+[data-theme="dark"] .contact-info p, 
+[data-theme="dark"] .footer p,
+[data-theme="dark"] .nav-link, 
+[data-theme="dark"] .btn {
+    color: #cbd5e1 !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] input, 
+[data-theme="dark"] textarea, 
+[data-theme="dark"] select, 
+[data-theme="dark"] option, 
+[data-theme="dark"] label {
+    color: #f1f5f9 !important;
+    font-weight: 600 !important;
+}
+
+/* 특별한 경우들 - 흰색 배경에 흰색 텍스트 유지 */
+.live-dashboard, 
+.live-dashboard *, 
+.activity-panel *, 
+.performance-panel *, 
+.achievement-panel *,
+.loading-text,
+.dashboard-title,
+.last-updated {
+    color: white !important;
+}
+
+/* 히어로 섹션 텍스트 */
+.hero-title {
+    color: white !important;
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 포트폴리오 오버레이 */
+.portfolio-overlay,
+.portfolio-overlay * {
+    color: white !important;
+}
+
+/* 버튼 텍스트 */
+.btn, .btn * {
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* 네비게이션 로고 */
+.logo, .logo-text {
+    color: #2c5aa0 !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="dark"] .logo,
+[data-theme="dark"] .logo-text {
+    color: #60a5fa !important;
+}

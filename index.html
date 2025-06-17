@@ -61,6 +61,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/3d-effects.css">
     <link rel="stylesheet" href="css/enhanced-design.css">
+    <link rel="stylesheet" href="css/text-fix.css">
     
     <!-- 로딩 스피너 및 스크롤 인디케이터 HTML -->
     <div id="loadingSpinner" class="loading-overlay">
@@ -78,58 +79,8 @@
         <div class="scroll-progress-bar" id="scrollProgress"></div>
     </div>
 
-    <!-- 텍스트 가독성 강제 적용 -->
+    <!-- 커서 속도 최적화 -->
     <style>
-        /* 전역 텍스트 색상 강제 적용 */
-        body, body *, html * {
-            color: #1a202c !important;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            color: #1a202c !important;
-            font-weight: 700 !important;
-        }
-        
-        p, span, div:not(.live-dashboard):not(.activity-panel):not(.performance-panel):not(.achievement-panel), a, li {
-            color: #1a202c !important;
-            font-weight: 600 !important;
-        }
-        
-        /* 다크모드 텍스트 */
-        [data-theme="dark"] *, 
-        [data-theme="dark"] body *, 
-        [data-theme="dark"] html * {
-            color: #f8fafc !important;
-        }
-        
-        [data-theme="dark"] h1, 
-        [data-theme="dark"] h2, 
-        [data-theme="dark"] h3, 
-        [data-theme="dark"] h4, 
-        [data-theme="dark"] h5, 
-        [data-theme="dark"] h6 {
-            color: #f8fafc !important;
-            font-weight: 700 !important;
-        }
-        
-        [data-theme="dark"] p,
-        [data-theme="dark"] span,
-        [data-theme="dark"] div:not(.live-dashboard):not(.activity-panel):not(.performance-panel):not(.achievement-panel),
-        [data-theme="dark"] a,
-        [data-theme="dark"] li {
-            color: #cbd5e1 !important;
-            font-weight: 600 !important;
-        }
-        
-        /* 대시보드는 흰색 유지 */
-        .live-dashboard, .live-dashboard *, 
-        .activity-panel *, 
-        .performance-panel *, 
-        .achievement-panel * {
-            color: white !important;
-        }
-        
-        /* 커서 속도 최적화 */
         .magnetic-cursor {
             transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         }
