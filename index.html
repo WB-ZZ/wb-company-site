@@ -2779,9 +2779,32 @@
                     
                     <div class="location-map">
                         <h3 data-i18n="location_map_title">약도</h3>
-                        <div class="map-placeholder">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <p data-i18n="location_map_desc">강남역 1번 출구에서 테헤란로 방향으로 직진 5분</p>
+                        <div class="naver-map-container">
+                            <img src="https://map.pstatic.net/staticmap/image?version=1.1&crs=EPSG:4326&w=600&h=400&center=127.0276,37.4979&level=2&markers=127.0276,37.4979,red" 
+                                 alt="파르나스타워 지도" 
+                                 class="static-map"
+                                 onclick="openNaverMap()"
+                                 loading="lazy">
+                            <div class="map-overlay">
+                                <div class="map-info">
+                                    <h4>📍 파르나스타워 35층</h4>
+                                    <p>서울특별시 강남구 테헤란로 521</p>
+                                    <button class="map-button" onclick="openNaverMap()">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        네이버 지도에서 보기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="location-tips">
+                            <div class="tip-item">
+                                <i class="fas fa-subway"></i>
+                                <span>강남역 1번 출구 → 테헤란로 직진 5분</span>
+                            </div>
+                            <div class="tip-item">
+                                <i class="fas fa-car"></i>
+                                <span>지하주차장 이용 (방문고객 2시간 무료)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2814,6 +2837,12 @@
                 // 데스크톱에서는 기본 동작 (섹션으로 이동)
                 document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        // 네이버 지도 열기 함수
+        function openNaverMap() {
+            const naverMapUrl = 'https://map.naver.com/v5/search/서울특별시%20강남구%20테헤란로%20521%20파르나스타워';
+            window.open(naverMapUrl, '_blank');
         }
         
         // 모달 외부 클릭시 닫기

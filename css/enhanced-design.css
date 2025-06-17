@@ -466,3 +466,144 @@
         font-size: 1rem;
     }
 }
+
+/* 네이버 지도 스타일 */
+.naver-map-container {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.naver-map-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.static-map {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.4) 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.naver-map-container:hover .map-overlay {
+    opacity: 1;
+}
+
+.map-info {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    max-width: 300px;
+}
+
+.map-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.map-info p {
+    margin: 0 0 1rem 0;
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.map-button {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.map-button:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.location-tips {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.tip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+    flex: 1;
+    min-width: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tip-item i {
+    color: #3b82f6;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.tip-item span {
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .location-tips {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .tip-item {
+        min-width: auto;
+    }
+    
+    .map-overlay {
+        padding: 1rem;
+    }
+    
+    .map-info {
+        max-width: none;
+        padding: 1rem;
+    }
+    
+    .static-map {
+        height: 250px;
+    }
+}
