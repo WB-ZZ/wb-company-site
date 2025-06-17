@@ -85,15 +85,25 @@
             background-clip: text !important;
         }
         
-        /* 배경 애니메이션 복구 */
+        /* 모든 배경 애니메이션 요소 복구 */
         .floating-elements,
         .floating-element,
         .animated-bg,
+        .gradient-overlay,
+        .particle-container,
+        .animated-shapes,
+        .shape,
         #particles-container,
         .particle {
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
+        }
+        
+        /* 카운터 애니메이션이 제대로 작동하도록 */
+        .stat h4 {
+            opacity: 1 !important;
+            transform: none !important;
         }
         
         /* Hero 레이아웃 개선 */
@@ -1471,10 +1481,17 @@
         }
         
         function animateCounter(element) {
-            const target = element.textContent;
-            const number = parseInt(target.replace(/[^\d]/g, ''));
-            const suffix = target.replace(/[\d]/g, '');
-            const duration = 3000; // 3초로 늘림
+            const target = element.textContent.trim();
+            console.log('Animating:', target); // 디버깅용
+            
+            // 숫자와 접미사 분리 개선
+            const numberMatch = target.match(/\d+/);
+            const number = numberMatch ? parseInt(numberMatch[0]) : 0;
+            const suffix = target.replace(/\d+/g, '');
+            
+            console.log('Number:', number, 'Suffix:', suffix); // 디버깅용
+            
+            const duration = 2000; // 2초로 단축
             const startTime = performance.now();
             
             // 더 자연스러운 easing 함수
