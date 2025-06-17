@@ -2779,21 +2779,27 @@
                     
                     <div class="location-map">
                         <h3 data-i18n="location_map_title">약도</h3>
-                        <div class="naver-map-container">
-                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop&crop=center" 
-                                 alt="강남 파르나스타워 위치" 
-                                 class="static-map"
-                                 onclick="openNaverMap()"
-                                 loading="lazy">
-                            <div class="map-overlay">
-                                <div class="map-info">
-                                    <h4>📍 파르나스타워 35층</h4>
-                                    <p>서울특별시 강남구 테헤란로 521</p>
-                                    <button class="map-button" onclick="openNaverMap()">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        네이버 지도에서 보기
-                                    </button>
+                        <div class="map-placeholder-styled" onclick="openNaverMap()">
+                            <div class="map-icon-large">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="map-content">
+                                <h4>📍 파르나스타워 35층</h4>
+                                <p>서울특별시 강남구 테헤란로 521</p>
+                                <div class="location-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-subway"></i>
+                                        <span>지하철 2호선 강남역 1번 출구</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-walking"></i>
+                                        <span>도보 5분 거리</span>
+                                    </div>
                                 </div>
+                                <button class="map-button-large" onclick="openNaverMap()">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    네이버 지도에서 정확한 위치 보기
+                                </button>
                             </div>
                         </div>
                         <div class="location-tips">
