@@ -587,7 +587,7 @@
                 <div class="dashboard-grid">
                     <!-- 현재 활동 상태 -->
                     <div class="activity-panel">
-                        <h4>🔥 현재 진행 중</h4>
+                        <h4><i class="fas fa-fire text-primary"></i> 현재 진행 중</h4>
                         <div class="activity-list">
                             <div class="activity-item">
                                 <div class="activity-status active"></div>
@@ -610,7 +610,7 @@
                     
                     <!-- 이번 달 성과 -->
                     <div class="performance-panel">
-                        <h4>📊 이번 달 성과</h4>
+                        <h4><i class="fas fa-chart-bar text-primary"></i> 이번 달 성과</h4>
                         <div class="performance-stats">
                             <div class="stat-item">
                                 <div class="stat-number">23</div>
@@ -633,31 +633,31 @@
                     
                     <!-- 누적 성과 -->
                     <div class="achievement-panel">
-                        <h4>🏆 누적 성과</h4>
+                        <h4><i class="fas fa-trophy text-primary"></i> 누적 성과</h4>
                         <div class="achievement-grid">
                             <div class="achievement-item">
-                                <div class="achievement-icon">🚀</div>
+                                <div class="achievement-icon"><i class="fas fa-rocket text-primary"></i></div>
                                 <div class="achievement-content">
                                     <div class="achievement-number">300+</div>
                                     <div class="achievement-desc">완료 프로젝트</div>
                                 </div>
                             </div>
                             <div class="achievement-item">
-                                <div class="achievement-icon">🏢</div>
+                                <div class="achievement-icon"><i class="fas fa-building text-primary"></i></div>
                                 <div class="achievement-content">
                                     <div class="achievement-number">50+</div>
                                     <div class="achievement-desc">대기업 고객사</div>
                                 </div>
                             </div>
                             <div class="achievement-item">
-                                <div class="achievement-icon">💰</div>
+                                <div class="achievement-icon"><i class="fas fa-won-sign text-primary"></i></div>
                                 <div class="achievement-content">
                                     <div class="achievement-number">250억</div>
                                     <div class="achievement-desc">총 계약금액</div>
                                 </div>
                             </div>
                             <div class="achievement-item">
-                                <div class="achievement-icon">⚡</div>
+                                <div class="achievement-icon"><i class="fas fa-clock text-primary"></i></div>
                                 <div class="achievement-content">
                                     <div class="achievement-number">24/7</div>
                                     <div class="achievement-desc">기술지원</div>
@@ -668,6 +668,45 @@
                 </div>
             </div>
             
+            <!-- 서비스 전문성 분포도 차트 -->
+            <div class="service-expertise-chart">
+                <h3>서비스 기술 전문성 분포도</h3>
+                <div class="chart-container">
+                    <div class="expertise-item">
+                        <div class="expertise-label">AI/ML</div>
+                        <div class="expertise-bar">
+                            <div class="expertise-fill" data-percentage="30" style="width: 30%; background: #667eea;">
+                                <span class="percentage-text">30%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-label">클라우드</div>
+                        <div class="expertise-bar">
+                            <div class="expertise-fill" data-percentage="30" style="width: 30%; background: #764ba2;">
+                                <span class="percentage-text">30%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-label">데이터분석</div>
+                        <div class="expertise-bar">
+                            <div class="expertise-fill" data-percentage="25" style="width: 25%; background: #f093fb;">
+                                <span class="percentage-text">25%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-label">보안/컨설팅</div>
+                        <div class="expertise-bar">
+                            <div class="expertise-fill" data-percentage="15" style="width: 15%; background: #f5576c;">
+                                <span class="percentage-text">15%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="services-grid">
                 <div class="service-card">
                     <i class="fas fa-robot service-icon"></i>
@@ -3574,7 +3613,35 @@
         // 페이지 완전 로드 후에도 한 번 더 실행
         window.addEventListener('load', function() {
             setTimeout(fixServiceCardVisibility, 100);
+            animateExpertiseChart();
         });
+        
+        // 차트 애니메이션
+        function animateExpertiseChart() {
+            const chartObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bars = entry.target.querySelectorAll('.expertise-fill');
+                        bars.forEach((bar, index) => {
+                            setTimeout(() => {
+                                bar.style.width = bar.dataset.percentage + '%';
+                            }, index * 200);
+                        });
+                        chartObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const chart = document.querySelector('.service-expertise-chart');
+            if (chart) {
+                // 초기에 폭을 0으로 설정
+                const bars = chart.querySelectorAll('.expertise-fill');
+                bars.forEach(bar => {
+                    bar.style.width = '0%';
+                });
+                chartObserver.observe(chart);
+            }
+        }
     </script>
 </body>
 </html>

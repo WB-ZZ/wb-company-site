@@ -621,6 +621,85 @@ html {
     font-weight: 500;
 }
 
+/* Service Expertise Chart */
+.service-expertise-chart {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+}
+
+.service-expertise-chart h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.expertise-item {
+    margin-bottom: 1.5rem;
+}
+
+.expertise-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expertise-bar {
+    width: 100%;
+    height: 30px;
+    background: #f1f3f4;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.expertise-fill {
+    height: 100%;
+    border-radius: 15px;
+    position: relative;
+    transition: width 2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.percentage-text {
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 기업용 전문적인 아이콘 스타일 */
+.text-primary {
+    color: #2c5aa0 !important;
+}
+
+.achievement-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(44, 90, 160, 0.1);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
