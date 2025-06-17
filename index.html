@@ -669,38 +669,45 @@
             </div>
             
             <!-- 서비스 전문성 분포도 차트 -->
-            <div class="service-expertise-chart">
-                <h3>서비스 기술 전문성 분포도</h3>
-                <div class="chart-container">
-                    <div class="expertise-item">
-                        <div class="expertise-label">AI/ML</div>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-percentage="30" style="width: 30%; background: #667eea;">
-                                <span class="percentage-text">30%</span>
+            <div class="service-expertise-section">
+                <h3 class="chart-title">서비스 기술 전문성 분포도</h3>
+                
+                <!-- 막대 차트 -->
+                <div class="expertise-chart-container">
+                    <div class="expertise-bars">
+                        <div class="expertise-bar-item">
+                            <div class="bar-label">AI/ML</div>
+                            <div class="bar-container">
+                                <div class="bar-fill ai-bar" data-width="30">
+                                    <span class="bar-percentage">30%</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="expertise-label">클라우드</div>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-percentage="30" style="width: 30%; background: #764ba2;">
-                                <span class="percentage-text">30%</span>
+                        
+                        <div class="expertise-bar-item">
+                            <div class="bar-label">클라우드</div>
+                            <div class="bar-container">
+                                <div class="bar-fill cloud-bar" data-width="30">
+                                    <span class="bar-percentage">30%</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="expertise-label">데이터분석</div>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-percentage="25" style="width: 25%; background: #f093fb;">
-                                <span class="percentage-text">25%</span>
+                        
+                        <div class="expertise-bar-item">
+                            <div class="bar-label">데이터분석</div>
+                            <div class="bar-container">
+                                <div class="bar-fill data-bar" data-width="25">
+                                    <span class="bar-percentage">25%</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="expertise-label">보안/컨설팅</div>
-                        <div class="expertise-bar">
-                            <div class="expertise-fill" data-percentage="15" style="width: 15%; background: #f5576c;">
-                                <span class="percentage-text">15%</span>
+                        
+                        <div class="expertise-bar-item">
+                            <div class="bar-label">보안/컨설팅</div>
+                            <div class="bar-container">
+                                <div class="bar-fill security-bar" data-width="15">
+                                    <span class="bar-percentage">15%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3621,24 +3628,20 @@
             const chartObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const bars = entry.target.querySelectorAll('.expertise-fill');
+                        const bars = entry.target.querySelectorAll('.bar-fill');
                         bars.forEach((bar, index) => {
                             setTimeout(() => {
-                                bar.style.width = bar.dataset.percentage + '%';
-                            }, index * 200);
+                                const width = bar.dataset.width;
+                                bar.style.width = width + '%';
+                            }, index * 300);
                         });
                         chartObserver.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.5 });
+            }, { threshold: 0.3 });
             
-            const chart = document.querySelector('.service-expertise-chart');
+            const chart = document.querySelector('.service-expertise-section');
             if (chart) {
-                // 초기에 폭을 0으로 설정
-                const bars = chart.querySelectorAll('.expertise-fill');
-                bars.forEach(bar => {
-                    bar.style.width = '0%';
-                });
                 chartObserver.observe(chart);
             }
         }
