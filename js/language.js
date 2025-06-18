@@ -33,6 +33,7 @@ const translations = {
         
         // 서비스
         services_title: "서비스",
+        services_subtitle: "전문 기술력으로 고객의 성공을 이끌어갑니다",
         tech_capabilities: "핵심 기술 역량",
         service1_title: "AI 솔루션",
         service1_desc: "머신러닝, 자연어처리, 컴퓨터비전을 활용한 맞춤형 AI 솔루션",
@@ -67,6 +68,12 @@ const translations = {
         btn_submit: "문의하기",
         
         // 포트폴리오
+        portfolio_title: "주요 프로젝트",
+        portfolio_subtitle: "대기업과 함께한 성공적인 디지털 전환 사례",
+        filter_all: "전체",
+        filter_ai: "AI 솔루션",
+        filter_cloud: "클라우드",
+        filter_data: "데이터 분석",
         portfolio1_title: "현대자동차 AI 품질관리 시스템",
         portfolio1_desc: "컴퓨터비전과 딥러닝을 활용한 실시간 품질 검사",
         portfolio2_title: "신한은행 클라우드 전환",
@@ -112,6 +119,7 @@ const translations = {
         
         // Services
         services_title: "Services",
+        services_subtitle: "Leading customer success with professional expertise",
         tech_capabilities: "Core Technical Capabilities",
         service1_title: "AI Solutions",
         service1_desc: "Customized AI solutions using machine learning, natural language processing, and computer vision",
@@ -146,6 +154,12 @@ const translations = {
         btn_submit: "Submit Inquiry",
         
         // Portfolio
+        portfolio_title: "Key Projects",
+        portfolio_subtitle: "Successful digital transformation cases with major enterprises",
+        filter_all: "All",
+        filter_ai: "AI Solutions",
+        filter_cloud: "Cloud",
+        filter_data: "Data Analytics",
         portfolio1_title: "Hyundai Motor AI Quality Management System",
         portfolio1_desc: "Real-time quality inspection using computer vision and deep learning",
         portfolio2_title: "Shinhan Bank Cloud Transformation",
